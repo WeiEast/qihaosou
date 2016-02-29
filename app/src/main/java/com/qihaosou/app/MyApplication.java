@@ -14,7 +14,7 @@ import com.umeng.socialize.PlatformConfig;
  * Author: wenjundu
  * Email:179451678@qq.com
  * Date:2016/1/12
- * Description:
+ * Description:Application
  */
 public class MyApplication extends Application {
 
