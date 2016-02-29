@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
+    <ListView android:id="@+id/history_listview"
+        android:scrollbars="none"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:dividerHeight="0.5dip"
+        android:layout_weight="1.0" />
+    <TextView android:textSize="@dimen/font_size_18"
+        android:textColor="@color/title_color"
+        android:gravity="center"
+        android:id="@+id/tv_beginclear_history"
+        android:background="@drawable/rightmenu_clearhis_border"
+        android:layout_width="fill_parent"
+        android:layout_height="40.0dip"
+        android:layout_marginLeft="40.0dip"
+        android:layout_marginTop="20.0dip"
+        android:layout_marginRight="40.0dip"
+        android:layout_marginBottom="20.0dip"
+        android:text="@string/right_history_clear" />
+</LinearLayout>

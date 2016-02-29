@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
+    <include
+        layout="@layout/common_toolbar"
+        />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/edt_login_number"
+            android:layout_width="fill_parent"
+            android:layout_height="44.0dip"
+            android:layout_marginLeft="38.0dip"
+            android:layout_marginRight="38.0dip"
+            android:layout_marginTop="80.0dip"
+            android:background="@drawable/bg_radius_border_white"
+            android:drawableLeft="@mipmap/login_number"
+            android:drawablePadding="10.0dip"
+            android:ems="10"
+            android:hint="@string/login_username_hint"
+            android:inputType="number"
+            android:paddingLeft="10.0dip"
+            android:singleLine="true"
+            android:textColor="#ff333333"
+            android:textColorHint="#ffabb5b9"
+            />
+
+        <EditText
+            android:id="@+id/edt_login_password"
+            android:layout_width="fill_parent"
+            android:layout_height="44.0dip"
+            android:layout_marginLeft="38.0dip"
+            android:layout_marginRight="38.0dip"
+            android:layout_marginTop="15.0dip"
+            android:background="@drawable/bg_radius_border_white"
+            android:drawableLeft="@mipmap/login_password"
+            android:drawablePadding="10.0dip"
+            android:hint="@string/login_password_hint"
+            android:inputType="textPassword"
+            android:paddingLeft="10.0dip"
+            android:singleLine="true"
+            android:textColor="#ff333333"
+            android:textColorHint="#ffabb5b9"
+             />
+
+        <Button
+            android:id="@+id/btn_login_newpage"
+            android:layout_width="fill_parent"
+            android:layout_height="44.0dip"
+            android:layout_marginLeft="38.0dip"
+            android:layout_marginRight="38.0dip"
+            android:layout_marginTop="20.0dip"
+            android:background="@drawable/bg_gradient_login"
+            android:text="@string/login_button_login"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_20" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50.0dip"
+            android:layout_marginTop="10.0dip"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_register_acount"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="@string/login_account_register"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_16" />
+
+            <View
+                android:layout_width="1.0dip"
+                android:layout_height="16.0dip"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="30.0dip"
+                android:layout_marginRight="30.0dip"
+                android:background="@mipmap/middle_icon" />
+
+            <TextView
+                android:id="@+id/tv_forget_password"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="@string/login_forget_password"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_16" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.0dip"
+            android:layout_weight="1.0" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="40.0dip"
+            android:layout_marginLeft="38.0dip"
+            android:layout_marginRight="38.0dip"
+            android:gravity="center_horizontal" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/thrid_login_line"
+                android:contentDescription="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="15.0dip"
+                android:layout_marginRight="15.0dip"
+                android:text="@string/login_third_account"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_16" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="40.0dip"
+            android:layout_marginBottom="50.0dip"
+            android:layout_marginLeft="38.0dip"
+            android:layout_marginRight="38.0dip"
+            android:layout_marginTop="20.0dip"
+            android:baselineAligned="false"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/ll_thridlogin_qq"
+                android:layout_width="0.0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0"
+                android:background="@drawable/bg_qqlogin_blue"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="40.0dip"
+                    android:layout_height="40.0dip"
+                    android:background="@drawable/bg_lefthelf_qqblue"
+                    android:contentDescription="@null"
+                    android:padding="12.0dip"
+                    android:src="@mipmap/third_login_qq" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:text="@string/login_qq_account"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_thridlogin_wx"
+                android:layout_width="0.0dip"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="20.0dip"
+                android:layout_weight="1.0"
+                android:background="@drawable/bg_wxlogin_green"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="40.0dip"
+                    android:layout_height="40.0dip"
+                    android:background="@drawable/bg_lefthelf_wxgreen"
+                    android:contentDescription="@null"
+                    android:padding="10.0dip"
+                    android:src="@mipmap/third_login_wx" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:text="@string/login_weixin_account"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

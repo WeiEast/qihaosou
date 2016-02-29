@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/common_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rl_bottom_layout"
+        android:layout_below="@id/common_toolbar"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/title_color"
+                android:minHeight="220.0dp">
+
+                <ImageView
+                    android:id="@+id/iv_company_logo"
+                    android:layout_width="60.0dip"
+                    android:layout_height="60.0dip"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3.0dip"
+                    android:contentDescription="@null"
+                    android:src="@mipmap/icon_company_default" />
+
+                <TextView
+                    android:id="@+id/tv_infodetial_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_company_logo"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="15.0dip"
+                    android:layout_marginRight="15.0dip"
+                    android:layout_marginTop="10.0dip"
+                    android:gravity="center"
+                    android:text="中商咨询有限公司"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_18" />
+
+                <LinearLayout
+                    android:id="@+id/ll_infodetial_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_infodetial_name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5.0dip"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_infodetial_type"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1.0"
+                        android:gravity="center_horizontal"
+                        android:text="股份有限公司(港澳台与境内合资、上市)"
+                        android:textColor="#ffd0d6e2"
+                        android:textSize="@dimen/font_size_16" />
+
+                    <TextView
+                        android:id="@+id/tv_compdetail_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5.0dip"
+                        android:background="@drawable/bg_border_company_status"
+                        android:gravity="center"
+                        android:paddingBottom="2.0dip"
+                        android:paddingLeft="8.0dip"
+                        android:paddingRight="8.0dip"
+                        android:paddingTop="2.0dip"
+                        android:text="在业"
+                        android:textColor="#EDCF07"
+                        android:textSize="@dimen/font_size_12" />
+                </LinearLayout>
+                <RelativeLayout
+                    android:id="@+id/rl_infodetial_refresh"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:layout_above="@+id/ll_infodetial_fun"
+                    android:layout_below="@id/ll_infodetial_type"
+                    android:layout_marginTop="5.0dip">
+
+                    <ImageView
+                        android:id="@+id/iv_rotate_update"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:clickable="false"
+                        android:contentDescription="@null"
+                        android:src="@mipmap/infodetial_refresh_white" />
+
+                    <TextView
+                        android:id="@+id/tv_infodetial_refresh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/iv_rotate_update"
+                        android:clickable="false"
+                        android:layout_centerVertical="true"
+                        android:paddingBottom="2.0dip"
+                        android:paddingLeft="3.0dip"
+                        android:paddingTop="2.0dip"
+                        android:text="2015-5-25"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_12" />
+                </RelativeLayout>
+                <LinearLayout
+                    android:id="@+id/ll_infodetial_fun"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40.0dip"
+                    android:baselineAligned="false"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0.0dip"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1.0"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_infodetial_commap"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@mipmap/company_mapinfo"
+                            android:drawablePadding="3.0dip"
+                            android:gravity="center_vertical"
+                            android:text="@string/information_commap_info"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_size_16" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_detailinfo_attention"
+                        android:layout_width="0.0dip"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1.0"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_detailinfo_attention"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:drawableLeft="@mipmap/company_view_count"
+                            android:drawablePadding="8.0dip"
+                            android:gravity="center"
+                            android:text="666"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0.0dip"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1.0"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_infodetial_contact"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@mipmap/company_contact"
+                            android:drawablePadding="3.0dip"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="10.0dip"
+                            android:paddingRight="10.0dip"
+                            android:text="@string/company_detial_contact"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_size_16" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#FF7F00"
+                android:baselineAligned="false"
+                android:minHeight="70.0dip"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="10.0dip">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/company_detial_opername"
+                        android:textColor="#ffd0d6e2"
+                        android:textSize="@dimen/font_size_14" />
+
+                    <TextView
+                        android:id="@+id/tv_compdetail_opername"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.0dip"
+                        android:maxLines="2"
+                        android:text="@string/company_detial_end_null"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_14" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="10.0dip">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/company_detial_registcapi"
+                        android:textColor="#ffd0d6e2"
+                        android:textSize="@dimen/font_size_14" />
+
+                    <TextView
+                        android:id="@+id/tv_compdetail_registcapi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.0dip"
+                        android:text="@string/company_detial_end_null"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_14" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="10.0dip">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/company_detial_termstart"
+                        android:textColor="#ffd0d6e2"
+                        android:textSize="@dimen/font_size_14" />
+
+                    <TextView
+                        android:id="@+id/tv_compdetail_checkdate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.0dip"
+                        android:text="@string/company_detial_end_null"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_14" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <include
+        layout="@layout/include_detail_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

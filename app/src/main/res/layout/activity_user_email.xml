@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
+    <include layout="@layout/common_toolbar"/>
+    <EditText android:textSize="16.0sp"
+        android:textColor="@color/base_text_color"
+        android:textColorHint="#ffbababa"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/edt_email"
+        android:background="@drawable/bg_radius_white_email"
+        android:paddingLeft="10.0dip"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="fill_parent"
+        android:layout_height="40.0dip"
+        android:layout_margin="10.0dip"
+        android:hint="@string/input_email_hint"
+        android:singleLine="true"
+        android:inputType="textEmailAddress" />
+    <Button
+        android:textSize="@dimen/font_size_18"
+        android:textColor="@color/white"
+        android:id="@+id/btn_email_submit"
+        android:background="@drawable/bg_gradient_login"
+        android:layout_width="fill_parent"
+        android:layout_height="44.0dip"
+        android:layout_marginLeft="30.0dip"
+        android:layout_marginTop="20.0dip"
+        android:layout_marginRight="30.0dip"
+        android:text="@string/submit" />
+</LinearLayout>

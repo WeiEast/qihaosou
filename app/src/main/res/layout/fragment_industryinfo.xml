@@ -1,0 +1,452 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <ScrollView
+        android:id="@+id/root_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <LinearLayout style="@style/industry_info_style">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_opername"
+                        android:textColor="@color/base_text_color"
+                        android:textSize="@dimen/font_size_16" />
+
+                    <TextView
+                        android:id="@+id/tv_opername"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_end_null"
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/font_size_16" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/industry_info_style"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_status"
+                        android:textColor="@color/base_text_color"
+                        android:textSize="@dimen/font_size_16" />
+
+                    <TextView
+                        android:id="@+id/tv_operate_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_end_null"
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/font_size_16" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <LinearLayout style="@style/industry_info_style">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_termstart"
+                        android:textColor="@color/base_text_color"
+                        android:textSize="@dimen/font_size_16" />
+
+                    <TextView
+                        android:id="@+id/tv_register_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_end_null"
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/font_size_16" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/industry_info_style"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_checkdate"
+                        android:textColor="@color/base_text_color"
+                        android:textSize="@dimen/font_size_16" />
+
+                    <TextView
+                        android:id="@+id/tv_check_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_end_null"
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/font_size_16" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <LinearLayout style="@style/industry_info_style">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_deadline_start"
+                        android:textColor="@color/base_text_color"
+                        android:textSize="@dimen/font_size_16" />
+
+                    <TextView
+                        android:id="@+id/tv_start_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_end_null"
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/font_size_16" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/industry_info_style"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_deadline_end"
+                        android:textColor="@color/base_text_color"
+                        android:textSize="@dimen/font_size_16" />
+
+                    <TextView
+                        android:id="@+id/tv_end_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_end_null"
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/font_size_16" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <LinearLayout style="@style/industry_info_style">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_registcapi"
+                        android:textColor="@color/base_text_color"
+                        android:textSize="@dimen/font_size_16" />
+
+                    <TextView
+                        android:id="@+id/tv_regist_capi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_end_null"
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/font_size_16" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/industry_info_style"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="@string/company_register_no"
+                        android:textColor="@color/base_text_color"
+                        android:textSize="@dimen/font_size_16" />
+
+                    <TextView
+                        android:id="@+id/tv_econ_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_end_null"
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/font_size_16" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <LinearLayout style="@style/industry_info_style">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="@string/company_zip_code"
+                        android:textColor="@color/base_text_color"
+                        android:textSize="@dimen/font_size_16" />
+
+                    <TextView
+                        android:id="@+id/tv_comp_zip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_end_null"
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/font_size_16" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/industry_info_style"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="@string/company_type"
+                        android:textColor="@color/base_text_color"
+                        android:textSize="@dimen/font_size_16" />
+
+                    <TextView
+                        android:id="@+id/tv_econ_kind"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_end_null"
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/font_size_16" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <LinearLayout style="@style/industry_info_style">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="@string/company_contact_number"
+                        android:textColor="@color/base_text_color"
+                        android:textSize="@dimen/font_size_16" />
+
+                    <TextView
+                        android:id="@+id/tv_comp_tel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_end_null"
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/font_size_16" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/industry_info_style"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="@string/company_email"
+                        android:textColor="@color/base_text_color"
+                        android:textSize="@dimen/font_size_16" />
+
+                    <TextView
+                        android:id="@+id/tv_company_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_end_null"
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/font_size_16" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                style="@style/industry_info_style">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/company_name"
+                    android:textColor="@color/base_text_color"
+                    android:textSize="@dimen/font_size_16" />
+
+                <TextView
+                    android:id="@+id/tv_econ_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:singleLine="true"
+                    android:text="@string/company_detial_end_null"
+                    android:textColor="@color/title_color"
+                    android:textSize="@dimen/font_size_16" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                style="@style/industry_info_style">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/company_register_organization"
+                    android:textColor="@color/base_text_color"
+                    android:textSize="@dimen/font_size_16" />
+
+                <TextView
+                    android:id="@+id/tv_belong_org"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:singleLine="true"
+                    android:text="@string/company_detial_end_null"
+                    android:textColor="@color/title_color"
+                    android:textSize="@dimen/font_size_16" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                style="@style/industry_info_style">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/company_credit_code"
+                    android:textColor="@color/base_text_color"
+                    android:textSize="@dimen/font_size_16" />
+
+                <TextView
+                    android:id="@+id/tv_unified_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:singleLine="true"
+                    android:text="@string/company_detial_end_null"
+                    android:textColor="@color/title_color"
+                    android:textSize="@dimen/font_size_16" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                style="@style/industry_info_style">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/company_present_address"
+                    android:textColor="@color/base_text_color"
+                    android:textSize="@dimen/font_size_16" />
+
+                <TextView
+                    android:id="@+id/tv_comp_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:singleLine="true"
+                    android:text="@string/company_detial_end_null"
+                    android:textColor="@color/title_color"
+                    android:textSize="@dimen/font_size_16" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                style="@style/industry_info_style">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/personal_residence"
+                    android:textColor="@color/base_text_color"
+                    android:textSize="@dimen/font_size_16" />
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:singleLine="true"
+                    android:text="@string/company_detial_end_null"
+                    android:textColor="@color/title_color"
+                    android:textSize="@dimen/font_size_16" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

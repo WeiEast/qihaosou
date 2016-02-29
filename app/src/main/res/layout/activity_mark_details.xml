@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+    <include
+        layout="@layout/common_toolbar"
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:id="@+id/iv_mark_display"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/default_userface"
+                    />
+
+            </RelativeLayout>
+            <View
+                android:layout_marginLeft="15dp"
+                style="@style/MyHorizontalDividerLine"
+                />
+            <RelativeLayout
+                android:orientation="vertical"
+                android:paddingTop="12.0dip"
+                android:paddingBottom="12.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/base_text_color"
+                    android:id="@+id/tv_detial_namesub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16.0dip"
+                    android:text="@string/trademark_detial_name"
+                    android:layout_centerVertical="true" />
+                <TextView
+                    android:textSize="@dimen/font_size_18"
+                    android:textColor="@color/title_color"
+                    android:gravity="right"
+                    android:id="@+id/tv_mark_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5.0dip"
+                    android:layout_marginRight="15.0dip"
+                    android:text="@string/company_detial_end_null"
+                    android:layout_toRightOf="@id/tv_detial_namesub"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+            <View
+                android:layout_marginLeft="15dp"
+                style="@style/MyHorizontalDividerLine"
+                />
+            <RelativeLayout
+                android:orientation="vertical"
+                android:paddingTop="12.0dip"
+                android:paddingBottom="12.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/base_text_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16.0dip"
+                    android:text="@string/trademark_detial_category"
+                    android:layout_centerVertical="true" />
+                <TextView
+                    android:textSize="@dimen/font_size_18"
+                    android:textColor="@color/title_color"
+                    android:id="@+id/tv_mark_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15.0dip"
+                    android:text="@string/company_detial_end_null"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+            <View
+                android:layout_marginLeft="15dp"
+                style="@style/MyHorizontalDividerLine"
+                />
+            <RelativeLayout
+                android:orientation="vertical"
+                android:paddingTop="12.0dip"
+                android:paddingBottom="12.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/base_text_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16.0dip"
+                    android:text="@string/trademark_detial_regno"
+                    android:layout_centerVertical="true" />
+                <TextView
+                    android:textSize="@dimen/font_size_18"
+                    android:textColor="@color/title_color"
+                    android:id="@+id/tv_mark_regno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15.0dip"
+                    android:text="@string/company_detial_end_null"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+            <View
+                android:layout_marginLeft="15dp"
+                style="@style/MyHorizontalDividerLine"
+                />
+            <RelativeLayout
+                android:orientation="vertical"
+                android:paddingTop="12.0dip"
+                android:paddingBottom="12.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/base_text_color"
+                    android:id="@+id/tv_detial_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16.0dip"
+                    android:text="@string/trademark_detial_status"
+                    android:layout_centerVertical="true" />
+                <TextView
+                    android:textSize="@dimen/font_size_18"
+                    android:textColor="@color/title_color"
+                    android:gravity="right"
+                    android:id="@+id/tv_trademark_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5.0dip"
+                    android:layout_marginRight="15.0dip"
+                    android:text="@string/company_detial_end_null"
+                    android:layout_toRightOf="@id/tv_detial_status"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+            <View
+                android:layout_marginLeft="15dp"
+                style="@style/MyHorizontalDividerLine"
+                />
+            <RelativeLayout
+                android:orientation="vertical"
+                android:paddingTop="12.0dip"
+                android:paddingBottom="12.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/base_text_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16.0dip"
+                    android:text="@string/trademark_detial_appdate"
+                    android:layout_centerVertical="true" />
+                <TextView
+                    android:textSize="@dimen/font_size_18"
+                    android:textColor="@color/title_color"
+                    android:id="@+id/tv_mark_applydate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15.0dip"
+                    android:text="@string/company_detial_end_null"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+            <View
+                style="@style/MyHorizontalDividerLine" />
+            <View
+                android:background="@color/category_divider_color"
+                android:layout_width="fill_parent"
+                android:layout_height="15.0dip" />
+            <View
+                style="@style/MyHorizontalDividerLine" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:paddingTop="12.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="70.0dip">
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/base_text_color"
+                    android:paddingBottom="12.0dip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15.0dip"
+                    android:text="@string/trademark_detial_validperiod" />
+                <View
+                    style="@style/MyHorizontalDividerLine"
+                    android:layout_marginLeft="15.0dip" />
+                <TextView
+                    android:textSize="@dimen/font_size_18"
+                    android:textColor="@color/title_color"
+                    android:id="@+id/tv_mark_validperiod"
+                    android:paddingLeft="15.0dip"
+                    android:paddingTop="12.0dip"
+                    android:paddingRight="10.0dip"
+                    android:paddingBottom="12.0dip"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/company_detial_end_null"
+                    android:lineSpacingExtra="3.0dip" />
+            </LinearLayout>
+            <View
+                style="@style/MyHorizontalDividerLine" />
+            <View
+                android:background="@color/category_divider_color"
+                android:layout_width="fill_parent"
+                android:layout_height="15.0dip" />
+            <View
+                style="@style/MyHorizontalDividerLine" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:paddingTop="12.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="70.0dip">
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/base_text_color"
+                    android:paddingBottom="12.0dip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15.0dip"
+                    android:text="@string/trademark_detial_flowitems" />
+                <View style="@style/MyHorizontalDividerLine" />
+                <ListView
+                    android:id="@+id/lv_mark_flowitem"
+                    android:scrollbars="none"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:listSelector="@color/transparent"
+                    android:scrollingCache="false"
+                    android:transcriptMode="normal"
+                    android:cacheColorHint="@android:color/transparent"
+                    android:divider="@color/transparent" />
+            </LinearLayout>
+            <View style="@style/MyHorizontalDividerLine" />
+            <View
+                android:background="@color/category_divider_color"
+                android:layout_width="fill_parent"
+                android:layout_height="15.0dip" />
+            <View
+                style="@style/MyHorizontalDividerLine"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:paddingTop="12.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="70.0dip">
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/base_text_color"
+                    android:paddingBottom="12.0dip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15.0dip"
+                    android:text="@string/trademark_detial_project" />
+                <View
+                    style="@style/MyHorizontalDividerLine"
+                    android:layout_marginLeft="15.0dip" />
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/title_color"
+                    android:id="@+id/tv_mark_seproject"
+                    android:paddingLeft="15.0dip"
+                    android:paddingRight="10.0dip"
+                    android:paddingBottom="12.0dip"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12.0dip"
+                    android:text="@string/company_detial_end_null"
+                    android:lineSpacingExtra="3.0dip" />
+            </LinearLayout>
+            <View
+                style="@style/MyHorizontalDividerLine" />
+            <View
+                android:background="@color/category_divider_color"
+                android:layout_width="fill_parent"
+                android:layout_height="15.0dip" />
+            <View
+                style="@style/MyHorizontalDividerLine" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:paddingTop="12.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="70.0dip">
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/base_text_color"
+                    android:paddingBottom="12.0dip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15.0dip"
+                    android:text="@string/trademark_detial_agent" />
+                <View
+                    style="@style/MyHorizontalDividerLine"
+                    android:layout_marginLeft="15.0dip" />
+                <TextView
+                    android:textSize="@dimen/font_size_18"
+                    android:textColor="@color/title_color"
+                    android:id="@+id/tv_mark_agent"
+                    android:paddingLeft="15.0dip"
+                    android:paddingTop="12.0dip"
+                    android:paddingRight="10.0dip"
+                    android:paddingBottom="12.0dip"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/company_detial_end_null"
+                    android:lineSpacingExtra="3.0dip" />
+            </LinearLayout>
+            <View
+                style="@style/MyHorizontalDividerLine" />
+            <View
+                android:background="@color/category_divider_color"
+                android:layout_width="fill_parent"
+                android:layout_height="15.0dip" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <include layout="@layout/common_toolbar"/>
+    <com.qihaosou.smarttablayout.SmartTabLayout
+        android:id="@+id/viewpagertab"
+        android:layout_below="@id/common_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:stl_dividerColor="@android:color/transparent"
+        app:stl_dividerThickness="0dp"
+        app:stl_customTabTextLayoutId="@layout/custom_tab"
+        app:stl_customTabTextViewId="@+id/custom_text"
+        app:stl_indicatorColor="@color/title_color"
+        app:stl_indicatorInterpolation="smart"
+        app:stl_indicatorThickness="3dp"
+        app:stl_underlineThickness="1dp"
+        android:background="@color/white"
+        >
+
+    </com.qihaosou.smarttablayout.SmartTabLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_below="@id/viewpagertab"
+        android:layout_above="@id/rl_bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_gray"
+        />
+    <include
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        layout="@layout/include_detail_bottom"/>
+</RelativeLayout>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@color/white"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    >
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="2014年度报告"
+        android:textColor="@color/base_text_color"
+        android:textSize="@dimen/font_size_16"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2014-9-27"
+        android:textSize="@dimen/font_size_16"
+        android:textColor="@color/base_text_color"
+        android:drawableRight="@mipmap/usercenter_arrow_right"
+        android:drawablePadding="10dp"
+        />
+</LinearLayout>

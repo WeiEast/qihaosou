@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
+    <include
+        layout="@layout/common_toolbar"
+        />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/edt_phone"
+            android:layout_width="fill_parent"
+            android:layout_height="40.0dip"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10.0dip"
+            android:background="@drawable/bg_radius_white_email"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="@string/input_phone_hint"
+            android:inputType="phone"
+            android:paddingLeft="10.0dip"
+            android:singleLine="true"
+            android:textColor="#ff333333"
+            android:textColorHint="#ffbababa"
+            android:textSize="@dimen/font_size_16"
+             />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginTop="10.0dip"
+            android:orientation="horizontal"
+             >
+
+            <EditText
+                android:id="@+id/edt_validcode"
+                android:layout_width="0.0dip"
+                android:layout_height="40.0dip"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1.0"
+                android:background="@drawable/bg_radius_white_email"
+                android:hint="@string/input_code_hint"
+                android:inputType="number"
+                android:paddingLeft="10.0dip"
+                android:singleLine="true"
+                android:textColor="#ff333333"
+                android:textColorHint="#ffbababa"
+                android:textSize="@dimen/font_size_16"
+                 />
+
+            <Button
+                android:id="@+id/btn_validcode"
+                android:layout_width="wrap_content"
+                android:layout_height="40.0dip"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginRight="10.0dip"
+                android:background="@drawable/bg_gradient_register_validcode"
+                android:paddingLeft="10.0dip"
+                android:paddingRight="10.0dip"
+                android:text="@string/get_validcode"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_18" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="fill_parent"
+            android:layout_height="44.0dip"
+            android:layout_marginLeft="30.0dip"
+            android:layout_marginRight="30.0dip"
+            android:layout_marginTop="20.0dip"
+            android:background="@drawable/bg_gradient_login"
+            android:text="@string/submit"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_20" />
+    </LinearLayout>
+</LinearLayout>

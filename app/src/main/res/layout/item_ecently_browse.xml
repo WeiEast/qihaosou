@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/white"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_toLeftOf="@+id/progressbar"
+        android:layout_height="80dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/tv_company_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_18"
+            android:textColor="@color/base_text_color"
+            android:text="阿里巴巴网络"
+            />
+        <TextView
+            android:id="@+id/tv_legal_person"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_16"
+            android:textColor="@color/gray_text_color"
+            android:text="法人代表:马云"
+            />
+    </LinearLayout>
+    <com.qihaosou.view.ProgressBarView
+        android:id="@+id/progressbar"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
+</RelativeLayout>
