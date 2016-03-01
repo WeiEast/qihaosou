@@ -2,7 +2,7 @@ package com.qihaosou.bean;
 
 /**
  * Author: Created by wenjundu
- * Date:on 2016/1/28
+ * Date:on 2016/3/1
  * Description:
  */
 public class IcinfoBody {
@@ -15,5 +15,4 @@ public class IcinfoBody {
     }
 
     private IcinfoBean icinfo;
-
 }

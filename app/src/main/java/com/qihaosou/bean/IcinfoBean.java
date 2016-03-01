@@ -2,13 +2,15 @@ package com.qihaosou.bean;
 
 /**
  * Author: Created by wenjundu
- * Date:on 2016/1/28
+ * Date:on 2016/3/1
  * Description:
  */
 public class IcinfoBean {
     private String address;
     private int areaCode;
     private int baseInvoking;
+    private long baseLastDate;
+    private long baseLoginDate;
     private String belongOrg;
     private String checkDate;
     private String compAddress;
@@ -25,7 +27,6 @@ public class IcinfoBean {
     private String teamEnd;
     private String teamStart;
     private String uuid;
-
     public String getAddress() {
         return address;
     }
@@ -48,6 +49,22 @@ public class IcinfoBean {
 
     public void setBaseInvoking(int baseInvoking) {
         this.baseInvoking = baseInvoking;
+    }
+
+    public long getBaseLastDate() {
+        return baseLastDate;
+    }
+
+    public void setBaseLastDate(long baseLastDate) {
+        this.baseLastDate = baseLastDate;
+    }
+
+    public long getBaseLoginDate() {
+        return baseLoginDate;
+    }
+
+    public void setBaseLoginDate(long baseLoginDate) {
+        this.baseLoginDate = baseLoginDate;
     }
 
     public String getBelongOrg() {
@@ -177,5 +194,6 @@ public class IcinfoBean {
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
+
 
 }

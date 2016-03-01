@@ -59,7 +59,6 @@ public abstract class AbsCallback<T> {
         if (e != null) e.printStackTrace();
         else if (response != null) L.e("服务器内部错误，或者找不到页面等");
     }
-
     public static final AbsCallback CALLBACK_DEFAULT = new AbsCallback() {
 
         @Override

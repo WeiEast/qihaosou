@@ -15,10 +15,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.qihaosou.R;
-import com.qihaosou.bean.BaseBean;
-import com.qihaosou.bean.EmpBean;
-import com.qihaosou.bean.EmployeeBean;
-import com.qihaosou.bean.UserBean;
 import com.qihaosou.loading.LoadingAndRetryManager;
 import com.qihaosou.net.GsonRequest;
 import com.qihaosou.net.UriHelper;
@@ -39,7 +35,6 @@ public class KeyPersonFragment extends Fragment{
     private GridView gridView;
     private LoadingAndRetryManager mLoadingAndRetryManager;
     private GridViewAdapter adapter;
-    private List<EmployeeBean> list;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,27 +51,24 @@ public class KeyPersonFragment extends Fragment{
     private void init(View view) {
         gridView= (GridView) view.findViewById(R.id.gv_key_person);
         mLoadingAndRetryManager=LoadingAndRetryManager.generate(gridView,null);
-        list=new ArrayList<EmployeeBean>();
-        adapter=new GridViewAdapter(getContext(),list);
         gridView.setAdapter(adapter);
         mLoadingAndRetryManager.showLoading();
       //  loadData();
     }
     class GridViewAdapter extends BaseAdapter{
         private LayoutInflater inflater;
-        private List<EmployeeBean> list;
-        public GridViewAdapter(Context context,List<EmployeeBean> list){
+        public GridViewAdapter(Context context,List list){
             inflater=LayoutInflater.from(context);
-            this.list=list;
+
         }
         @Override
         public int getCount() {
-            return list.size();
+            return 10;
         }
 
         @Override
         public Object getItem(int position) {
-            return list.get(position);
+            return 0;
         }
 
         @Override
@@ -96,8 +88,7 @@ public class KeyPersonFragment extends Fragment{
             }else{
                 viewHolder= (ViewHolder) convertView.getTag();
             }
-            viewHolder.empNameTV.setText(list.get(position).getEmpName());
-            viewHolder.empJbTV.setText(list.get(position).getEmpJob());
+
 
             return convertView;
         }
@@ -133,8 +124,5 @@ public class KeyPersonFragment extends Fragment{
 //        }
 //    }
 
-    private void fullData(List<EmployeeBean> list) {
-        this.list.addAll(list);
-        adapter.notifyDataSetChanged();
-    }
+
 }

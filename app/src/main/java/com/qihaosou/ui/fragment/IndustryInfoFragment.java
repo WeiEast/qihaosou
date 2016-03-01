@@ -17,9 +17,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.qihaosou.R;
-import com.qihaosou.bean.IcBean;
-import com.qihaosou.bean.IcinfoBean;
-import com.qihaosou.bean.IcinfoBody;
 import com.qihaosou.listener.MyBeanCallBack;
 import com.qihaosou.loading.LoadingAndRetryManager;
 import com.qihaosou.loading.OnLoadingAndRetryListener;
@@ -154,24 +151,7 @@ public class IndustryInfoFragment extends BaseFragment {
         });
     }
 
-    private void fulldate(IcBean response) {
-        IcinfoBean icinfoBean=response.getBody().getIcinfo();
-        operNameTV.setText(icinfoBean.getOperName());
-        operateStatusTV.setText(icinfoBean.getRegisterStatus());
-        registerDateTV.setText(icinfoBean.getStartDate());
-        checkDateTV.setText(icinfoBean.getCheckDate());
-        startDateTV.setText(icinfoBean.getTeamStart());
-        endDateTV.setText(icinfoBean.getTeamEnd());
-        registCapiTV.setText(icinfoBean.getRegistCapi());
-        econNoTV.setText(icinfoBean.getEconNo());
-        compZipTV.setText(icinfoBean.getCompZip());
-        econKindTV.setText(icinfoBean.getEconKind());
-        compTelTV.setText(icinfoBean.getCompTel());
-        econNameTV.setText(icinfoBean.getEconName());
-        belongOrgTV.setText(icinfoBean.getBelongOrg());
-        compAddressTV.setText(icinfoBean.getCompAddress());
-        addressTV.setText(icinfoBean.getAddress());
-    }
+
     public void setRetryEvent(View retryEvent) {
         View view = retryEvent.findViewById(R.id.id_btn_retry);
         view.setOnClickListener(new View.OnClickListener() {

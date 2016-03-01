@@ -1,25 +1,20 @@
 package com.qihaosou.ui.activity;
 
-import android.text.TextUtils;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.google.gson.reflect.TypeToken;
 import com.lzy.okhttputils.OkHttpUtils;
+import com.lzy.okhttputils.callback.BeanCallBack;
+import com.lzy.okhttputils.request.BaseRequest;
 import com.qihaosou.R;
-import com.qihaosou.bean.LoginBean;
-import com.qihaosou.bean.UserBean;
-import com.qihaosou.listener.MyBeanCallBack;
-import com.qihaosou.net.GsonRequest;
+import com.qihaosou.bean.BaseBean;
+import com.qihaosou.bean.LoginBody;
+import com.qihaosou.listener.MyTextWacher;
 import com.qihaosou.net.UriHelper;
-import com.qihaosou.net.VolleyHelper;
 import com.qihaosou.util.L;
-import com.qihaosou.util.NetUtils;
 import com.qihaosou.util.ToastUtil;
 import com.qihaosou.view.LoadingDialog;
 import com.umeng.socialize.UMAuthListener;
@@ -40,6 +35,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private Button loginBtn;
     private LinearLayout loginQQ,loginWechat;
     private UMShareAPI mShareAPI = null;
+    private MyTextWacher wacher;
     @Override
     protected void init() {
         forgetPasswordTV= (TextView) findViewById(R.id.tv_forget_password);
@@ -49,6 +45,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         loginBtn= (Button) findViewById(R.id.btn_login_newpage);
         loginQQ= (LinearLayout) findViewById(R.id.ll_thridlogin_qq);
         loginWechat= (LinearLayout) findViewById(R.id.ll_thridlogin_wx);
+        wacher=new MyTextWacher(loginBtn,phoneET,passwordET);
     }
 
     @Override
@@ -59,7 +56,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         loginBtn.setOnClickListener(this);
         loginWechat.setOnClickListener(this);
         loginWechat.setOnClickListener(this);
-
+        phoneET.addTextChangedListener(wacher);
+        passwordET.addTextChangedListener(wacher);
 
     }
 
@@ -88,8 +86,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                 readyGo(RegisterActivity.class);
                 break;
             case R.id.btn_login_newpage://登录
-                if(TextUtils.isEmpty(phone)&& TextUtils.isEmpty(password))
-                    return;
                 Login(phone,password);
                 break;
             case R.id.ll_thridlogin_qq://qq登录
@@ -106,35 +102,31 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private void Login(String phone,String password) {
         String clientType="android";
         final LoadingDialog loadingDialog=new LoadingDialog(LoginActivity.this);
-        loadingDialog.show();
-//        if(NetUtils.isNetworkConnected(this)){
-//            GsonRequest<LoginBean> request=new GsonRequest<LoginBean>(Request.Method.POST, UriHelper.getInstance().getLoginUrl(phone,password,clientType),new TypeToken<LoginBean>(){}.getType(),
-//
-//                    new Response.Listener<LoginBean>() {
-//                        @Override
-//                        public void onResponse(LoginBean response) {
-//                            loadingDialog.dismiss();
-//                            if("0000".equals(response.getCode())){
-//                                showToast(getString(R.string.login_success));
-//                                finish();
-//                            }else{
-//                                L.e(response.getMessage());
-//                                showToast(response.getMessage());
-//                            }
-//                        }
-//                    }, new Response.ErrorListener() {
-//                         @Override
-//                         public void onErrorResponse(VolleyError error) {
-//                             L.e("loginError:" + error.toString());
-//                           loadingDialog.dismiss();
-//                         }
-//            });
-//            VolleyHelper.getInstance().getRequestQueue().add(request);
-//        }
-        OkHttpUtils.post(UriHelper.getInstance().getLoginUrl(phone,password,clientType)).execute(new MyBeanCallBack<String>() {
+        OkHttpUtils.post(UriHelper.getInstance().getLoginUrl(phone,password,clientType)).tag(this).execute(new BeanCallBack<BaseBean<LoginBody>>() {
             @Override
-            public void onResponse(String s) {
-                L.e("login callback::"+s);
+            public void onBefore(BaseRequest request) {
+                loadingDialog.show();
+            }
+
+            @Override
+            public void onAfter(@Nullable BaseBean<LoginBody> loginBodyBaseBean, okhttp3.Request request, okhttp3.Response response, @Nullable Exception e) {
+                loadingDialog.dismiss();
+            }
+
+            @Override
+            public void onError(okhttp3.Request request, @Nullable okhttp3.Response response, @Nullable Exception e) {
+                ToastUtil.TextToast(LoginActivity.this, "网络异常");
+            }
+
+            @Override
+            public void onResponse(BaseBean<LoginBody> loginBodyBaseBean) {
+                if(loginBodyBaseBean!=null) {
+                    if(loginBodyBaseBean.getCode().equals("0000")) {
+                        LoginBody loginBean = loginBodyBaseBean.getBody();
+                        finish();
+                    }
+                    ToastUtil.TextToast(LoginActivity.this,loginBodyBaseBean.getMessage());
+                }
             }
         });
     }

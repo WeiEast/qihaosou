@@ -10,21 +10,6 @@ import java.util.Map;
  */
 public class BaseBean<T>{
     private String code;
-    private String message;
-    private T data;
-    private List<T> datalist;
-    public List<T> getDatalist() {
-        return datalist;
-    }
-    public void setDatalist(List<T> datalist) {
-        this.datalist = datalist;
-    }
-    public T getData() {
-        return data;
-    }
-    public void setData(T data) {
-        this.data = data;
-    }
 
     public String getCode() {
         return code;
@@ -42,5 +27,14 @@ public class BaseBean<T>{
         this.message = message;
     }
 
+    public T getBody() {
+        return body;
+    }
 
+    public void setBody(T body) {
+        this.body =body ;
+    }
+
+    private String message;
+    private T body;
 }

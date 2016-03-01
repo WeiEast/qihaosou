@@ -1,5 +1,7 @@
 package com.qihaosou.net;
 import com.qihaosou.app.Constants;
+import com.qihaosou.util.L;
+
 public class UriHelper {
 
     private static volatile UriHelper instance = null;
@@ -44,6 +46,15 @@ public class UriHelper {
         sb.append(clientType);
         return sb.toString();
     }
+    public String getVcodeUrl(String phone){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.GET_V_CODE_URL);
+        sb.append("&mobile=");
+        sb.append(phone);
+
+        return sb.toString();
+    }
+
     public String getRegisterUrl(String phone,String password,String vcode,String nickname){
         StringBuffer sb = new StringBuffer();
         sb.append(Constants.REGISTER_URL);
@@ -55,7 +66,7 @@ public class UriHelper {
         sb.append(vcode);
         sb.append("&nickname=");
         sb.append(nickname);
-
+        L.e(sb.toString());
         return sb.toString();
     }
     public String getIcInfoUrl(String uuid){
@@ -68,6 +79,13 @@ public class UriHelper {
     public String getIcInfoEmpUrl(String uuid){
         StringBuffer sb = new StringBuffer();
         sb.append(Constants.GET_ICINFO_EMP);
+        sb.append("&uuid=");
+        sb.append(uuid);
+        return sb.toString();
+    }
+    public String getIcinfo(String uuid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.GET_ICINFO);
         sb.append("&uuid=");
         sb.append(uuid);
         return sb.toString();
