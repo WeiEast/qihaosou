@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,7 @@ import com.qihaosou.util.L;
 public class ChangeInfoFragment extends Fragment{
     private ListView listView;
     LoadingAndRetryManager mLoadingAndRetryManager;
-    LinearLayout rootLayout;
+    SwipeRefreshLayout swipeRefreshLayout;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class ChangeInfoFragment extends Fragment{
         super.onActivityCreated(savedInstanceState);
 
         init(getView());
-        mLoadingAndRetryManager = LoadingAndRetryManager.generate(listView, null);
+        mLoadingAndRetryManager = LoadingAndRetryManager.generate(swipeRefreshLayout, null);
         loadData();
     }
     private void loadData()
@@ -64,7 +65,7 @@ public class ChangeInfoFragment extends Fragment{
     }
     private void init(View view) {
         listView= (ListView) view.findViewById(R.id.lv_changeinfo);
-        rootLayout= (LinearLayout) view.findViewById(R.id.root_layout);
+        swipeRefreshLayout= (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
         MyAdapter adapter=new MyAdapter(getContext());
         listView.setAdapter(adapter);
     }

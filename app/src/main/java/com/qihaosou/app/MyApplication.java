@@ -27,10 +27,8 @@ public class MyApplication extends Application {
         LoadingAndRetryManager.BASE_RETRY_LAYOUT_ID = R.layout.base_retry;
         LoadingAndRetryManager.BASE_EMPTY_LAYOUT_ID = R.layout.base_empty;
         PlatformConfig.setWeixin("wx1596167db4f5cd13", "930dcfcb2007dd9f16e2eece4708a3b6");
-        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
+        PlatformConfig.setQQZone("1105146713", "7ZT2Qy3jwgJimRdc");
         com.umeng.socialize.utils.Log.LOG = true;
-
-
         OkHttpUtils.debug(true, "MyOkHttp");    //是否打开调试
         try {
             OkHttpUtils.getInstance()//

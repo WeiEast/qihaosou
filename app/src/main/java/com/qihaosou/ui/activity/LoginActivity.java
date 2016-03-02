@@ -46,6 +46,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         loginQQ= (LinearLayout) findViewById(R.id.ll_thridlogin_qq);
         loginWechat= (LinearLayout) findViewById(R.id.ll_thridlogin_wx);
         wacher=new MyTextWacher(loginBtn,phoneET,passwordET);
+
     }
 
     @Override
@@ -55,7 +56,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         registerTV.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
         loginWechat.setOnClickListener(this);
-        loginWechat.setOnClickListener(this);
+        loginQQ.setOnClickListener(this);
         phoneET.addTextChangedListener(wacher);
         passwordET.addTextChangedListener(wacher);
 
@@ -133,7 +134,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private UMAuthListener umAuthListener = new UMAuthListener() {
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
-            mShareAPI.getPlatformInfo(LoginActivity.this,platform,umAuthListener);
+
             ToastUtil.TextToast(getApplicationContext(), action+"Authorize succeed");
             L.e(data.toString());
         }

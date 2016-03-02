@@ -19,6 +19,10 @@ public class Constants {
     public static final String GET_ICINFO_EMP=BASE_URL+"&cmd=getIcinfoEmp";
     //获取验证码
     public static final String GET_V_CODE_URL=BASE_URL+"&cmd=sendVcode";
-
-
+    //关注
+    public static final String  ATTENTION_URL=BASE_URL+"&cmd=insertAttention";
+    //关注列表
+    public static final String GET_ATTENTION_LIST_URL=BASE_URL+"&cmd=getAttention";
+    //取消关注
+    public static final String CANCEL_ATTENTION_URL=BASE_URL+"&cmd=cancelAttention";
 }

@@ -125,8 +125,10 @@ public class LoadingAndRetryLayout extends FrameLayout
         if (view == mLoadingView)
         {
             mLoadingView.setVisibility(View.VISIBLE);
-            if (mRetryView != null)
+            if (mRetryView != null) {
                 mRetryView.setVisibility(View.GONE);
+
+            }
             if (mContentView != null)
                 mContentView.setVisibility(View.GONE);
             if (mEmptyView != null)

@@ -9,19 +9,19 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.BeanCallBack;
 import com.qihaosou.R;
 import com.qihaosou.bean.BaseBean;
 import com.qihaosou.bean.IcinfoBean;
 import com.qihaosou.bean.IcinfoBody;
+import com.qihaosou.bean.IcinfoListBody;
 import com.qihaosou.loading.LoadingAndRetryManager;
 import com.qihaosou.loading.OnLoadingAndRetryListener;
 import com.qihaosou.net.UriHelper;
 import com.qihaosou.util.ToastUtil;
 import com.qihaosou.view.LineGridView;
-
+import java.util.List;
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -29,15 +29,17 @@ import okhttp3.Response;
  * Created by Administrator on 2016/1/20.
  * 企业详情
  */
-public class EnterpriseDetailInfoActivity extends BaseActivity{
+public class EnterpriseDetailInfoActivity extends BaseActivity implements View.OnClickListener{
     private String uuid="aad4272599094555983094089e3a27bf";
     LoadingAndRetryManager mLoadingAndRetryManager;
     private LineGridView gridView;
     int[] resId = {R.mipmap.item_image_01,R.mipmap.item_image_02,R.mipmap.item_image_03,R.mipmap.item_image_04,
             R.mipmap.item_image_05,R.mipmap.item_image_06,R.mipmap.item_image_07,R.mipmap.item_image_08,R.mipmap.item_image_09,R.mipmap.item_image_10,R.mipmap.item_image_11,R.mipmap.item_image_12};
     String[] titles = {"工商信息","工商变更","年报","网站信息","商标","专利","著作权","法院诉讼","失信信息","资质","法院判决","招投标信息"};
-
+    private TextView btnAttent;
     private TextView econ_nameTV,oper_nameTV,regist_capiTV,start_dateTV,register_statusTV,econ_kindTV;
+    private List<IcinfoBean> list;
+    private Boolean isAttent=false;//是否关注
     @Override
     protected void init() {
         setTitle("");
@@ -56,6 +58,8 @@ public class EnterpriseDetailInfoActivity extends BaseActivity{
         regist_capiTV= (TextView) findViewById(R.id.tv_compdetail_registcapi);
         //成立日期
         start_dateTV= (TextView) findViewById(R.id.tv_compdetail_checkdate);
+        //关注
+        btnAttent= (TextView) findViewById(R.id.tv_infordetial_attention);
     }
 
     @Override
@@ -77,6 +81,7 @@ public class EnterpriseDetailInfoActivity extends BaseActivity{
 
             }
         });
+        btnAttent.setOnClickListener(this);
     }
 
     @Override
@@ -84,6 +89,7 @@ public class EnterpriseDetailInfoActivity extends BaseActivity{
       //  loadData();
         mLoadingAndRetryManager.showLoading();
         getIcinfo(uuid);
+        getAttentList(uuid);
 
     }
     private void loadData()
@@ -113,6 +119,18 @@ public class EnterpriseDetailInfoActivity extends BaseActivity{
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_enterprise_detailinfo1;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.tv_infordetial_attention://关注,取消关注
+                if(isAttent)
+                    cancelAttent(uuid);
+                else
+                    attent(uuid);
+                break;
+        }
     }
 
     class MyAdapter extends BaseAdapter {
@@ -168,7 +186,7 @@ public class EnterpriseDetailInfoActivity extends BaseActivity{
         OkHttpUtils.post(UriHelper.getInstance().getIcInfoUrl(uuid)).tag(this).execute(new BeanCallBack<BaseBean<IcinfoBody>>() {
             @Override
             public void onError(Request request, @Nullable Response response, @Nullable Exception e) {
-                ToastUtil.TextToast(EnterpriseDetailInfoActivity.this,"网络请求异常");
+                ToastUtil.TextToast(EnterpriseDetailInfoActivity.this, getString(R.string.network_exception));
             }
 
             @Override
@@ -181,10 +199,10 @@ public class EnterpriseDetailInfoActivity extends BaseActivity{
                 if (icinfoBodyBaseBean != null) {
                     if ("0000".equals(icinfoBodyBaseBean.getCode())) {
                         fullinfo(icinfoBodyBaseBean.getBody().getIcinfo());
-                    }else if("103".equals(icinfoBodyBaseBean.getCode())){
-                        ToastUtil.TextToast(EnterpriseDetailInfoActivity.this,"未登录");
-                    }else{
-                        ToastUtil.TextToast(EnterpriseDetailInfoActivity.this,icinfoBodyBaseBean.getMessage());
+                    } else if ("103".equals(icinfoBodyBaseBean.getCode())) {
+                        ToastUtil.TextToast(EnterpriseDetailInfoActivity.this, "未登录");
+                    } else {
+                        ToastUtil.TextToast(EnterpriseDetailInfoActivity.this, icinfoBodyBaseBean.getMessage());
                     }
                 }
             }
@@ -200,6 +218,70 @@ public class EnterpriseDetailInfoActivity extends BaseActivity{
             regist_capiTV.setText(icinfo.getRegistCapi());
             register_statusTV.setText(icinfo.getRegisterStatus());
         }
+    }
+    //关注
+    private void attent(String uuid){
+        OkHttpUtils.post(UriHelper.getInstance().getAttentUrl(uuid)).tag(this).execute(new BeanCallBack<BaseBean>() {
+
+            @Override
+            public void onError(Request request, @Nullable Response response, @Nullable Exception e) {
+                ToastUtil.TextToast(EnterpriseDetailInfoActivity.this,getString(R.string.network_exception));
+            }
+
+            @Override
+            public void onResponse(BaseBean baseBean) {
+                if(baseBean!=null){
+                    if("0000".equals(baseBean.getCode()))
+                        isAttent=true;
+                    ToastUtil.TextToast(EnterpriseDetailInfoActivity.this,baseBean.getMessage());
+
+                }
+
+            }
+        });
+    }
+    //取消关注
+    private void cancelAttent(String uuid){
+        OkHttpUtils.post(UriHelper.getInstance().cancelAttentUrl(uuid)).tag(this).execute(new BeanCallBack<BaseBean>() {
+            @Override
+            public void onResponse(BaseBean baseBean) {
+                if(baseBean!=null){
+                    if("0000".equals(baseBean.getCode())){
+                        isAttent=false;
+                    }
+                    ToastUtil.TextToast(EnterpriseDetailInfoActivity.this,baseBean.getMessage());
+                }
+            }
+
+            @Override
+            public void onError(Request request, @Nullable Response response, @Nullable Exception e) {
+                ToastUtil.TextToast(EnterpriseDetailInfoActivity.this,getString(R.string.network_exception));
+            }
+        });
+    }
+
+    //获取关注列表
+    private void getAttentList(final String uuid){
+        OkHttpUtils.post(UriHelper.getInstance().getAttentListUrl(uuid)).tag(this).execute(new BeanCallBack<BaseBean<IcinfoListBody>>() {
+            @Override
+            public void onResponse(BaseBean<IcinfoListBody> icinfoListBodyBaseBean) {
+                if(icinfoListBodyBaseBean!=null){
+                    if("0000".equals(icinfoListBodyBaseBean.getCode())){
+                        if(icinfoListBodyBaseBean.getBody().getIcinfoAll()!=null){
+                             list=icinfoListBodyBaseBean.getBody().getIcinfoAll();
+                            for(IcinfoBean bean:list){
+                                if(uuid.equals(bean.getUuid())){
+                                    isAttent=true;
+                                    ToastUtil.TextToast(EnterpriseDetailInfoActivity.this,"关注状态:已关注");
+                                }
+                            }
+                            //在这Button设置关注状态
+                        }
+
+                    }
+                }
+            }
+        });
     }
 
 }

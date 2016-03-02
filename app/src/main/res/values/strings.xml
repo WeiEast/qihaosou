@@ -128,4 +128,7 @@
     <string name="trademark_detial_agent">代理机构</string>
     <string name="trademark_detial_flowitems">申请流程</string>
     <string name="trademark_detial_project">商品/服务项目</string>
+
+
+    <string name="network_exception">网络异常</string>
 </resources>

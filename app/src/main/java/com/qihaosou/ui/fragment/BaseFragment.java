@@ -8,4 +8,8 @@ package com.qihaosou.ui.fragment;
  */
 public abstract class BaseFragment extends BaseLazyFragment {
 
+
+
+
+
 }

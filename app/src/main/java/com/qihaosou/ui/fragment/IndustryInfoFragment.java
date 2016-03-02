@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,6 +76,7 @@ public class IndustryInfoFragment extends BaseFragment {
         compAddressTV= (TextView) view.findViewById(R.id.tv_comp_address);
         addressTV= (TextView) view.findViewById(R.id.tv_address);
         rootView= (ScrollView) view.findViewById(R.id.root_view);
+
     }
 
     @Override
@@ -115,6 +117,7 @@ public class IndustryInfoFragment extends BaseFragment {
 
     @Override
     protected int getContentViewLayoutID() {
+
         return R.layout.fragment_industryinfo;
     }
 

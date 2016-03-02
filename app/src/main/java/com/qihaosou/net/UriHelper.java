@@ -90,4 +90,28 @@ public class UriHelper {
         sb.append(uuid);
         return sb.toString();
     }
+    //关注url
+    public String getAttentUrl(String uuid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.ATTENTION_URL);
+        sb.append("&uuid=");
+        sb.append(uuid);
+        return sb.toString();
+    }
+    //关注列表Url
+    public  String getAttentListUrl(String uuid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.GET_ATTENTION_LIST_URL);
+        sb.append("&uuid=");
+        sb.append(uuid);
+        return sb.toString();
+    }
+    //取消关注
+    public String cancelAttentUrl(String uuid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.CANCEL_ATTENTION_URL);
+        sb.append("&uuid=");
+        sb.append(uuid);
+        return sb.toString();
+    }
 }
