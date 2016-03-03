@@ -69,6 +69,13 @@ public class UriHelper {
         L.e(sb.toString());
         return sb.toString();
     }
+    public String getHomePageUrl(String uuid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.GET_HOME_PAGE_URL);
+        sb.append("&uuid=");
+        sb.append(uuid);
+        return sb.toString();
+    }
     public String getIcInfoUrl(String uuid){
         StringBuffer sb = new StringBuffer();
         sb.append(Constants.GET_ICINFO);

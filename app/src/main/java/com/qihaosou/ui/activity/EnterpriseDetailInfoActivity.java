@@ -11,11 +11,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.BeanCallBack;
+import com.lzy.okhttputils.https.TaskException;
 import com.qihaosou.R;
 import com.qihaosou.bean.BaseBean;
+import com.qihaosou.bean.HomepageBean;
 import com.qihaosou.bean.IcinfoBean;
 import com.qihaosou.bean.IcinfoBody;
 import com.qihaosou.bean.IcinfoListBody;
+import com.qihaosou.callback.HomePageBeanCallBack;
 import com.qihaosou.loading.LoadingAndRetryManager;
 import com.qihaosou.loading.OnLoadingAndRetryListener;
 import com.qihaosou.net.UriHelper;
@@ -30,16 +33,25 @@ import okhttp3.Response;
  * 企业详情
  */
 public class EnterpriseDetailInfoActivity extends BaseActivity implements View.OnClickListener{
-    private String uuid="aad4272599094555983094089e3a27bf";
+    private String uuid="2ee37bb8b9ab4fe5ad6a8b9fdce26401";
     LoadingAndRetryManager mLoadingAndRetryManager;
     private LineGridView gridView;
     int[] resId = {R.mipmap.item_image_01,R.mipmap.item_image_02,R.mipmap.item_image_03,R.mipmap.item_image_04,
             R.mipmap.item_image_05,R.mipmap.item_image_06,R.mipmap.item_image_07,R.mipmap.item_image_08,R.mipmap.item_image_09,R.mipmap.item_image_10,R.mipmap.item_image_11,R.mipmap.item_image_12};
     String[] titles = {"工商信息","工商变更","年报","网站信息","商标","专利","著作权","法院诉讼","失信信息","资质","法院判决","招投标信息"};
     private TextView btnAttent;
-    private TextView econ_nameTV,oper_nameTV,regist_capiTV,start_dateTV,register_statusTV,econ_kindTV;
+    private TextView econ_nameTV,oper_nameTV,regist_capiTV,start_dateTV,register_statusTV,econ_kindTV,refreshTV;
     private List<IcinfoBean> list;
     private Boolean isAttent=false;//是否关注
+    //浏览量
+    private int readCount;
+    //工商更改数量
+    private int changerecordsCount;
+    //年报数量
+    private int annualCount;
+    //网站数量
+    private int webCount;
+    //
     @Override
     protected void init() {
         setTitle("");
@@ -58,6 +70,8 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
         regist_capiTV= (TextView) findViewById(R.id.tv_compdetail_registcapi);
         //成立日期
         start_dateTV= (TextView) findViewById(R.id.tv_compdetail_checkdate);
+        //更新时间
+        refreshTV= (TextView) findViewById(R.id.tv_infodetial_refresh);
         //关注
         btnAttent= (TextView) findViewById(R.id.tv_infordetial_attention);
     }
@@ -88,8 +102,7 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
     protected void addData() {
       //  loadData();
         mLoadingAndRetryManager.showLoading();
-        getIcinfo(uuid);
-        getAttentList(uuid);
+        getHomePage(uuid);
 
     }
     private void loadData()
@@ -181,50 +194,44 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
         });
     }
 
-    private void getIcinfo(String uuid){
+    private void getHomePage(String uuid){
 
-        OkHttpUtils.post(UriHelper.getInstance().getIcInfoUrl(uuid)).tag(this).execute(new BeanCallBack<BaseBean<IcinfoBody>>() {
+        OkHttpUtils.post(UriHelper.getInstance().getHomePageUrl(uuid)).tag(this).execute(new HomePageBeanCallBack() {
+
             @Override
-            public void onError(Request request, @Nullable Response response, @Nullable Exception e) {
-                ToastUtil.TextToast(EnterpriseDetailInfoActivity.this, getString(R.string.network_exception));
+            public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
+                ToastUtil.TextToast(getApplicationContext(), e.getMessage());
             }
 
             @Override
-            public void onAfter(@Nullable BaseBean<IcinfoBody> icinfoBodyBaseBean, Request request, Response response, @Nullable Exception e) {
+            public void onAfter(@Nullable HomepageBean homepageBean, Request request, Response response, @Nullable TaskException e) {
                 mLoadingAndRetryManager.showContent();
             }
 
             @Override
-            public void onResponse(BaseBean<IcinfoBody> icinfoBodyBaseBean) {
-                if (icinfoBodyBaseBean != null) {
-                    if ("0000".equals(icinfoBodyBaseBean.getCode())) {
-                        fullinfo(icinfoBodyBaseBean.getBody().getIcinfo());
-                    } else if ("103".equals(icinfoBodyBaseBean.getCode())) {
-                        ToastUtil.TextToast(EnterpriseDetailInfoActivity.this, "未登录");
-                    } else {
-                        ToastUtil.TextToast(EnterpriseDetailInfoActivity.this, icinfoBodyBaseBean.getMessage());
-                    }
-                }
+            public void onResponse(HomepageBean homepageBean) {
+                if (homepageBean != null)
+                    fullinfo(homepageBean);
             }
         });
     }
 
-    private void fullinfo(IcinfoBean icinfo) {
-        if(icinfo!=null){
-            econ_nameTV.setText(icinfo.getEconName());
-            econ_kindTV.setText(icinfo.getEconKind());
-            start_dateTV.setText(icinfo.getStartDate());
-            oper_nameTV.setText(icinfo.getOperName());
-            regist_capiTV.setText(icinfo.getRegistCapi());
-            register_statusTV.setText(icinfo.getRegisterStatus());
-        }
+    private void fullinfo(HomepageBean homepageBean) {
+
+        econ_nameTV.setText(homepageBean.getEconName());
+        econ_kindTV.setText(homepageBean.getEconKind());
+        start_dateTV.setText(homepageBean.getStartDate());
+        oper_nameTV.setText(homepageBean.getOperName());
+        regist_capiTV.setText(homepageBean.getRegistCapi());
+        register_statusTV.setText(homepageBean.getRegisterStatus());
+        refreshTV.setText(homepageBean.getUpdateTime());
     }
     //关注
     private void attent(String uuid){
         OkHttpUtils.post(UriHelper.getInstance().getAttentUrl(uuid)).tag(this).execute(new BeanCallBack<BaseBean>() {
 
             @Override
-            public void onError(Request request, @Nullable Response response, @Nullable Exception e) {
+            public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
                 ToastUtil.TextToast(EnterpriseDetailInfoActivity.this,getString(R.string.network_exception));
             }
 
@@ -254,32 +261,8 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
             }
 
             @Override
-            public void onError(Request request, @Nullable Response response, @Nullable Exception e) {
+            public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
                 ToastUtil.TextToast(EnterpriseDetailInfoActivity.this,getString(R.string.network_exception));
-            }
-        });
-    }
-
-    //获取关注列表
-    private void getAttentList(final String uuid){
-        OkHttpUtils.post(UriHelper.getInstance().getAttentListUrl(uuid)).tag(this).execute(new BeanCallBack<BaseBean<IcinfoListBody>>() {
-            @Override
-            public void onResponse(BaseBean<IcinfoListBody> icinfoListBodyBaseBean) {
-                if(icinfoListBodyBaseBean!=null){
-                    if("0000".equals(icinfoListBodyBaseBean.getCode())){
-                        if(icinfoListBodyBaseBean.getBody().getIcinfoAll()!=null){
-                             list=icinfoListBodyBaseBean.getBody().getIcinfoAll();
-                            for(IcinfoBean bean:list){
-                                if(uuid.equals(bean.getUuid())){
-                                    isAttent=true;
-                                    ToastUtil.TextToast(EnterpriseDetailInfoActivity.this,"关注状态:已关注");
-                                }
-                            }
-                            //在这Button设置关注状态
-                        }
-
-                    }
-                }
             }
         });
     }

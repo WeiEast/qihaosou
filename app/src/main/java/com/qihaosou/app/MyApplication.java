@@ -4,6 +4,7 @@ package com.qihaosou.app;
 import android.app.Application;
 
 import com.lzy.okhttputils.OkHttpUtils;
+import com.lzy.okhttputils.context.GlobalContext;
 import com.qihaosou.R;
 import com.qihaosou.loading.LoadingAndRetryManager;
 import com.qihaosou.net.VolleyHelper;
@@ -16,7 +17,7 @@ import com.umeng.socialize.PlatformConfig;
  * Date:2016/1/12
  * Description:Application
  */
-public class MyApplication extends Application {
+public class MyApplication extends GlobalContext {
 
     @Override
     public void onCreate() {

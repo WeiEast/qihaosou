@@ -3,6 +3,7 @@ package com.qihaosou.listener;
 import android.support.annotation.Nullable;
 
 import com.lzy.okhttputils.callback.BeanCallBack;
+import com.lzy.okhttputils.https.TaskException;
 import com.lzy.okhttputils.request.BaseRequest;
 
 import okhttp3.Request;
@@ -26,7 +27,7 @@ public abstract class MyBeanCallBack<T> extends BeanCallBack<T> {
     }
 
     @Override
-    public void onAfter(@Nullable T t, Request request, Response response, @Nullable Exception e) {
+    public void onAfter(@Nullable T t, Request request, Response response, @Nullable TaskException e) {
         System.out.println("onAfter");
     }
 
@@ -41,7 +42,7 @@ public abstract class MyBeanCallBack<T> extends BeanCallBack<T> {
     }
 
     @Override
-    public void onError(Request request, @Nullable Response response, @Nullable Exception e) {
+    public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
         System.out.println("onError");
         super.onError(request, response, e);
     }

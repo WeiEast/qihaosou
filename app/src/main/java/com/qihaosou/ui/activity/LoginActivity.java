@@ -8,10 +8,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.BeanCallBack;
+import com.lzy.okhttputils.https.TaskException;
 import com.lzy.okhttputils.request.BaseRequest;
 import com.qihaosou.R;
 import com.qihaosou.bean.BaseBean;
 import com.qihaosou.bean.LoginBody;
+import com.qihaosou.bean.UserBean;
+import com.qihaosou.callback.UserBeanCallBack;
 import com.qihaosou.listener.MyTextWacher;
 import com.qihaosou.net.UriHelper;
 import com.qihaosou.util.L;
@@ -22,6 +25,9 @@ import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import java.util.Map;
+
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Author: wenjundu
@@ -103,31 +109,27 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private void Login(String phone,String password) {
         String clientType="android";
         final LoadingDialog loadingDialog=new LoadingDialog(LoginActivity.this);
-        OkHttpUtils.post(UriHelper.getInstance().getLoginUrl(phone,password,clientType)).tag(this).execute(new BeanCallBack<BaseBean<LoginBody>>() {
+        OkHttpUtils.post(UriHelper.getInstance().getLoginUrl(phone,password,clientType)).tag(this).execute(new UserBeanCallBack() {
+
             @Override
             public void onBefore(BaseRequest request) {
                 loadingDialog.show();
             }
 
             @Override
-            public void onAfter(@Nullable BaseBean<LoginBody> loginBodyBaseBean, okhttp3.Request request, okhttp3.Response response, @Nullable Exception e) {
+            public void onAfter(@Nullable UserBean userBean, Request request, Response response, @Nullable TaskException e) {
                 loadingDialog.dismiss();
             }
 
             @Override
-            public void onError(okhttp3.Request request, @Nullable okhttp3.Response response, @Nullable Exception e) {
-                ToastUtil.TextToast(LoginActivity.this, "网络异常");
+            public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
+                ToastUtil.TextToast(LoginActivity.this,e.getMessage());
             }
 
             @Override
-            public void onResponse(BaseBean<LoginBody> loginBodyBaseBean) {
-                if(loginBodyBaseBean!=null) {
-                    if(loginBodyBaseBean.getCode().equals("0000")) {
-                        LoginBody loginBean = loginBodyBaseBean.getBody();
-                        finish();
-                    }
-                    ToastUtil.TextToast(LoginActivity.this,loginBodyBaseBean.getMessage());
-                }
+            public void onResponse(UserBean userBean) {
+                ToastUtil.TextToast(getApplicationContext(),getString(R.string.login_success));
+                finish();
             }
         });
     }

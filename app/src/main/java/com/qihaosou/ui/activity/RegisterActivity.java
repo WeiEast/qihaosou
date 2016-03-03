@@ -1,8 +1,6 @@
 package com.qihaosou.ui.activity;
 
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
+import android.support.annotation.Nullable;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -11,26 +9,28 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ToggleButton;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.BeanCallBack;
+import com.lzy.okhttputils.https.TaskException;
+import com.lzy.okhttputils.request.BaseRequest;
 import com.qihaosou.R;
 import com.qihaosou.bean.BaseBean;
-import com.qihaosou.bean.VcodeBody;
-import com.qihaosou.listener.MyBeanCallBack;
+import com.qihaosou.bean.QihaosouBean;
+import com.qihaosou.bean.VcodeBean;
+import com.qihaosou.callback.QihaosouBeanCallBack;
+import com.qihaosou.callback.VcodeBeanCallBack;
 import com.qihaosou.listener.MyTextWacher;
 import com.qihaosou.listener.TimeCountListener;
-import com.qihaosou.net.GsonRequest;
 import com.qihaosou.net.UriHelper;
-import com.qihaosou.net.VolleyHelper;
 import com.qihaosou.util.DensityUtils;
 import com.qihaosou.util.L;
 import com.qihaosou.util.NetUtils;
 import com.qihaosou.util.TimeCount;
 import com.qihaosou.util.ToastUtil;
 import com.qihaosou.view.LoadingDialog;
+
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Author: wenjundu
@@ -113,33 +113,56 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     MyTextWacher codewatcher;
     MyTextWacher regwatcher;
     private void register(String phone,String password,String nickname,String vcode){
-        OkHttpUtils.post(UriHelper.getInstance().getRegisterUrl(phone, password, vcode,nickname)).tag(this).execute(new BeanCallBack<BaseBean>() {
+        final LoadingDialog loadingDialog=new LoadingDialog(this);
+        OkHttpUtils.post(UriHelper.getInstance().getRegisterUrl(phone, password, vcode,nickname)).tag(this).execute(new QihaosouBeanCallBack() {
             @Override
-            public void onResponse(BaseBean baseBean) {
-                if(baseBean!=null){
-                    if("0000".equals(baseBean.getCode())){
-                        ToastUtil.TextToast(RegisterActivity.this,"注册成功");
-                    }else{
-                        ToastUtil.TextToast(RegisterActivity.this,baseBean.getMessage()+baseBean.getCode());
-                    }
-                }
+            public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
+                ToastUtil.TextToast(getApplicationContext(),e.getMessage());
+            }
+
+            @Override
+            public void onResponse(QihaosouBean qihaosouBean) {
+                ToastUtil.TextToast(getApplicationContext(),qihaosouBean.getMessage());
+            }
+
+            @Override
+            public void onBefore(BaseRequest request) {
+                loadingDialog.show();
+            }
+
+            @Override
+            public void onAfter(@Nullable QihaosouBean qihaosouBean, Request request, Response response, @Nullable TaskException e) {
+                loadingDialog.dismiss();
             }
         });
     }
     //获取验证码
     private void getCode(String phone){
-        OkHttpUtils.post(UriHelper.getInstance().getVcodeUrl(phone)).tag(this).execute(new BeanCallBack<BaseBean<VcodeBody>>() {
+        final LoadingDialog loadingDialog=new LoadingDialog(this);
+        OkHttpUtils.post(UriHelper.getInstance().getVcodeUrl(phone)).tag(this).execute(new VcodeBeanCallBack() {
             @Override
-            public void onResponse(BaseBean<VcodeBody> vcodeBodyBaseBean) {
-                if(vcodeBodyBaseBean!=null){
-                    if("0000".equals(vcodeBodyBaseBean.getCode())){
-                        VcodeBody vcodeBody=vcodeBodyBaseBean.getBody();
-                         L.e("code:::"+vcodeBody.getVcode().toString());
-                        timeCount.start();
-                    }else{
-                        ToastUtil.TextToast(RegisterActivity.this,vcodeBodyBaseBean.getMessage());
-                    }
+            public void onAfter(@Nullable VcodeBean vcodeBean, Request request, Response response, @Nullable TaskException e) {
+                loadingDialog.dismiss();
+            }
+
+            @Override
+            public void onBefore(BaseRequest request) {
+                loadingDialog.show();
+            }
+
+            @Override
+            public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
+                ToastUtil.TextToast(getApplicationContext(),e.getMessage());
+                btnCode.setEnabled(true);
+            }
+
+            @Override
+            public void onResponse(VcodeBean vcodeBean) {
+                if(vcodeBean!=null){
+                    L.e(vcodeBean.getVcode());
                 }
+              btnCode.setEnabled(false);
+              timeCount.start();
             }
         });
     }

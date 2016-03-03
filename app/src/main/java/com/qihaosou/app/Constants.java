@@ -1,5 +1,7 @@
 package com.qihaosou.app;
 
+import android.os.Build;
+
 /**
  * Author: Created by wenjundu
  * Date:on 2016/1/25
@@ -25,4 +27,8 @@ public class Constants {
     public static final String GET_ATTENTION_LIST_URL=BASE_URL+"&cmd=getAttention";
     //取消关注
     public static final String CANCEL_ATTENTION_URL=BASE_URL+"&cmd=cancelAttention";
+    //工商变更
+    public static final String GET_ICIONFO_CHANGE_URL= BASE_URL+"&cmd=getIcinfoChange";
+    //公司信息主页
+    public static final String GET_HOME_PAGE_URL=BASE_URL+"&cmd=getHomepage";
 }

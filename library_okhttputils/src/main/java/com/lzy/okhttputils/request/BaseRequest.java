@@ -4,15 +4,20 @@ import android.support.annotation.NonNull;
 
 import com.lzy.okhttputils.L;
 import com.lzy.okhttputils.OkHttpUtils;
+import com.lzy.okhttputils.SystemUtils;
 import com.lzy.okhttputils.callback.AbsCallback;
 import com.lzy.okhttputils.https.HttpsUtils;
+import com.lzy.okhttputils.https.TaskException;
 import com.lzy.okhttputils.model.RequestHeaders;
 import com.lzy.okhttputils.model.RequestParams;
+
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.SocketTimeoutException;
 import java.net.URLEncoder;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -212,44 +217,52 @@ public abstract class BaseRequest<R extends BaseRequest> {
     public <T> void execute(AbsCallback<T> callback) {
         mCallback = callback;
         if (mCallback == null) mCallback = AbsCallback.CALLBACK_DEFAULT;
-
         mCallback.onBefore(this);      //请求执行前调用 （UI线程）
-        RequestBody requestBody = generateRequestBody();
-        Request request = generateRequest(wrapRequestBody(requestBody));
-        Call call = generateCall(request);
-        call.enqueue(new okhttp3.Callback() {
-            @Override
-            public void onFailure(Request request, IOException e) {
-                //请求失败，一般为url地址错误，网络错误等
-                sendFailResultCallback(request, null, e, mCallback);
-            }
-
-            @Override
-            public void onResponse(Response response) throws IOException {
-                //响应失败，一般为服务器内部错误，或者找不到页面等
-                if (response.code() >= 400 && response.code() <= 599) {
-                    sendFailResultCallback(response.request(), response, null, mCallback);
-                    return;
+        // 是否有网络连接
+        if (SystemUtils.getNetworkType() == SystemUtils.NetWorkType.none){
+            sendFailResultCallback(null,null, new TaskException(TaskException.TaskError.noneNetwork.toString()),mCallback);
+        }else {
+            RequestBody requestBody = generateRequestBody();
+            Request request = generateRequest(wrapRequestBody(requestBody));
+            Call call = generateCall(request);
+            call.enqueue(new okhttp3.Callback() {
+                @Override
+                public void onFailure(Request request, IOException e) {
+                    //请求失败，一般为url地址错误，网络错误等
+                     sendFailResultCallback(request, null,  new TaskException(TaskException.TaskError.socketTimeout.toString()), mCallback);
                 }
 
-                try {
-                    //解析过程中抛出异常，一般为 json 格式错误，或者数据解析异常
-                    T t = (T) mCallback.parseNetworkResponse(response);
-                    sendSuccessResultCallback(t, response.request(), response, mCallback);
-                } catch (Exception e) {
-                    sendFailResultCallback(response.request(), response, e, mCallback);
+                @Override
+                public void onResponse(Response response) throws IOException {
+                    //响应失败，一般为服务器内部错误，或者找不到页面等
+                    if (response.code() >= 400 && response.code() <= 599) {
+                        sendFailResultCallback(response.request(), response, new TaskException(TaskException.TaskError.timeout.toString()), mCallback);
+                        return;
+                    }
+
+                    try {
+                        //解析过程中抛出异常，一般为 json 格式错误，或者数据解析异常
+                            T t = (T) mCallback.parseNetworkResponse(response);
+                            sendSuccessResultCallback(t, response.request(), response, mCallback);
+                    }catch(TaskException e){
+                        L.e(e.getMessage());
+                        sendFailResultCallback(response.request(),response,e,mCallback);
+                    }
+                    catch (Exception e) {
+                        sendFailResultCallback(response.request(), response, new TaskException(TaskException.TaskError.resultIllegal.toString()), mCallback);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     /** 失败回调，发送到主线程 */
-    public <T> void sendFailResultCallback(final Request request, final Response response, final Exception e, final AbsCallback<T> callback) {
+    public <T> void sendFailResultCallback(final Request request, final Response response, final IOException e, final AbsCallback<T> callback) {
         OkHttpUtils.getInstance().getDelivery().post(new Runnable() {
             @Override
             public void run() {
-                callback.onError(request, response, e);         //请求失败回调 （UI线程）
-                callback.onAfter(null, request, response, e);   //请求结束回调 （UI线程）
+                callback.onError(request, response, (TaskException)e);         //请求失败回调 （UI线程）
+                callback.onAfter(null, request, response, (TaskException)e);   //请求结束回调 （UI线程）
             }
         });
     }

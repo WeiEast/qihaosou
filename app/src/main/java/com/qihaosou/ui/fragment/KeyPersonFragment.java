@@ -14,13 +14,18 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.lzy.okhttputils.OkHttpUtils;
+import com.lzy.okhttputils.https.TaskException;
 import com.qihaosou.R;
+import com.qihaosou.bean.EmployeeBean;
+import com.qihaosou.callback.EmployeeAllCallBack;
 import com.qihaosou.loading.LoadingAndRetryManager;
 import com.qihaosou.net.GsonRequest;
 import com.qihaosou.net.UriHelper;
 import com.qihaosou.net.VolleyHelper;
 import com.qihaosou.util.L;
 import com.qihaosou.util.NetUtils;
+import com.qihaosou.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +40,8 @@ public class KeyPersonFragment extends Fragment{
     private GridView gridView;
     private LoadingAndRetryManager mLoadingAndRetryManager;
     private GridViewAdapter adapter;
+    private String uuid="aad4272599094555983094089e3a27bf";
+    private List<EmployeeBean> list;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,24 +58,27 @@ public class KeyPersonFragment extends Fragment{
     private void init(View view) {
         gridView= (GridView) view.findViewById(R.id.gv_key_person);
         mLoadingAndRetryManager=LoadingAndRetryManager.generate(gridView,null);
+        list=new ArrayList<EmployeeBean>();
+        adapter=new GridViewAdapter(getActivity().getApplicationContext(),list);
         gridView.setAdapter(adapter);
         mLoadingAndRetryManager.showLoading();
-      //  loadData();
+       loadData(uuid);
     }
     class GridViewAdapter extends BaseAdapter{
         private LayoutInflater inflater;
-        public GridViewAdapter(Context context,List list){
+        private List<EmployeeBean> list;
+        public GridViewAdapter(Context context,List<EmployeeBean> list){
             inflater=LayoutInflater.from(context);
-
+            this.list=list;
         }
         @Override
         public int getCount() {
-            return 10;
+            return list.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return 0;
+            return list.get(position);
         }
 
         @Override
@@ -79,6 +89,7 @@ public class KeyPersonFragment extends Fragment{
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder viewHolder=null;
+            EmployeeBean employeeBean=list.get(position);
             if(convertView==null){
                 viewHolder=new ViewHolder();
                 convertView=inflater.inflate(R.layout.item_key_person,(ViewGroup)null);
@@ -88,7 +99,8 @@ public class KeyPersonFragment extends Fragment{
             }else{
                 viewHolder= (ViewHolder) convertView.getTag();
             }
-
+            viewHolder.empNameTV.setText(employeeBean.getEmpName());
+            viewHolder.empJbTV.setText(employeeBean.getEmpJob());
 
             return convertView;
         }
@@ -96,7 +108,7 @@ public class KeyPersonFragment extends Fragment{
             TextView empNameTV,empJbTV;
         }
     }
-//    private void loadData(){
+   private void loadData(String uuid){
 //        String uuid="1f236e6b71484e06abf96130b6fe64aa";
 //        if(NetUtils.isNetworkConnected(getContext())){
 //            GsonRequest<EmpBean> gsonRequest=new GsonRequest<EmpBean>(Request.Method.POST, UriHelper.getInstance().getIcInfoEmpUrl(uuid),
@@ -122,7 +134,31 @@ public class KeyPersonFragment extends Fragment{
 //
 //            VolleyHelper.getInstance().getRequestQueue().add(gsonRequest);
 //        }
-//    }
+
+
+       OkHttpUtils.post(UriHelper.getInstance().getIcInfoEmpUrl(uuid)).tag(this).execute(new EmployeeAllCallBack() {
+
+           @Override
+           public void onError(okhttp3.Request request, @Nullable okhttp3.Response response, @Nullable TaskException e) {
+               ToastUtil.TextToast(getActivity(), e.toString());
+           }
+
+
+           @Override
+           public void onAfter(@Nullable List<EmployeeBean> employeeBeans, okhttp3.Request request, okhttp3.Response response, @Nullable TaskException e) {
+               mLoadingAndRetryManager.showContent();
+           }
+
+           @Override
+           public void onResponse(List<EmployeeBean> employeeBeans) {
+               if(employeeBeans!=null){
+                   list.clear();
+                   list.addAll(employeeBeans);
+                   adapter.notifyDataSetChanged();
+               }
+           }
+       });
+  }
 
 
 }

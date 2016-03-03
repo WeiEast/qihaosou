@@ -17,7 +17,13 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.lzy.okhttputils.OkHttpUtils;
+import com.lzy.okhttputils.callback.BeanCallBack;
+import com.lzy.okhttputils.https.TaskException;
 import com.qihaosou.R;
+import com.qihaosou.bean.BaseBean;
+import com.qihaosou.bean.IcinfoBean;
+import com.qihaosou.bean.IcinfoBody;
+import com.qihaosou.callback.IcinfoBeanCallBack;
 import com.qihaosou.listener.MyBeanCallBack;
 import com.qihaosou.loading.LoadingAndRetryManager;
 import com.qihaosou.loading.OnLoadingAndRetryListener;
@@ -26,6 +32,7 @@ import com.qihaosou.net.UriHelper;
 import com.qihaosou.net.VolleyHelper;
 import com.qihaosou.util.L;
 import com.qihaosou.util.NetUtils;
+import com.qihaosou.util.ToastUtil;
 import com.qihaosou.view.LoadingDialog;
 
 /**
@@ -34,14 +41,13 @@ import com.qihaosou.view.LoadingDialog;
  * Description:工商信息
  */
 public class IndustryInfoFragment extends BaseFragment {
+    private String uuid="aad4272599094555983094089e3a27bf";
     LoadingAndRetryManager mLoadingAndRetryManager;
     ScrollView rootView;
-    //法定代表 经营状态 成立日期 发照日期   营业期限自 营业期限至 注册资本 注册号 邮政编码 企业类型 企业联系电话 企业名称 登记机构 统一社会信用代码 企业联系地址 住所
     private TextView operNameTV,operateStatusTV,registerDateTV,checkDateTV,startDateTV,endDateTV,registCapiTV,econNoTV,compZipTV,econKindTV,compTelTV,econNameTV,belongOrgTV,unifiedNoTV,compAddressTV,addressTV;
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
 
     }
 
@@ -59,22 +65,39 @@ public class IndustryInfoFragment extends BaseFragment {
 
     @Override
     protected void init(View view) {
+        //法定代表
         operNameTV= (TextView) view.findViewById(R.id.tv_opername);
+        //经营状态
         operateStatusTV= (TextView) view.findViewById(R.id.tv_operate_status);
+        //成立日期
         registerDateTV= (TextView) view.findViewById(R.id.tv_register_date);
+        //发照日期
         checkDateTV= (TextView) view.findViewById(R.id.tv_check_date);
+        // 营业期限自
         startDateTV= (TextView) view.findViewById(R.id.tv_start_date);
+        //营业期限至
         endDateTV= (TextView) view.findViewById(R.id.tv_end_date);
+        //注册资本
         registCapiTV= (TextView) view.findViewById(R.id.tv_regist_capi);
+        //注册号
         econNoTV= (TextView) view.findViewById(R.id.tv_econ_no);
+        //邮政编码
         compZipTV= (TextView) view.findViewById(R.id.tv_comp_zip);
+        //企业类型
         econKindTV= (TextView) view.findViewById(R.id.tv_econ_kind);
+        //企业联系电话
         compTelTV= (TextView) view.findViewById(R.id.tv_comp_tel);
+        //企业名称
         econNameTV= (TextView) view.findViewById(R.id.tv_econ_name);
+        //登记机构
         belongOrgTV= (TextView) view.findViewById(R.id.tv_belong_org);
+        //统一社会信用代码
         unifiedNoTV= (TextView) view.findViewById(R.id.tv_unified_no);
+        //企业联系地址
         compAddressTV= (TextView) view.findViewById(R.id.tv_comp_address);
+        //住所
         addressTV= (TextView) view.findViewById(R.id.tv_address);
+
         rootView= (ScrollView) view.findViewById(R.id.root_view);
 
     }
@@ -104,14 +127,8 @@ public class IndustryInfoFragment extends BaseFragment {
         });
 
         mLoadingAndRetryManager.showLoading();
-        final String uuid="1f236e6b71484e06abf96130b6fe64aa";
-        Handler handler=new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-               loadDate(uuid);
-            }
-        },2000);
+        loadDate(uuid);
+
 
     }
 
@@ -125,33 +142,41 @@ public class IndustryInfoFragment extends BaseFragment {
 
     private void loadDate(String uuid) {
 
-//        if(NetUtils.isNetworkConnected(mContext)){
-//            GsonRequest<IcBean> gsonRequest=new GsonRequest<IcBean>(Request.Method.POST, UriHelper.getInstance().getIcInfoUrl(uuid), new Response.Listener<IcBean>() {
-//                @Override
-//                public void onResponse(IcBean response) {
-//                    if(response!=null){
-//                        mLoadingAndRetryManager.showContent();
-//                        fulldate(response);
-//                    }else{
-//                        mLoadingAndRetryManager.showEmpty();
-//                    }
-//                }
-//            }, new Response.ErrorListener() {
-//                @Override
-//                public void onErrorResponse(VolleyError error) {
-//                }
-//            });
-//            VolleyHelper.getInstance().getRequestQueue().add(gsonRequest);
-//        }else{
-//            mLoadingAndRetryManager.showEmpty();
-//        }
+        OkHttpUtils.post(UriHelper.getInstance().getIcInfoUrl(uuid)).execute(new IcinfoBeanCallBack() {
 
-        OkHttpUtils.post(UriHelper.getInstance().getIcInfoUrl(uuid)).execute(new MyBeanCallBack<String>() {
             @Override
-            public void onResponse(String s) {
-                L.e("login callback::" + s);
+            public void onError(okhttp3.Request request, @Nullable okhttp3.Response response, @Nullable TaskException e) {
+                ToastUtil.TextToast(getActivity().getApplicationContext(),e.getMessage());
+            }
+
+            @Override
+            public void onAfter(@Nullable IcinfoBean icinfoBean, okhttp3.Request request, okhttp3.Response response, @Nullable TaskException e) {
+                mLoadingAndRetryManager.showContent();
+            }
+
+            @Override
+            public void onResponse(IcinfoBean icinfoBean) {
+                if(icinfoBean!=null)
+                    fullInfo(icinfoBean);
             }
         });
+    }
+
+    private void fullInfo(IcinfoBean icinfo) {
+        econNameTV.setText(icinfo.getEconName());
+        econKindTV.setText(icinfo.getEconKind());
+        startDateTV.setText(icinfo.getStartDate());
+        operNameTV.setText(icinfo.getOperName());
+        registCapiTV.setText(icinfo.getRegistCapi());
+        operateStatusTV.setText(icinfo.getRegisterStatus());
+        registerDateTV.setText(icinfo.getStartDate());
+        checkDateTV.setText(icinfo.getCheckDate());
+        econNoTV.setText(icinfo.getEconNo());
+        compZipTV.setText(icinfo.getCompZip());
+        compTelTV.setText(icinfo.getCompTel());
+        belongOrgTV.setText(icinfo.getBelongOrg());
+        compAddressTV.setText(icinfo.getCompAddress());
+        addressTV.setText(icinfo.getAddress());
     }
 
 

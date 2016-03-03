@@ -3,9 +3,9 @@ package com.qihaosou.bean;
 /**
  * Author: Created by wenjundu
  * Date:on 2016/3/1
- * Description:
+ * Description:验证码
  */
-public class VcodeBody {
+public class VcodeBean {
     private String vcode;
     public String getVcode() {
         return vcode;
@@ -14,6 +14,5 @@ public class VcodeBody {
     public void setVcode(String vcode) {
         this.vcode = vcode;
     }
-
 
 }
