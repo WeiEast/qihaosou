@@ -6,22 +6,22 @@
     android:background="@color/white"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
     >
     <TextView
+        android:id="@+id/tv_year_report"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="2014年度报告"
         android:textColor="@color/base_text_color"
-        android:textSize="@dimen/font_size_16"
+        android:textSize="@dimen/font_size_18"
         />
     <TextView
+        android:id="@+id/tv_year_report_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2014-9-27"
-        android:textSize="@dimen/font_size_16"
+        android:textSize="@dimen/font_size_18"
         android:textColor="@color/base_text_color"
         android:drawableRight="@mipmap/usercenter_arrow_right"
         android:drawablePadding="10dp"

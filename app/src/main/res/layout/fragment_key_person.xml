@@ -13,5 +13,6 @@
         android:scrollbars="none"
         android:horizontalSpacing="10dp"
         android:verticalSpacing="5dp"
+        android:clipToPadding="false"
         ></GridView>
 </LinearLayout>

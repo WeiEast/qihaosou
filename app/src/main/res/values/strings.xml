@@ -111,11 +111,12 @@
     <string name="company_credit_code">统一社会信用代码</string>
     <string name="company_present_address">企业通信地址</string>
     <string name="personal_residence">住所</string>
-
+    <string name="company_work_num">从业人数(人)</string>
     <!--年报-->
     <string name="header_reportdetial_nocontent">（暂无内容）</string>
     <string name="company_reportdetial_nocontent">暂无相关内容</string>
     <string name="company_no_date">该企业没有相关信息</string>
+
 
     <!--商标详情-->
     <string name="trademark_details">商标详情</string>
@@ -128,7 +129,10 @@
     <string name="trademark_detial_agent">代理机构</string>
     <string name="trademark_detial_flowitems">申请流程</string>
     <string name="trademark_detial_project">商品/服务项目</string>
-
+    <!--投资人-->
+    <string name="partner">投资人</string>
+    <string name="partner_type">投资人类型</string>
+    <string name="cert_num">证件号码</string>
 
     <string name="network_exception">网络异常</string>
     <string name="login_successed">登录成功</string>

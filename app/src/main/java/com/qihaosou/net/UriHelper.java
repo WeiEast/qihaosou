@@ -1,5 +1,6 @@
 package com.qihaosou.net;
 import com.qihaosou.app.Constants;
+import com.qihaosou.bean.AnnualBean;
 import com.qihaosou.util.L;
 
 public class UriHelper {
@@ -117,6 +118,40 @@ public class UriHelper {
     public String cancelAttentUrl(String uuid){
         StringBuffer sb=new StringBuffer();
         sb.append(Constants.CANCEL_ATTENTION_URL);
+        sb.append("&uuid=");
+        sb.append(uuid);
+        return sb.toString();
+    }
+    //变更信息
+    public String getChangeInfoUrl(String uuid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.GET_ICIONFO_CHANGE_URL);
+        sb.append("&uuid=");
+        sb.append(uuid);
+        return sb.toString();
+    }
+    //年报list
+    public String getAnnualListUrl(String uuid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.GET_ICIONFO_ANNUAL_URL);
+        sb.append("&uuid=");
+        sb.append(uuid);
+        return sb.toString();
+    }
+    //年报详情
+    public String getAnnualBasicUrl(AnnualBean annualBean){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.GET_ICIONFO_ANNUAL_BASIC_URL);
+        sb.append("&submittedYear=");
+        sb.append(annualBean.getSubmittedYear());
+        sb.append("&uuid=");
+        sb.append(annualBean.getUuid());
+        return sb.toString();
+    }
+    //投资人信息
+    public String getPartnerInfoUrl(String uuid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.GET_ICINFO_PARTNER_URL);
         sb.append("&uuid=");
         sb.append(uuid);
         return sb.toString();

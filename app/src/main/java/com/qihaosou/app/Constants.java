@@ -31,4 +31,10 @@ public class Constants {
     public static final String GET_ICIONFO_CHANGE_URL= BASE_URL+"&cmd=getIcinfoChange";
     //公司信息主页
     public static final String GET_HOME_PAGE_URL=BASE_URL+"&cmd=getHomepage";
+    //年报信息List
+    public static final String GET_ICIONFO_ANNUAL_URL=BASE_URL+"&cmd=getIcinfoAnnual";
+    //年报详情
+    public static final String GET_ICIONFO_ANNUAL_BASIC_URL=BASE_URL+"&cmd=getIcinfoAnnualBasic";
+    //投资人信息
+    public static final String GET_ICINFO_PARTNER_URL=BASE_URL+"&cmd=getIcinfoPartner";
 }

@@ -7,17 +7,16 @@
         android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="工商信息"
         android:textColor="@color/base_text_color"
         android:drawableTop="@mipmap/btn_01"
         android:drawablePadding="4dp"
         android:layout_centerInParent="true"
         />
     <TextView
+        android:id="@+id/tv_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="4dp"
-        android:text="56"
         android:textSize="@dimen/font_size_12"
         android:textColor="@color/base_text_color"
         android:layout_alignParentRight="true"

@@ -11,9 +11,22 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.lzy.okhttputils.OkHttpUtils;
+import com.lzy.okhttputils.https.TaskException;
 import com.qihaosou.R;
+import com.qihaosou.bean.AnnualBean;
+import com.qihaosou.callback.AnnualAllCallBack;
+import com.qihaosou.net.UriHelper;
 import com.qihaosou.ui.activity.YearReportDetailsActivity;
+import com.qihaosou.util.ToastUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Author: Created by wenjundu
@@ -22,6 +35,9 @@ import com.qihaosou.ui.activity.YearReportDetailsActivity;
  */
 public class YearReportFragment extends Fragment{
     private ListView listView;
+    private YearReportAdapter adapter;
+    private List<AnnualBean> list;
+    private String uuid="2ee37bb8b9ab4fe5ad6a8b9fdce26401";
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,33 +48,62 @@ public class YearReportFragment extends Fragment{
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         init(getView());
+        addData();
     }
 
-    private void init(View view) {
-        listView= (ListView) view.findViewById(R.id.lv_year_report);
-        MyAdapter adapter=new MyAdapter(getContext());
+    private void addData() {
+        list=new ArrayList<AnnualBean>();
+        adapter=new YearReportAdapter(getContext(),list);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(getContext(), YearReportDetailsActivity.class);
+                Intent intent = new Intent(getContext(), YearReportDetailsActivity.class);
+                intent.putExtra("AnnualBean" ,list.get(position));
                 startActivity(intent);
             }
         });
+        getYearReoprtList(uuid);
     }
-    class MyAdapter extends BaseAdapter{
+
+    private void getYearReoprtList(String uuid) {
+        OkHttpUtils.post(UriHelper.getInstance().getAnnualListUrl(uuid)).tag(this).execute(new AnnualAllCallBack() {
+            @Override
+            public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
+                ToastUtil.TextToast(getActivity().getApplication(),e.getMessage());
+            }
+
+            @Override
+            public void onResponse(List<AnnualBean> annualBeans) {
+                list.clear();
+                list.addAll(annualBeans);
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    private void init(View view) {
+        listView= (ListView) view.findViewById(R.id.lv_year_report);
+
+    }
+
+
+
+    class YearReportAdapter extends BaseAdapter{
         private LayoutInflater inflater;
-        public MyAdapter(Context context){
+        private List<AnnualBean> list;
+        public YearReportAdapter(Context context,List<AnnualBean> list){
             inflater=LayoutInflater.from(context);
+            this.list=list;
         }
         @Override
         public int getCount() {
-            return 3;
+            return list.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return position;
+            return list.get(position);
         }
 
         @Override
@@ -68,8 +113,22 @@ public class YearReportFragment extends Fragment{
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView=inflater.inflate(R.layout.item_year_report,(ViewGroup)null);
+            ViewHolder viewHolder=null;
+            if(convertView==null){
+                viewHolder=new ViewHolder();
+                convertView=inflater.inflate(R.layout.item_year_report,(ViewGroup)null);
+                viewHolder.yearTV= (TextView) convertView.findViewById(R.id.tv_year_report);
+                convertView.setTag(viewHolder);
+            }else{
+                viewHolder= (ViewHolder) convertView.getTag();
+            }
+            AnnualBean annualBean=list.get(position);
+            viewHolder.yearTV.setText(annualBean.getSubmittedYear());
             return convertView;
         }
     }
+    static class ViewHolder{
+        TextView yearTV;
+    }
+
 }

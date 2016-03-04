@@ -1,7 +1,9 @@
 package com.qihaosou.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,16 +16,21 @@ import com.lzy.okhttputils.callback.BeanCallBack;
 import com.lzy.okhttputils.https.TaskException;
 import com.qihaosou.R;
 import com.qihaosou.bean.BaseBean;
+import com.qihaosou.bean.HomePageGridViewBean;
 import com.qihaosou.bean.HomepageBean;
 import com.qihaosou.bean.IcinfoBean;
 import com.qihaosou.bean.IcinfoBody;
 import com.qihaosou.bean.IcinfoListBody;
+import com.qihaosou.bean.QihaosouBean;
 import com.qihaosou.callback.HomePageBeanCallBack;
+import com.qihaosou.callback.QihaosouBeanCallBack;
 import com.qihaosou.loading.LoadingAndRetryManager;
 import com.qihaosou.loading.OnLoadingAndRetryListener;
 import com.qihaosou.net.UriHelper;
 import com.qihaosou.util.ToastUtil;
 import com.qihaosou.view.LineGridView;
+
+import java.util.ArrayList;
 import java.util.List;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -41,8 +48,10 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
     String[] titles = {"工商信息","工商变更","年报","网站信息","商标","专利","著作权","法院诉讼","失信信息","资质","法院判决","招投标信息"};
     private TextView btnAttent;
     private TextView econ_nameTV,oper_nameTV,regist_capiTV,start_dateTV,register_statusTV,econ_kindTV,refreshTV;
+    private TextView readCountTV;
     private List<IcinfoBean> list;
-    private Boolean isAttent=false;//是否关注
+    private List<HomePageGridViewBean> gridViewlist;
+    private HomePageGridViewAdapter gridViewAdapter;
     //浏览量
     private int readCount;
     //工商更改数量
@@ -51,12 +60,33 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
     private int annualCount;
     //网站数量
     private int webCount;
-    //
+    //商标数量
+    private int logoCount;
+    //专利数量
+    private int patentCount;
+    //著作权数量
+    private int copyrightCount;
+    //法院诉讼数量
+    private int courtCount;
+    //失信信息数量
+    private int dishonestyCount;
+    //资质数量
+    private int qualificationCount;
+    //招聘信息数量
+    private int recruitCount;
+    //招标数量
+    private int tendersCount;
+    //关注状态
+    private Boolean attentionStatus=false;
+    //企业头像
+    private String companyAvatar;
+    //创建时间
+    private String createDate;
     @Override
     protected void init() {
         setTitle("");
         gridView= (LineGridView) findViewById(R.id.line_gridview);
-        gridView.setAdapter(new MyAdapter());
+
         mLoadingAndRetryManager = LoadingAndRetryManager.generate(this, null);
         //公司名称
         econ_nameTV= (TextView) findViewById(R.id.tv_infodetial_name);
@@ -74,6 +104,8 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
         refreshTV= (TextView) findViewById(R.id.tv_infodetial_refresh);
         //关注
         btnAttent= (TextView) findViewById(R.id.tv_infordetial_attention);
+        //阅读量
+        readCountTV= (TextView) findViewById(R.id.tv_detailinfo_attention);
     }
 
     @Override
@@ -102,6 +134,10 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
     protected void addData() {
       //  loadData();
         mLoadingAndRetryManager.showLoading();
+        gridViewlist=new ArrayList<HomePageGridViewBean>();
+        initGridViewData();
+        gridViewAdapter=new HomePageGridViewAdapter(this,gridViewlist);
+        gridView.setAdapter(gridViewAdapter);
         getHomePage(uuid);
 
     }
@@ -138,7 +174,7 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_infordetial_attention://关注,取消关注
-                if(isAttent)
+                if(attentionStatus)
                     cancelAttent(uuid);
                 else
                     attent(uuid);
@@ -146,15 +182,23 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
         }
     }
 
-    class MyAdapter extends BaseAdapter {
+    class HomePageGridViewAdapter extends BaseAdapter {
+        private Context context;
+        private List<HomePageGridViewBean> list;
+        private LayoutInflater inflater;
+        public HomePageGridViewAdapter(Context context,List<HomePageGridViewBean> list){
+            this.context=context;
+            this.list=list;
+            inflater=LayoutInflater.from(context);
+        }
         @Override
         public int getCount() {
-            return resId.length;
+            return list.size();
         }
 
         @Override
         public Object getItem(int i) {
-            return i;
+            return list.get(i);
         }
 
         @Override
@@ -166,21 +210,25 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
         public View getView(int i, View convertView, ViewGroup viewGroup) {
             Holder holder = null;
             if(convertView == null){
-                convertView = View.inflate(EnterpriseDetailInfoActivity.this, R.layout.item_enterprise_detailinfo_gridview, null);
                 holder = new Holder();
+                convertView = inflater.inflate( R.layout.item_enterprise_detailinfo_gridview, null);
                 holder.tv = ((TextView) convertView.findViewById(R.id.btn_fun));
+                holder.numTV= (TextView) convertView.findViewById(R.id.tv_num);
                 convertView.setTag(holder);
             } else {
                 holder = ((Holder) convertView.getTag());
             }
-            holder.tv.setCompoundDrawablesWithIntrinsicBounds(0,resId[i],0,0);
-            holder.tv.setText(titles[i]);
+            holder.tv.setCompoundDrawablesWithIntrinsicBounds(0,list.get(i).getImgId(),0,0);
+            holder.tv.setText(list.get(i).getName());
+            if(list.get(i).getNum()!=0)
+                holder.numTV.setText(""+list.get(i).getNum());
             return convertView;
         }
     }
 
     static class Holder{
         TextView tv;
+        TextView numTV;
     }
     public void setRetryEvent(View retryView)
     {
@@ -215,7 +263,18 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
             }
         });
     }
-
+    //初始化GridView数据
+    private void  initGridViewData(){
+        gridViewlist.clear();
+        int[] resIds = {R.mipmap.item_image_01,R.mipmap.item_image_02,R.mipmap.item_image_03,R.mipmap.item_image_04,
+                R.mipmap.item_image_05,R.mipmap.item_image_06,R.mipmap.item_image_07,R.mipmap.item_image_08,R.mipmap.item_image_09,R.mipmap.item_image_10,R.mipmap.item_image_11,R.mipmap.item_image_12};
+        String[] titles = {"工商信息","工商变更","年报","网站信息","商标","专利","著作权","法院诉讼","失信信息","资质","法院判决","招投标信息"};
+        int[] nums={0,changerecordsCount,annualCount,webCount,logoCount,patentCount,copyrightCount,courtCount,dishonestyCount,qualificationCount,0,tendersCount};
+        for(int i=0;i<resId.length;i++){
+            HomePageGridViewBean homepageBean=new HomePageGridViewBean(resIds[i],titles[i],nums[i]);
+            gridViewlist.add(homepageBean);
+        }
+    }
     private void fullinfo(HomepageBean homepageBean) {
 
         econ_nameTV.setText(homepageBean.getEconName());
@@ -225,46 +284,53 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
         regist_capiTV.setText(homepageBean.getRegistCapi());
         register_statusTV.setText(homepageBean.getRegisterStatus());
         refreshTV.setText(homepageBean.getUpdateTime());
+        changerecordsCount=Integer.valueOf(homepageBean.getChangerecordsCount());
+        annualCount=Integer.valueOf(homepageBean.getAnnualCount());
+        webCount=Integer.valueOf(homepageBean.getWebCount());
+        logoCount=Integer.valueOf(homepageBean.getLogoCount());
+        patentCount=Integer.valueOf(homepageBean.getPatentCount());
+        copyrightCount=Integer.valueOf(homepageBean.getCopyrightCount());
+        courtCount=Integer.valueOf(homepageBean.getCourtCount());
+        dishonestyCount=Integer.valueOf(homepageBean.getDishonestyCount());
+        qualificationCount=Integer.valueOf(homepageBean.getQualificationCount());
+        tendersCount=Integer.valueOf(homepageBean.getTendersCount());
+        gridViewAdapter.notifyDataSetChanged();
+        readCountTV.setText("" + homepageBean.getReadCount());
+        attentionStatus=homepageBean.getAttentionStatus().equals("0")?true:false;
+
+        initGridViewData();
+        gridViewAdapter.notifyDataSetChanged();
+
     }
     //关注
     private void attent(String uuid){
-        OkHttpUtils.post(UriHelper.getInstance().getAttentUrl(uuid)).tag(this).execute(new BeanCallBack<BaseBean>() {
-
+        OkHttpUtils.post(UriHelper.getInstance().getAttentUrl(uuid)).tag(this).execute(new QihaosouBeanCallBack() {
             @Override
             public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
-                ToastUtil.TextToast(EnterpriseDetailInfoActivity.this,getString(R.string.network_exception));
+                ToastUtil.TextToast(getApplicationContext(),e.getMessage());
             }
-
             @Override
-            public void onResponse(BaseBean baseBean) {
-                if(baseBean!=null){
-                    if("0000".equals(baseBean.getCode()))
-                        isAttent=true;
-                    ToastUtil.TextToast(EnterpriseDetailInfoActivity.this,baseBean.getMessage());
-
-                }
-
+            public void onResponse(QihaosouBean qihaosouBean) {
+                ToastUtil.TextToast(getApplicationContext(),"关注成功");
+                attentionStatus=true;
             }
         });
     }
     //取消关注
     private void cancelAttent(String uuid){
-        OkHttpUtils.post(UriHelper.getInstance().cancelAttentUrl(uuid)).tag(this).execute(new BeanCallBack<BaseBean>() {
+        OkHttpUtils.post(UriHelper.getInstance().cancelAttentUrl(uuid)).tag(this).execute(new QihaosouBeanCallBack() {
             @Override
-            public void onResponse(BaseBean baseBean) {
-                if(baseBean!=null){
-                    if("0000".equals(baseBean.getCode())){
-                        isAttent=false;
-                    }
-                    ToastUtil.TextToast(EnterpriseDetailInfoActivity.this,baseBean.getMessage());
-                }
+            public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
+               ToastUtil.TextToast(getApplicationContext(),e.getMessage());
             }
 
             @Override
-            public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
-                ToastUtil.TextToast(EnterpriseDetailInfoActivity.this,getString(R.string.network_exception));
+            public void onResponse(QihaosouBean qihaosouBean) {
+                ToastUtil.TextToast(getApplicationContext(),"取消关注");
+                attentionStatus=false;
             }
         });
     }
+
 
 }

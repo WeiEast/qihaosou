@@ -9,11 +9,11 @@
         layout="@layout/common_toolbar"
         />
     <ScrollView
+        android:id="@+id/scroll_view"
         android:paddingTop="10dp"
         android:clipToPadding="false"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
+        android:layout_height="match_parent"
         android:scrollbars="none">
 
         <LinearLayout
@@ -43,15 +43,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
-                        android:text="企业名称"
+                        android:text="@string/company_name"
                         android:textColor="@color/base_text_color"
                         android:textSize="@dimen/font_size_16" />
 
                     <TextView
+                        android:id="@+id/tv_company_name"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2.5"
-                        android:text="深圳中商产业研究院有限公司"
                         android:textColor="@color/title_color"
                         android:textSize="@dimen/font_size_16" />
                 </LinearLayout>
@@ -70,15 +70,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
-                        android:text="注册号"
+                        android:text="@string/trademark_detial_regno"
                         android:textColor="@color/base_text_color"
                         android:textSize="@dimen/font_size_16" />
 
                     <TextView
+                        android:id="@+id/tv_econ_no"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2.5"
-                        android:text="201554854545"
                         android:textColor="@color/title_color"
                         android:textSize="@dimen/font_size_16" />
                 </LinearLayout>
@@ -96,42 +96,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
-                        android:text="企业通信地址"
+                        android:text="@string/company_present_address"
                         android:textColor="@color/base_text_color"
                         android:textSize="@dimen/font_size_16" />
 
                     <TextView
+                        android:id="@+id/tv_comp_address"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2.5"
-                        android:text="深圳市前海深港合作区前海一路1号A栋201室(入驻深圳市前海商务秘书有限公司)"
-                        android:textColor="@color/title_color"
-                        android:textSize="@dimen/font_size_16" />
-                </LinearLayout>
-
-                <View style="@style/MyHorizontalDividerLine" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="10dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.5"
-                        android:text="电子邮箱"
-                        android:textColor="@color/base_text_color"
-                        android:textSize="@dimen/font_size_16" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2.5"
-                        android:text="google@sina.com"
                         android:textColor="@color/title_color"
                         android:textSize="@dimen/font_size_16" />
                 </LinearLayout>
@@ -150,15 +123,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
-                        android:text="邮政编码"
+                        android:text="@string/company_email"
                         android:textColor="@color/base_text_color"
                         android:textSize="@dimen/font_size_16" />
 
                     <TextView
+                        android:id="@+id/tv_comp_email"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2.5"
-                        android:text="431900"
                         android:textColor="@color/title_color"
                         android:textSize="@dimen/font_size_16" />
                 </LinearLayout>
@@ -177,15 +150,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
-                        android:text="企业经营状态"
+                        android:text="@string/company_zip_code"
                         android:textColor="@color/base_text_color"
                         android:textSize="@dimen/font_size_16" />
 
                     <TextView
+                        android:id="@+id/comp_zip_code"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2.5"
-                        android:text="在业"
                         android:textColor="@color/title_color"
                         android:textSize="@dimen/font_size_16" />
                 </LinearLayout>
@@ -204,15 +177,42 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
-                        android:text="从业人数（人）"
+                        android:text="@string/company_detial_status"
                         android:textColor="@color/base_text_color"
                         android:textSize="@dimen/font_size_16" />
 
                     <TextView
+                        android:id="@+id/tv_comp_state"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2.5"
-                        android:text="不公示"
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/font_size_16" />
+                </LinearLayout>
+
+                <View style="@style/MyHorizontalDividerLine" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:text="@string/company_work_num"
+                        android:textColor="@color/base_text_color"
+                        android:textSize="@dimen/font_size_16" />
+
+                    <TextView
+                        android:id="@+id/tv_comp_work_num"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.5"
                         android:textColor="@color/title_color"
                         android:textSize="@dimen/font_size_16" />
                 </LinearLayout>

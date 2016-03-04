@@ -109,32 +109,6 @@ public class KeyPersonFragment extends Fragment{
         }
     }
    private void loadData(String uuid){
-//        String uuid="1f236e6b71484e06abf96130b6fe64aa";
-//        if(NetUtils.isNetworkConnected(getContext())){
-//            GsonRequest<EmpBean> gsonRequest=new GsonRequest<EmpBean>(Request.Method.POST, UriHelper.getInstance().getIcInfoEmpUrl(uuid),
-//                    new Response.Listener<EmpBean>() {
-//                        @Override
-//                        public void onResponse(EmpBean response) {
-//
-//                            if(response==null || response.getBody().getEmployeeAll().size()==0){
-//
-//                                mLoadingAndRetryManager.showEmpty();}
-//                            else{
-//                                mLoadingAndRetryManager.showContent();
-//                              fullData(response.getBody().getEmployeeAll());
-//                            }
-//                        }
-//                    }, new Response.ErrorListener() {
-//                @Override
-//                public void onErrorResponse(VolleyError error) {
-//
-//                }
-//            });
-//
-//
-//            VolleyHelper.getInstance().getRequestQueue().add(gsonRequest);
-//        }
-
 
        OkHttpUtils.post(UriHelper.getInstance().getIcInfoEmpUrl(uuid)).tag(this).execute(new EmployeeAllCallBack() {
 

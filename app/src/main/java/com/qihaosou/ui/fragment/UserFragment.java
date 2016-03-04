@@ -23,6 +23,7 @@ import com.qihaosou.net.VolleyHelper;
 import com.qihaosou.ui.activity.SetActivity;
 import com.qihaosou.util.L;
 import com.qihaosou.util.NetUtils;
+import com.qihaosou.view.CircleImageView;
 
 /**
  * Author:wenjundu
@@ -34,6 +35,7 @@ public class UserFragment extends Fragment implements OnClickListener{
     private RelativeLayout btnUserSet;
     private TextView userNameTV;
     private TextView btnOut;
+    private CircleImageView userHeaderIV;
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -47,6 +49,7 @@ public class UserFragment extends Fragment implements OnClickListener{
         userNameTV.setText("醉心客");
         btnUserSet.setOnClickListener(this);
         btnOut.setOnClickListener(this);
+        userHeaderIV= (CircleImageView) view.findViewById(R.id.iv_user_header);
     }
 
     @Nullable
@@ -70,21 +73,5 @@ public class UserFragment extends Fragment implements OnClickListener{
         if(intent!=null)
             startActivity(intent);
     }
-//    private void loginout(){
-//        if(NetUtils.isNetworkConnected(getContext())){
-//            GsonRequest<BaseBean> gsonRequest=new GsonRequest<BaseBean>(Request.Method.POST, Constants.LOGINOUT_URL,
-//                    new Response.Listener<BaseBean>() {
-//                        @Override
-//                        public void onResponse(BaseBean response) {
-//                            L.e(response.getMessage());
-//                        }
-//                    }, new Response.ErrorListener() {
-//                @Override
-//                public void onErrorResponse(VolleyError error) {
-//
-//                }
-//            });
-//            VolleyHelper.getInstance().getRequestQueue().add(gsonRequest);
-//        }
-//    }
+
 }
