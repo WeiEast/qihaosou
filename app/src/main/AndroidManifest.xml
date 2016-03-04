@@ -42,6 +42,7 @@
         <activity android:name=".ui.activity.MarkDetailsActivity" android:theme="@style/ActivityTheme"/>
         <activity android:name=".ui.activity.CompanyPatentActivity" android:theme="@style/ActivityTheme"/>
         <activity android:name=".ui.activity.DemoActivity" android:theme="@style/ActivityTheme"/>
+        <activity android:name=".ui.activity.WebInfoActivity" android:theme="@style/ActivityTheme"/>
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

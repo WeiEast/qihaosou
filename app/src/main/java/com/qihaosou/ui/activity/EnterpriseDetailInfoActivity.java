@@ -114,6 +114,14 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
+                    case 3:
+                        if(webCount==0){
+                            ToastUtil.TextToast(getApplicationContext(),"无网站信息");
+                            return;
+                        }
+                        else
+                            readyGo(WebInfoActivity.class);
+                        break;
                     case 4:
                         readyGo(MarkDetailsActivity.class);
                         break;
