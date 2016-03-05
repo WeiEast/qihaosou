@@ -84,7 +84,7 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
     private String createDate;
     @Override
     protected void init() {
-        setTitle("");
+
         gridView= (LineGridView) findViewById(R.id.line_gridview);
 
         mLoadingAndRetryManager = LoadingAndRetryManager.generate(this, null);
@@ -115,15 +115,10 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     case 3:
-                        if(webCount==0){
-                            ToastUtil.TextToast(getApplicationContext(),"无网站信息");
-                            return;
-                        }
-                        else
-                            readyGo(WebInfoActivity.class);
+                        readyGo(WebInfoActivity.class);
                         break;
                     case 4:
-                        readyGo(MarkDetailsActivity.class);
+                        readyGo(MarkListActivity.class);
                         break;
                     case 5:
                         readyGo(CompanyPatentActivity.class);
@@ -141,6 +136,7 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
     @Override
     protected void addData() {
       //  loadData();
+        setTitle("企业详情");
         mLoadingAndRetryManager.showLoading();
         gridViewlist=new ArrayList<HomePageGridViewBean>();
         initGridViewData();

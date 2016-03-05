@@ -138,7 +138,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
 
             ToastUtil.TextToast(getApplicationContext(), action+"Authorize succeed");
-            L.e(data.toString());
+            L.e("........:"+data.toString());
         }
 
         @Override

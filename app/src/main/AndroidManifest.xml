@@ -43,6 +43,7 @@
         <activity android:name=".ui.activity.CompanyPatentActivity" android:theme="@style/ActivityTheme"/>
         <activity android:name=".ui.activity.DemoActivity" android:theme="@style/ActivityTheme"/>
         <activity android:name=".ui.activity.WebInfoActivity" android:theme="@style/ActivityTheme"/>
+        <activity android:name=".ui.activity.MarkListActivity" android:theme="@style/ActivityTheme"/>
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -92,4 +93,6 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+
+
 </manifest>

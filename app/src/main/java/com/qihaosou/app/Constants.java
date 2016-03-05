@@ -37,4 +37,8 @@ public class Constants {
     public static final String GET_ICIONFO_ANNUAL_BASIC_URL=BASE_URL+"&cmd=getIcinfoAnnualBasic";
     //投资人信息
     public static final String GET_ICINFO_PARTNER_URL=BASE_URL+"&cmd=getIcinfoPartner";
+    //网站备案信息
+    public static final String GET_RECORD_URL=BASE_URL+"&cmd=getRecordCmd";
+    //商标信息
+    public static final String GET_COMPANY_LOGO_URL=BASE_URL+"&cmd=getCompanyLogo";
 }

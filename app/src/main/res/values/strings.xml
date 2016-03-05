@@ -136,4 +136,9 @@
 
     <string name="network_exception">网络异常</string>
     <string name="login_successed">登录成功</string>
+
+    <!--网站信息-->
+    <string name="website_name">网站名称: %s</string>
+    <string name="website_check_date">审核时间: %s</string>
+
 </resources>

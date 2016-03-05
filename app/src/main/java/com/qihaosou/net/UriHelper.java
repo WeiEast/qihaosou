@@ -156,4 +156,20 @@ public class UriHelper {
         sb.append(uuid);
         return sb.toString();
     }
+    //网站备案信息
+    public String getRecordUrl(String uuid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.GET_RECORD_URL);
+        sb.append("&uuid=");
+        sb.append(uuid);
+        return sb.toString();
+    }
+    //商标列表
+    public String getMarkListUrl(String uuid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.GET_COMPANY_LOGO_URL);
+        sb.append("&uuid=");
+        sb.append(uuid);
+        return sb.toString();
+    }
 }

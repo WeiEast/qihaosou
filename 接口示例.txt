@@ -1,0 +1,202 @@
+http://192.168.1.40:8080/main?cmd=getNewVersion&version=1 版本更新
+
+{
+  "code": "0000",
+  "message": "成功",
+  "body": {
+    "updateVersion": {
+      "downloagUrl": "222",
+      "forceUpdate": "1212",--是否强制升级
+      "newVersion": "212",
+      "pageSize": "121",
+      "publishDate": "121"
+      "message":"更新信息"
+    }
+  }
+}
+
+http://192.168.1.40:8080/main?cmd=vagueQuery&version=1&keyWord=南京   模糊搜索
+
+{
+  "code": "0000",
+  "message": "成功",
+  "body": {
+    "icinfoVagueQuery": [
+      {
+        "areaCode": 0,
+        "baseInvoking": 0,
+        "econName": "南京全兴企业管理有限公司",
+        "econNo": "320100400041860",
+        "uuid": "5d34aec0a2a74e1c82bfcef622396bc0"
+      },
+      {
+        "areaCode": 0,
+        "baseInvoking": 0,
+        "econName": "南京墨阳投资顾问有限公司",
+        "econNo": "320103000223846",
+        "uuid": "ad0d4087a57a4affae54ad4acee0a919"
+      },
+      {
+        "areaCode": 0,
+        "baseInvoking": 0,
+        "econName": "南京成量工具有限公司",
+        "econNo": "320103000034018",
+        "uuid": "1549f46dbed146b2930756f657eb0f1d"
+      },
+      {
+        "areaCode": 0,
+        "baseInvoking": 0,
+        "econName": "南京本森自动化设备有限公司",
+        "econNo": "913201917331569691",
+        "uuid": "26ac8baff8a74cfcaaec206995eb0174"
+      },
+      {
+        "areaCode": 0,
+        "baseInvoking": 0,
+        "econName": "南京元昊金属材料有限公司",
+        "econNo": "320107000092370",
+        "uuid": "de7ceb4ecfe44e429a051128bb5c705b"
+      },
+      {
+        "areaCode": 0,
+        "baseInvoking": 0,
+        "econName": "南京大安建设工程有限公司",
+        "econNo": "320103000210376",
+        "uuid": "38e4fc8eea3d42dd9ebd1f9593c07b78"
+      },
+      {
+        "areaCode": 0,
+        "baseInvoking": 0,
+        "econName": "北京中免博奥商贸有限公司南京分公司",
+        "econNo": "320121000027211",
+        "uuid": "7ba4f2778fc64e7395600dd62e85435c"
+      },
+      {
+        "areaCode": 0,
+        "baseInvoking": 0,
+        "econName": "南京市旅游产品公司",
+        "econNo": "320100000004536",
+        "uuid": "88bcc9c605b241f6ba3d94560b87e48e"
+      },
+      {
+        "areaCode": 0,
+        "baseInvoking": 0,
+        "econName": "南京温江酒业有限公司",
+        "econNo": "320105000118078",
+        "uuid": "6a5353a7d00a4877b55061dff1b5e1b0"
+      },
+      {
+        "areaCode": 0,
+        "baseInvoking": 0,
+        "econName": "南京惠达汽车服务有限公司",
+        "econNo": "320100400040779",
+        "uuid": "9c17f7d3c5184e16844f8ef1ecf26a07"
+      }
+    ]
+  }
+}
+
+http://192.168.1.40:8080/main?cmd=getComment&version=1&uuid=2ee37bb8b9ab4fe5ad6a8b9fdce26401  评论列表
+
+{
+  "code": "0000",
+  "message": "成功",
+  "body": {
+    "commentAll": [
+      {
+        "content": "wooed wow",
+        "mobile": "18123872980",
+        "nickName": "122123",
+        "publishDate": "2016-03-03 19:25:55",
+        "uuid": "2ee37bb8b9ab4fe5ad6a8b9fdce26401"
+      },
+      {
+        "content": "1121233321112123123123123```12312312312312312313123123123123",
+        "mobile": "18123872980",
+        "nickName": "122123",
+        "publishDate": "2016-03-03 20:08:37",
+        "uuid": "2ee37bb8b9ab4fe5ad6a8b9fdce26401"
+      },
+      {
+        "content": "123123123123123123123123123123123123123123123123123sdsdsd23123123123123123123123123123sdasdasdasdasdasde12312312312312312312312312312ssasdasdSaaaaaasq\tq212312312313123123`12`12`1231231`12`12`12`12",
+        "mobile": "18123872980",
+        "nickName": "122123",
+        "publishDate": "2016-03-03 20:09:13",
+        "uuid": "2ee37bb8b9ab4fe5ad6a8b9fdce26401"
+      },
+      {
+        "content": "",
+        "mobile": "18123872980",
+        "nickName": "122123",
+        "publishDate": "2016-03-03 20:09:24",
+        "uuid": "2ee37bb8b9ab4fe5ad6a8b9fdce26401"
+      },
+      {
+        "content": "企鹅肉吃了吗你",
+        "mobile": "18123872980",
+        "nickName": "122123",
+        "publishDate": "2016-03-04 09:19:38",
+        "uuid": "2ee37bb8b9ab4fe5ad6a8b9fdce26401"
+      },
+      {
+        "content": "一个人哭。一个人笑，还有什么大不了",
+        "mobile": "18123872980",
+        "nickName": "122123",
+        "publishDate": "2016-03-04 17:55:07",
+        "uuid": "2ee37bb8b9ab4fe5ad6a8b9fdce26401"
+      }
+    ]
+  }
+}
+
+http://192.168.1.40:8080/main?cmd=addComment&content="caocoaocao"&version=1&uuid=2ee37bb8b9ab4fe5ad6a8b9fdce26401  评论
+
+{
+  "code": "0000",
+  "message": "成功"
+}
+
+unionid=oGUhHxNCXSmegDeLqdY9beCQs3Ng
+
+http://192.168.1.40:8080/main?cmd=checkUid&version=1&uid=oGUhHxNCXSmegDeLqdY9beCQs3Ng  是否绑定uid
+
+{
+  "code": "0000",
+  "message": "成功",
+  "body": {
+    "user": {
+      "clientType": "android",    
+      "mobile": "18588433719",
+      "nickname": "fdfd"
+    }
+  }
+}
+
+
+{
+  "code": "102",
+  "message": "用户不存在"
+}
+
+http://192.168.1.40:8080/main?cmd=bindingUid&version=1&uid=oGUhHxNCXSmegDeLqdY9beCQs3Ng  绑定uid
+
+{
+  "code": "0000",
+  "message": "成功"
+}
+
+
+http://192.168.1.40:8080/main?cmd=rePassword&version=1&mobile=18588433719&password=123456&vcode=535471  找回密码
+{
+  "code": "0000",
+  "message": "成功"
+}
+
+
+
+http://localhost:8080/main?cmd=uploadAvatar&version=1(上传图片接口)
+参数：base64String
+{
+  "code": "0000",
+  "message": "成功"
+}
