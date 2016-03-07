@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_patent_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="@string/company_detial_end_null"
+                android:textColor="@color/title_color"
+                android:textSize="@dimen/font_size_18" />
+
+            <View style="@style/MyHorizontalDividerLine" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/request_number"
+                        android:textColor="@color/base_text_color"
+                        android:textSize="@dimen/font_size_16" />
+
+                    <TextView
+                        android:id="@+id/tv_request_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_end_null"
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/font_size_16" />
+                </LinearLayout>
+
+                <View
+                    style="@style/MyVerticalDividerLine"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/request_date"
+                        android:textColor="@color/base_text_color"
+                        android:textSize="@dimen/font_size_16" />
+
+                    <TextView
+                        android:id="@+id/tv_request_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_end_null"
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/font_size_16" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:paddingBottom="10dp"
+                android:paddingTop="15dp"
+                android:paddingLeft="15dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/patent_public_no"
+                        android:textColor="@color/base_text_color"
+                        android:textSize="@dimen/font_size_16" />
+
+                    <TextView
+                        android:id="@+id/tv_public_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_end_null"
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/font_size_16" />
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    style="@style/MyVerticalDividerLine"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/public_date"
+                        android:textColor="@color/base_text_color"
+                        android:textSize="@dimen/font_size_16" />
+
+                    <TextView
+                        android:id="@+id/tv_public_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text="@string/company_detial_end_null"
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/font_size_16" />
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                style="@style/MyHorizontalDividerLine"/>
+            <View
+                android:background="@color/category_divider_color"
+                android:layout_width="fill_parent"
+                android:layout_height="15.0dip" />
+            <View
+                style="@style/MyHorizontalDividerLine"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:paddingTop="12.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="70.0dip">
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/base_text_color"
+                    android:paddingBottom="12.0dip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15.0dip"
+                    android:text="@string/request_person" />
+                <View
+                    style="@style/MyHorizontalDividerLine"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15.0dip" />
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/title_color"
+                    android:id="@+id/tv_request_person"
+                    android:paddingLeft="15.0dip"
+                    android:paddingTop="12.0dip"
+                    android:paddingRight="10.0dip"
+                    android:paddingBottom="12.0dip"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/company_detial_end_null"
+                    android:lineSpacingExtra="3.0dip" />
+            </LinearLayout>
+            <View
+                style="@style/MyHorizontalDividerLine"/>
+            <View
+                android:background="@color/category_divider_color"
+                android:layout_width="fill_parent"
+                android:layout_height="15.0dip" />
+            <View
+                style="@style/MyHorizontalDividerLine"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:paddingTop="12.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="70.0dip">
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/base_text_color"
+                    android:paddingBottom="12.0dip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15.0dip"
+                    android:text="@string/inventor" />
+                <View
+                    style="@style/MyHorizontalDividerLine"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15.0dip" />
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/title_color"
+                    android:id="@+id/tv_inventor"
+                    android:paddingLeft="15.0dip"
+                    android:paddingTop="12.0dip"
+                    android:paddingRight="10.0dip"
+                    android:paddingBottom="12.0dip"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/company_detial_end_null"
+                    android:lineSpacingExtra="3.0dip" />
+            </LinearLayout>
+            <View
+                style="@style/MyHorizontalDividerLine"/>
+            <View
+                android:background="@color/category_divider_color"
+                android:layout_width="fill_parent"
+                android:layout_height="15.0dip" />
+            <View
+                style="@style/MyHorizontalDividerLine"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:paddingTop="12.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="70.0dip">
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/base_text_color"
+                    android:paddingBottom="12.0dip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15.0dip"
+                    android:text="@string/patent_category" />
+                <View
+                    style="@style/MyHorizontalDividerLine"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15.0dip" />
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/title_color"
+                    android:id="@+id/tv_patent_category"
+                    android:paddingLeft="15.0dip"
+                    android:paddingTop="12.0dip"
+                    android:paddingRight="10.0dip"
+                    android:paddingBottom="12.0dip"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/company_detial_end_null"
+                    android:lineSpacingExtra="3.0dip" />
+            </LinearLayout>
+            <View
+                style="@style/MyHorizontalDividerLine"/>
+            <View
+                android:background="@color/category_divider_color"
+                android:layout_width="fill_parent"
+                android:layout_height="15.0dip" />
+            <View
+                style="@style/MyHorizontalDividerLine"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:paddingTop="12.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="70.0dip">
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/base_text_color"
+                    android:paddingBottom="12.0dip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15.0dip"
+                    android:text="@string/category_no" />
+                <View
+                    style="@style/MyHorizontalDividerLine"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15.0dip" />
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/title_color"
+                    android:id="@+id/tv_category_no"
+                    android:paddingLeft="15.0dip"
+                    android:paddingTop="12.0dip"
+                    android:paddingRight="10.0dip"
+                    android:paddingBottom="12.0dip"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/company_detial_end_null"
+                    android:lineSpacingExtra="3.0dip" />
+            </LinearLayout>
+            <View
+                style="@style/MyHorizontalDividerLine"/>
+            <View
+                android:background="@color/category_divider_color"
+                android:layout_width="fill_parent"
+                android:layout_height="15.0dip" />
+            <View
+                style="@style/MyHorizontalDividerLine"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:paddingTop="12.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="70.0dip">
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/base_text_color"
+                    android:paddingBottom="12.0dip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15.0dip"
+                    android:text="@string/category" />
+                <View
+                    style="@style/MyHorizontalDividerLine"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15.0dip" />
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/title_color"
+                    android:id="@+id/tv_category"
+                    android:paddingLeft="15.0dip"
+                    android:paddingTop="12.0dip"
+                    android:paddingRight="10.0dip"
+                    android:paddingBottom="12.0dip"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/company_detial_end_null"
+                    android:lineSpacingExtra="3.0dip" />
+            </LinearLayout>
+            <View
+                style="@style/MyHorizontalDividerLine"/>
+            <View
+                android:background="@color/category_divider_color"
+                android:layout_width="fill_parent"
+                android:layout_height="15.0dip" />
+            <View
+                style="@style/MyHorizontalDividerLine"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:paddingTop="12.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="70.0dip">
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/base_text_color"
+                    android:paddingBottom="12.0dip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15.0dip"
+                    android:text="@string/legal_status" />
+                <View
+                    style="@style/MyHorizontalDividerLine"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15.0dip" />
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/title_color"
+                    android:id="@+id/tv_legal_status"
+                    android:paddingLeft="15.0dip"
+                    android:paddingTop="12.0dip"
+                    android:paddingRight="10.0dip"
+                    android:paddingBottom="12.0dip"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/company_detial_end_null"
+                    android:lineSpacingExtra="3.0dip" />
+            </LinearLayout>
+            <View
+                style="@style/MyHorizontalDividerLine"/>
+            <View
+                android:background="@color/category_divider_color"
+                android:layout_width="fill_parent"
+                android:layout_height="15.0dip" />
+            <View
+                style="@style/MyHorizontalDividerLine"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:paddingTop="12.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="70.0dip">
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/base_text_color"
+                    android:paddingBottom="12.0dip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15.0dip"
+                    android:text="@string/detail_info" />
+                <View
+                    style="@style/MyHorizontalDividerLine"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15.0dip" />
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/title_color"
+                    android:id="@+id/tv_detail_info"
+                    android:paddingLeft="15.0dip"
+                    android:paddingTop="12.0dip"
+                    android:paddingRight="10.0dip"
+                    android:paddingBottom="12.0dip"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/company_detial_end_null"
+                    android:lineSpacingExtra="3.0dip" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
+</LinearLayout>

@@ -172,4 +172,28 @@ public class UriHelper {
         sb.append(uuid);
         return sb.toString();
     }
+    //专利
+    public String getPatentlistUrl(String uuid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.GET_PATENT_OUTLINE_URL);
+        sb.append("&uuid=");
+        sb.append(uuid);
+        return sb.toString();
+    }
+    //作品著作权
+    public String getWorkCopyRightUrl(String uuid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.GET_WORK_COPYRIGHT_URL);
+        sb.append("&uuid=");
+        sb.append(uuid);
+        return sb.toString();
+    }
+    //软件著作权
+    public String getSoftWareCopyRightUrl(String uuid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.GET_COMPUTER_COPYRIGHT_URL);
+        sb.append("&uuid=");
+        sb.append(uuid);
+        return sb.toString();
+    }
 }

@@ -44,6 +44,8 @@
         <activity android:name=".ui.activity.DemoActivity" android:theme="@style/ActivityTheme"/>
         <activity android:name=".ui.activity.WebInfoActivity" android:theme="@style/ActivityTheme"/>
         <activity android:name=".ui.activity.MarkListActivity" android:theme="@style/ActivityTheme"/>
+        <activity android:name=".ui.activity.PatentDetailActivity" android:theme="@style/ActivityTheme"/>
+        <activity android:name=".ui.activity.CopyRightActivity" android:theme="@style/ActivityTheme"/>
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

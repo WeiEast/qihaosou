@@ -13,6 +13,12 @@
         <item>@string/history_search</item>
         <item>@string/my_collect</item>
     </string-array>
+    <string-array name="copy_right">
+        <item>@string/work_copy_right</item>
+        <item>@string/software_copy_right</item>
+    </string-array>
+
+
     <string-array name="enterprise_info">
         <item>工商信息</item>
         <item>主要人员</item>
@@ -140,5 +146,28 @@
     <!--网站信息-->
     <string name="website_name">网站名称: %s</string>
     <string name="website_check_date">审核时间: %s</string>
+    <!--专利信息-->
+    <string name="patent_type">类别: %s</string>
+    <string name="patent_public_date">公布时间: %s</string>
+    <string name="patent_detail">专利详细</string>
+    <string name="request_number">申请号</string>
+    <string name="patent_public_no">授权公布号</string>
+    <string name="request_date">申请日</string>
+    <string name="public_date">授权公布日期</string>
+    <string name="request_person">申请人</string>
+    <string name="inventor">发明人</string>
+    <string name="patent_category">专利类型</string>
+    <string name="category_no">分类号</string>
+    <string name="category">分类</string>
+    <string name="legal_status">法律状态</string>
+    <string name="detail_info">详细信息</string>
 
+    <!--著作权-->
+    <string name="work_copy_right">作品著作权</string>
+    <string name="software_copy_right">软件著作权</string>
+    <string name="copyright_reg_no">登记号: %s</string>
+    <string name="copyright_reg_date">登记日期: %s</string>
+    <string name="copyright_public_date">发布日期: %s</string>
+    <string name="copyright_complete_date">创作完成日期: %s</string>
+    <string name="copyright_class_no">分类号: %s</string>
 </resources>

@@ -123,8 +123,8 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
                     case 5:
                         readyGo(CompanyPatentActivity.class);
                         break;
-                    default:
-                        readyGo(EnterpriseInfoDetailsActivity.class);
+                    case 6:
+                        readyGo(CopyRightActivity.class);
                 }
 
 

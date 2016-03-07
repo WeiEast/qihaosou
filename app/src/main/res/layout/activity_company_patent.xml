@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:cube_ptr="http://schemas.android.com/tools">
+    >
     <android.support.v7.widget.Toolbar
         android:id="@+id/common_toolbar"
         android:layout_width="match_parent"
@@ -31,13 +31,6 @@
         android:background="#f1f1f1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
-        <in.srain.cube.views.ptr.PtrClassicFrameLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            cube_ptr:ptr_resistance="1.7"
-            cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
-            cube_ptr:ptr_duration_to_close="200"
-            >
             <ListView
                 android:id="@+id/lv_compatent_list"
                 android:background="@color/white"
@@ -49,8 +42,7 @@
                 android:scrollingCache="false"
                 android:transcriptMode="normal"
                 android:cacheColorHint="@android:color/transparent"
-                android:divider="#ffdbdbdb"
-                android:dividerHeight="0.5dip" />
-        </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+                android:divider="@null"
+                />
     </RelativeLayout>
 </RelativeLayout>

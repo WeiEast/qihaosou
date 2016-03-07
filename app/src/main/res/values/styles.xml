@@ -65,7 +65,7 @@
     <style name="MyVerticalDividerLine">
         <item name="android:background">@color/border_bg_color</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_width">0.5dp</item>
     </style>
     <!--工商信息页style-->
     <style name="industry_info_style">

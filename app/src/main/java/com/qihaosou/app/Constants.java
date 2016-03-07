@@ -41,4 +41,10 @@ public class Constants {
     public static final String GET_RECORD_URL=BASE_URL+"&cmd=getRecordCmd";
     //商标信息
     public static final String GET_COMPANY_LOGO_URL=BASE_URL+"&cmd=getCompanyLogo";
+    //专利
+    public static final String GET_PATENT_OUTLINE_URL=BASE_URL+"&cmd=getPatentOutline";
+    //作品著作权
+    public static final String GET_WORK_COPYRIGHT_URL=BASE_URL+"&cmd=getWorkCopyright";
+    //软件著作权
+    public static final String GET_COMPUTER_COPYRIGHT_URL=BASE_URL+"&cmd=getComputerCopyright";
 }

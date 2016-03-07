@@ -3,7 +3,7 @@ package com.qihaosou.bean;
 /**
  * Author: Created by wenjundu
  * Date:on 2016/3/4
- * Description:
+ * Description:投资人
  */
 public class PartnerBean {
     private String identifyNo;
