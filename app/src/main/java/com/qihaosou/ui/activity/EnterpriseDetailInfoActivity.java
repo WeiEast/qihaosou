@@ -2,6 +2,7 @@ package com.qihaosou.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,8 +46,9 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
     private LineGridView gridView;
     int[] resId = {R.mipmap.item_image_01,R.mipmap.item_image_02,R.mipmap.item_image_03,R.mipmap.item_image_04,
             R.mipmap.item_image_05,R.mipmap.item_image_06,R.mipmap.item_image_07,R.mipmap.item_image_08,R.mipmap.item_image_09,R.mipmap.item_image_10,R.mipmap.item_image_11,R.mipmap.item_image_12};
-    String[] titles = {"工商信息","工商变更","年报","网站信息","商标","专利","著作权","法院诉讼","失信信息","资质","法院判决","招投标信息"};
+    String[] titles = {"工商信息","工商变更","年报","网站信息","商标","专利","著作权","法院诉讼","失信信息","资质","招聘","招投标信息"};
     private TextView btnAttent;
+    private TextView btnComment;
     private TextView econ_nameTV,oper_nameTV,regist_capiTV,start_dateTV,register_statusTV,econ_kindTV,refreshTV;
     private TextView readCountTV;
     private List<IcinfoBean> list;
@@ -106,6 +108,8 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
         btnAttent= (TextView) findViewById(R.id.tv_infordetial_attention);
         //阅读量
         readCountTV= (TextView) findViewById(R.id.tv_detailinfo_attention);
+        //评论
+        btnComment= (TextView) findViewById(R.id.tv_infordetial_comment);
     }
 
     @Override
@@ -114,6 +118,11 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
+                    case 0:
+                    case 1:
+                    case 2:
+                        readyGo(EnterpriseInfoDetailsActivity.class);
+                        break;
                     case 3:
                         readyGo(WebInfoActivity.class);
                         break;
@@ -125,12 +134,23 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
                         break;
                     case 6:
                         readyGo(CopyRightActivity.class);
+                        break;
+                    case 7:
+                        readyGo(CourtListActivity.class);
+                        break;
+                    case 10:
+                        readyGo(RecruitInfoActivity.class);
+                        break;
+                    case 11:
+                        readyGo(TenderActivity.class);
+                        break;
                 }
 
 
             }
         });
         btnAttent.setOnClickListener(this);
+        btnComment.setOnClickListener(this);
     }
 
     @Override
@@ -183,6 +203,8 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
                 else
                     attent(uuid);
                 break;
+            case  R.id.tv_infordetial_comment://评论
+                readyGo(CommentListActivity.class);
         }
     }
 
@@ -272,7 +294,7 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
         gridViewlist.clear();
         int[] resIds = {R.mipmap.item_image_01,R.mipmap.item_image_02,R.mipmap.item_image_03,R.mipmap.item_image_04,
                 R.mipmap.item_image_05,R.mipmap.item_image_06,R.mipmap.item_image_07,R.mipmap.item_image_08,R.mipmap.item_image_09,R.mipmap.item_image_10,R.mipmap.item_image_11,R.mipmap.item_image_12};
-        String[] titles = {"工商信息","工商变更","年报","网站信息","商标","专利","著作权","法院诉讼","失信信息","资质","法院判决","招投标信息"};
+        String[] titles = {"工商信息","工商变更","年报","网站信息","商标","专利","著作权","法院诉讼","失信信息","资质","招聘","招投标信息"};
         int[] nums={0,changerecordsCount,annualCount,webCount,logoCount,patentCount,copyrightCount,courtCount,dishonestyCount,qualificationCount,0,tendersCount};
         for(int i=0;i<resId.length;i++){
             HomePageGridViewBean homepageBean=new HomePageGridViewBean(resIds[i],titles[i],nums[i]);
@@ -301,7 +323,15 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
         gridViewAdapter.notifyDataSetChanged();
         readCountTV.setText("" + homepageBean.getReadCount());
         attentionStatus=homepageBean.getAttentionStatus().equals("0")?true:false;
-
+        if(attentionStatus){
+            Drawable add=getResources().getDrawable(R.mipmap.add_attention, null);
+            add.setBounds(0,0,add.getMinimumWidth(),add.getMinimumHeight());
+            btnAttent.setCompoundDrawables(null, add, null, null);
+        }else{
+            Drawable cancel=getResources().getDrawable(R.mipmap.cancel_attention, null);
+            cancel.setBounds(0,0,cancel.getMinimumWidth(),cancel.getMinimumHeight());
+            btnAttent.setCompoundDrawables(null, cancel, null, null);
+        }
         initGridViewData();
         gridViewAdapter.notifyDataSetChanged();
 
@@ -315,7 +345,10 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
             }
             @Override
             public void onResponse(QihaosouBean qihaosouBean) {
-                ToastUtil.TextToast(getApplicationContext(),"关注成功");
+                ToastUtil.TextToast(getApplicationContext(), "关注成功");
+                Drawable add=getResources().getDrawable(R.mipmap.add_attention, null);
+                add.setBounds(0, 0, add.getMinimumWidth(), add.getMinimumHeight());
+                btnAttent.setCompoundDrawables(null, add, null, null);
                 attentionStatus=true;
             }
         });
@@ -331,6 +364,9 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
             @Override
             public void onResponse(QihaosouBean qihaosouBean) {
                 ToastUtil.TextToast(getApplicationContext(),"取消关注");
+                Drawable cancel=getResources().getDrawable(R.mipmap.cancel_attention, null);
+                cancel.setBounds(0, 0, cancel.getMinimumWidth(), cancel.getMinimumHeight());
+                btnAttent.setCompoundDrawables(null, cancel, null, null);
                 attentionStatus=false;
             }
         });

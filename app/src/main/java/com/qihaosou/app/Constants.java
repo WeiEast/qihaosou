@@ -47,4 +47,14 @@ public class Constants {
     public static final String GET_WORK_COPYRIGHT_URL=BASE_URL+"&cmd=getWorkCopyright";
     //软件著作权
     public static final String GET_COMPUTER_COPYRIGHT_URL=BASE_URL+"&cmd=getComputerCopyright";
+    //招聘信息
+    public static final String GET_RECRUITINFO_URL=BASE_URL+"&cmd=getRecruitInfoList";
+    //招投标
+    public static final String GET_TENDERS_URL=BASE_URL+"&cmd=getTenders";
+    //诉讼列表
+    public static final String GET_COURTLIST_URL=BASE_URL+"&cmd=getCourtList";
+    //法律文书
+    public static final String GET_COURT_URL=BASE_URL+"&cmd=getCourt";
+    //评论列表
+    public static final String GET_COMMENT_URL=BASE_URL+"&cmd=getComment";
 }

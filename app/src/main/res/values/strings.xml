@@ -170,4 +170,28 @@
     <string name="copyright_public_date">发布日期: %s</string>
     <string name="copyright_complete_date">创作完成日期: %s</string>
     <string name="copyright_class_no">分类号: %s</string>
+
+
+    <!--招聘信息-->
+    <string name="job_salary">薪资: %s</string>
+    <string name="job_address">地点: %s</string>
+    <string name="job_experience">经验: %s</string>
+    <string name="job_education">学历: %s</string>
+    <string name="tv_job_name">职位名称</string>
+    <string name="tv_job_address">工作地点</string>
+    <string name="tv_job_public_date">发布时间</string>
+    <string name="tv_job_salary">薪酬待遇</string>
+    <string name="tv_job_experience">工作经验</string>
+    <string name="tv_job_type">工作性质</string>
+    <string name="tv_job_education">学历要求</string>
+    <string name="tv_job_number">招聘人数</string>
+    <string name="tv_job_detail">职位详细</string>
+
+    <!--招投标-->
+    <string name="tv_tender_name">中标公告</string>
+    <string name="tv_tender_opentime">公告时间</string>
+    <string name="tv_tender_address">标讯地区</string>
+    <string name="tv_tender_no">公告编号</string>
+    <string name="tv_tender_procurement">采购人</string>
+    <string name="tv_tender_agentorg">代理机构</string>
 </resources>

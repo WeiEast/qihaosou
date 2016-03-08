@@ -13,6 +13,11 @@
     <color name="transparent">#00000000</color>
     <color name="gridview_divider_line">#DCDCDC</color>
     <color name="border_bg_color">#DDDDDD</color>
+    
+    <color name="bg_job_detail">#fff5f5f9</color>
+    <color name="line_blue">#ff90c3ff</color>
+    <color name="line_green">#ff7bf0e9</color>
+
     <integer-array name="gplus_colors">
         <item>@color/gplus_color_1</item>
         <item>@color/gplus_color_2</item>

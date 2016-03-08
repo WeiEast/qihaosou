@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="15dp"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tv_recruit_coname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_size_18"
+        android:textColor="@color/base_text_color"
+        android:text="上海市场营销招聘"
+        />
+    <TextView
+        android:id="@+id/tv_recruit_public_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/light_text_color"
+        android:textSize="@dimen/font_size_16"
+        android:text="2016-03-07"
+        />
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/tv_recruit_salary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/font_size_16"
+            android:textColor="@color/light_text_color"
+            android:text="薪资: 面议"
+            />
+        <TextView
+            android:id="@+id/tv_recruit_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/font_size_16"
+            android:textColor="@color/light_text_color"
+            android:text="地点: 上海"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/tv_recruit_experience"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/font_size_16"
+            android:textColor="@color/light_text_color"
+            android:text="经验: 不限"
+            />
+        <TextView
+            android:id="@+id/tv_recruit_education"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/font_size_16"
+            android:textColor="@color/light_text_color"
+            android:text="学历: 不限"
+            />
+    </LinearLayout>
+</LinearLayout>

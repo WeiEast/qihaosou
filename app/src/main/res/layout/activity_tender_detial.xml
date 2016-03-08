@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/common_toolbar"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <RelativeLayout
+                android:background="@color/bg_job_detail"
+                android:layout_width="fill_parent"
+                android:layout_height="100dp"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginTop="10.0dip"
+                android:layout_marginRight="10.0dip">
+                <View
+                    android:background="@color/line_blue"
+                    android:layout_width="2.0dip"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true" />
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/light_text_color"
+                    android:id="@+id/tender_name_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginTop="8.0dip"
+                    android:text="@string/tv_tender_name" />
+                <TextView
+                    android:textSize="@dimen/font_size_18"
+                    android:textColor="@color/base_text_color"
+                    android:text="@string/company_detial_end_null"
+                    android:id="@+id/tv_tender_name"
+                    android:maxLines="2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginTop="5.0dip"
+                    android:layout_below="@id/tender_name_title"
+                    android:lineSpacingExtra="2.0dip" />
+            </RelativeLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:background="@color/bg_job_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="64dp"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginTop="10.0dip"
+                    android:layout_weight="1.0">
+                    <View
+                        android:background="@color/line_green"
+                        android:layout_width="2.0dip"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true" />
+                    <TextView
+                        android:textSize="@dimen/font_size_16"
+                        android:textColor="@color/light_text_color"
+                        android:id="@+id/tender_opentime_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10.0dip"
+                        android:layout_marginTop="8.0dip"
+                        android:text="@string/tv_tender_opentime" />
+                    <TextView
+                        android:textSize="@dimen/font_size_18"
+                        android:textColor="@color/base_text_color"
+                        android:id="@+id/tv_tender_opentime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/company_detial_end_null"
+                        android:layout_marginLeft="10.0dip"
+                        android:layout_marginTop="5.0dip"
+                        android:layout_below="@id/tender_opentime_title"
+                        android:lineSpacingExtra="2.0dip" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:background="@color/bg_job_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="64dp"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginTop="10.0dip"
+                    android:layout_marginRight="10.0dip"
+                    android:layout_weight="1.0">
+                    <View
+                        android:background="@color/line_blue"
+                        android:layout_width="2.0dip"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true" />
+                    <TextView
+                        android:textSize="@dimen/font_size_16"
+                        android:textColor="@color/light_text_color"
+                        android:id="@+id/tender_address_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10.0dip"
+                        android:layout_marginTop="8.0dip"
+                        android:text="@string/tv_tender_address" />
+                    <TextView
+                        android:textSize="@dimen/font_size_18"
+                        android:textColor="@color/base_text_color"
+                        android:id="@+id/tv_tender_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10.0dip"
+                        android:layout_marginTop="5.0dip"
+                        android:text="@string/company_detial_end_null"
+                        android:layout_below="@id/tender_address_title"
+                        android:lineSpacingExtra="2.0dip" />
+                </RelativeLayout>
+            </LinearLayout>
+            <RelativeLayout
+                android:background="@color/bg_job_detail"
+                android:layout_width="fill_parent"
+                android:layout_height="64dp"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginTop="10.0dip"
+                android:layout_marginRight="10.0dip">
+                <View
+                    android:background="@color/line_blue"
+                    android:layout_width="2.0dip"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true" />
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/light_text_color"
+                    android:id="@+id/tender_no_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginTop="8.0dip"
+                    android:text="@string/tv_tender_no" />
+                <TextView
+                    android:textSize="@dimen/font_size_18"
+                    android:textColor="@color/base_text_color"
+                    android:id="@+id/tv_tender_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginTop="5.0dip"
+                    android:text="@string/company_detial_end_null"
+                    android:layout_below="@id/tender_no_title"
+                    android:lineSpacingExtra="2.0dip" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:background="@color/bg_job_detail"
+                android:layout_width="fill_parent"
+                android:layout_height="64dp"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginTop="10.0dip"
+                android:layout_marginRight="10.0dip">
+                <View
+                    android:background="@color/line_blue"
+                    android:layout_width="2.0dip"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true" />
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/light_text_color"
+                    android:id="@+id/tender_procurement_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginTop="8.0dip"
+                    android:text="@string/tv_tender_procurement" />
+                <TextView
+                    android:textSize="@dimen/font_size_18"
+                    android:textColor="@color/base_text_color"
+                    android:id="@+id/tv_tender_procurement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginTop="5.0dip"
+                    android:text="@string/company_detial_end_null"
+                    android:layout_below="@id/tender_procurement_title"
+                    android:lineSpacingExtra="2.0dip" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:background="@color/bg_job_detail"
+                android:layout_width="fill_parent"
+                android:layout_height="64dp"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginTop="10.0dip"
+                android:layout_marginRight="10.0dip">
+                <View
+                    android:background="@color/line_blue"
+                    android:layout_width="2.0dip"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true" />
+                <TextView
+                    android:textSize="@dimen/font_size_16"
+                    android:textColor="@color/light_text_color"
+                    android:id="@+id/tender_agentorg_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginTop="8.0dip"
+                    android:text="@string/tv_tender_agentorg" />
+                <TextView
+                    android:textSize="@dimen/font_size_18"
+                    android:textColor="@color/base_text_color"
+                    android:id="@+id/tv_tender_agentorg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginTop="5.0dip"
+                    android:text="@string/company_detial_end_null"
+                    android:layout_below="@id/tender_agentorg_title"
+                    android:lineSpacingExtra="2.0dip" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

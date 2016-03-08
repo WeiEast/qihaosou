@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/white"
+    android:paddingTop="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="30dp"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_tender_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:layout_marginRight="20dp"
+        android:textSize="@dimen/font_size_18"
+        android:textColor="@color/base_text_color"
+        />
+    <TextView
+        android:id="@+id/tv_tender_region"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/position_icon"
+        android:drawablePadding="10dp"
+        android:textSize="@dimen/font_size_16"
+        android:textColor="@color/light_text_color"
+        />
+    <TextView
+        android:id="@+id/tv_tender_opentime"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/time_icon"
+        android:drawablePadding="10dp"
+        android:textSize="@dimen/font_size_16"
+        android:textColor="@color/light_text_color"
+        />
+    <View
+        android:layout_marginTop="20dp"
+        style="@style/MyHorizontalDividerLine"/>
+</LinearLayout>

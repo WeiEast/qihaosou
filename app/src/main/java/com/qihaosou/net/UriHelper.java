@@ -196,4 +196,46 @@ public class UriHelper {
         sb.append(uuid);
         return sb.toString();
     }
+    //招聘信息
+    public String getRecruitInfoListUrl(String uuid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.GET_RECRUITINFO_URL);
+        sb.append("&uuid=");
+        sb.append(uuid);
+        return sb.toString();
+    }
+    //招投标信息
+    public String getTenderListUrl(String uuid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.GET_TENDERS_URL);
+        sb.append("&uuid=");
+        sb.append(uuid);
+        return sb.toString();
+    }
+    //诉讼URL
+    public String getCourtListUrl(String uuid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.GET_COURTLIST_URL);
+        sb.append("&uuid=");
+        sb.append(uuid);
+        return sb.toString();
+    }
+    //法律文书
+    public String getCourtUrl(String docId,String uuid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.GET_COURT_URL);
+        sb.append("&uuid=");
+        sb.append(uuid);
+        sb.append("&docId=");
+        sb.append(docId);
+        return sb.toString();
+    }
+    //评论列表
+    public String getComments(String uuid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.GET_COMMENT_URL);
+        sb.append("&uuid=");
+        sb.append(uuid);
+        return sb.toString();
+    }
 }

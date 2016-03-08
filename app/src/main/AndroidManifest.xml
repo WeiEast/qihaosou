@@ -46,6 +46,13 @@
         <activity android:name=".ui.activity.MarkListActivity" android:theme="@style/ActivityTheme"/>
         <activity android:name=".ui.activity.PatentDetailActivity" android:theme="@style/ActivityTheme"/>
         <activity android:name=".ui.activity.CopyRightActivity" android:theme="@style/ActivityTheme"/>
+        <activity android:name=".ui.activity.RecruitInfoActivity" android:theme="@style/ActivityTheme"/>
+        <activity android:name=".ui.activity.RecruitDetailActivity" android:theme="@style/ActivityTheme"/>
+        <activity android:name=".ui.activity.TenderActivity" android:theme="@style/ActivityTheme"/>
+        <activity android:name=".ui.activity.TenderDetailActivity" android:theme="@style/ActivityTheme"/>
+        <activity android:name=".ui.activity.CourtListActivity" android:theme="@style/ActivityTheme"/>
+        <activity android:name=".ui.activity.CourtDocActivity" android:theme="@style/ActivityTheme"/>
+        <activity android:name=".ui.activity.CommentListActivity" android:theme="@style/ActivityTheme"/>
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
