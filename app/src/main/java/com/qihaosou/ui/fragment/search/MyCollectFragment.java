@@ -1,4 +1,4 @@
-package com.qihaosou.ui.fragment;
+package com.qihaosou.ui.fragment.search;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

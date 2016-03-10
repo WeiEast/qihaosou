@@ -15,6 +15,8 @@ public class Constants {
     public static final String REGISTER_URL=BASE_URL+"&cmd=register";
     //注销url
     public static final String LOGINOUT_URL=BASE_URL+"&cmd=loginOut";
+    //重设密码
+    public static final String REPASSWORD_URL=BASE_URL+"&cmd=rePassword";
     //工商信息主页接口
     public static final String GET_ICINFO=BASE_URL+"&cmd=getIcinfo";
     //主要人员接口
@@ -57,4 +59,10 @@ public class Constants {
     public static final String GET_COURT_URL=BASE_URL+"&cmd=getCourt";
     //评论列表
     public static final String GET_COMMENT_URL=BASE_URL+"&cmd=getComment";
+    //模糊搜索
+    public static final String VAGUE_QUERY_URL=BASE_URL+"&cmd=vagueQuery";
+    //失信列表
+    public static final String GET_DISHONESTYLIST_URL=BASE_URL+"&cmd=getDishonestyList";
+    //失信详情
+    public static final String GET_DISHONESTY_URL=BASE_URL+"&cmd=getDishonesty";
 }

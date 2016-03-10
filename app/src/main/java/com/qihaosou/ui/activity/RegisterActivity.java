@@ -79,7 +79,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onTick(long millisUntilFinished) {
                 btnCode.setEnabled(false);
-                btnCode.setText(millisUntilFinished /1000+getString(R.string.time_count_tips));
+                btnCode.setText(String.format(getString(R.string.time_count_tips),millisUntilFinished / 1000));
             }
         });
     }
@@ -162,6 +162,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     L.e(vcodeBean.getVcode());
                 }
               btnCode.setEnabled(false);
+                vcodeET.setText(vcodeBean.getVcode());
               timeCount.start();
             }
         });

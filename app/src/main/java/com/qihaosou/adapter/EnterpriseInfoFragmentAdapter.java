@@ -8,7 +8,6 @@ import com.qihaosou.R;
 import com.qihaosou.ui.fragment.ChangeInfoFragment;
 import com.qihaosou.ui.fragment.IndustryInfoFragment;
 import com.qihaosou.ui.fragment.KeyPersonFragment;
-import com.qihaosou.ui.fragment.MyCollectFragment;
 import com.qihaosou.ui.fragment.StockHolderInfoFragment;
 import com.qihaosou.ui.fragment.YearReportFragment;
 

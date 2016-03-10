@@ -15,14 +15,19 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.lzy.okhttputils.OkHttpUtils;
 import com.qihaosou.R;
 import com.qihaosou.app.Constants;
 import com.qihaosou.bean.BaseBean;
+import com.qihaosou.bean.QihaosouBean;
+import com.qihaosou.callback.QihaosouBeanCallBack;
 import com.qihaosou.net.GsonRequest;
+import com.qihaosou.net.UriHelper;
 import com.qihaosou.net.VolleyHelper;
 import com.qihaosou.ui.activity.SetActivity;
 import com.qihaosou.util.L;
 import com.qihaosou.util.NetUtils;
+import com.qihaosou.util.ToastUtil;
 import com.qihaosou.view.CircleImageView;
 
 /**
@@ -67,11 +72,18 @@ public class UserFragment extends Fragment implements OnClickListener{
                 intent=new Intent(getActivity(), SetActivity.class);
                 break;
             case R.id.btn_exit_login://退出登录
-                //loginout();
+                loginOut();
                 break;
         }
         if(intent!=null)
             startActivity(intent);
     }
+    private void loginOut(){
+        OkHttpUtils.post(Constants.LOGINOUT_URL).tag(this).execute(new QihaosouBeanCallBack() {
+            @Override
+            public void onResponse(QihaosouBean qihaosouBean) {
 
+            }
+        });
+    }
 }

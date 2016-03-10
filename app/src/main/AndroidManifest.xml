@@ -53,6 +53,8 @@
         <activity android:name=".ui.activity.CourtListActivity" android:theme="@style/ActivityTheme"/>
         <activity android:name=".ui.activity.CourtDocActivity" android:theme="@style/ActivityTheme"/>
         <activity android:name=".ui.activity.CommentListActivity" android:theme="@style/ActivityTheme"/>
+        <activity android:name=".ui.activity.DishonestyActivity" android:theme="@style/ActivityTheme"/>
+        <activity android:name=".ui.activity.DishonestyDetailActivity" android:theme="@style/ActivityTheme"/>
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

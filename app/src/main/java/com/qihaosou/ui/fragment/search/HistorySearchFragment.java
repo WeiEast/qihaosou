@@ -1,4 +1,4 @@
-package com.qihaosou.ui.fragment;
+package com.qihaosou.ui.fragment.search;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -70,6 +70,18 @@ public class UriHelper {
         L.e(sb.toString());
         return sb.toString();
     }
+    public String rePasswordUrl(String phone,String vcode,String password){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.REPASSWORD_URL);
+        sb.append("&mobile=");
+        sb.append(phone);
+        sb.append("&vcode=");
+        sb.append(vcode);
+        sb.append("&password=");
+        sb.append(password);
+        return  sb.toString();
+    }
+
     public String getHomePageUrl(String uuid){
         StringBuffer sb=new StringBuffer();
         sb.append(Constants.GET_HOME_PAGE_URL);
@@ -237,5 +249,31 @@ public class UriHelper {
         sb.append("&uuid=");
         sb.append(uuid);
         return sb.toString();
+    }
+    //模糊搜索
+    public String vagueQueryUrl(String keyWord){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.VAGUE_QUERY_URL);
+        sb.append("&keyWord=");
+        sb.append(keyWord);
+        return sb.toString();
+    }
+    //失信列表
+    public String getDishonestyListUrl(String uuid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.GET_DISHONESTYLIST_URL);
+        sb.append("&uuid=");
+        sb.append(uuid);
+        return sb.toString();
+    }
+    //失信详情
+    public String getDishonestyDetailUrl(String AutoID,String uuid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.GET_DISHONESTY_URL);
+        sb.append("&AutoID=");
+        sb.append(AutoID);
+        sb.append("&uuid=");
+        sb.append(uuid);
+        return  sb.toString();
     }
 }

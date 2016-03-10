@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.qihaosou.R;
-import com.qihaosou.ui.fragment.HistorySearchFragment;
-import com.qihaosou.ui.fragment.MyCollectFragment;
+import com.qihaosou.ui.fragment.search.HistorySearchFragment;
+import com.qihaosou.ui.fragment.search.MyCollectFragment;
 
 /**
  * Created by Administrator on 2016/1/20.

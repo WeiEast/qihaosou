@@ -28,6 +28,7 @@ import com.qihaosou.callback.QihaosouBeanCallBack;
 import com.qihaosou.loading.LoadingAndRetryManager;
 import com.qihaosou.loading.OnLoadingAndRetryListener;
 import com.qihaosou.net.UriHelper;
+import com.qihaosou.util.L;
 import com.qihaosou.util.ToastUtil;
 import com.qihaosou.view.LineGridView;
 
@@ -42,6 +43,7 @@ import okhttp3.Response;
  */
 public class EnterpriseDetailInfoActivity extends BaseActivity implements View.OnClickListener{
     private String uuid="2ee37bb8b9ab4fe5ad6a8b9fdce26401";
+   // private String uuid;
     LoadingAndRetryManager mLoadingAndRetryManager;
     private LineGridView gridView;
     int[] resId = {R.mipmap.item_image_01,R.mipmap.item_image_02,R.mipmap.item_image_03,R.mipmap.item_image_04,
@@ -138,6 +140,9 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
                     case 7:
                         readyGo(CourtListActivity.class);
                         break;
+                    case 8:
+                        readyGo(DishonestyActivity.class);
+                        break;
                     case 10:
                         readyGo(RecruitInfoActivity.class);
                         break;
@@ -157,6 +162,7 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
     protected void addData() {
       //  loadData();
         setTitle("企业详情");
+        //uuid=getIntent().getExtras().getString("uuid");
         mLoadingAndRetryManager.showLoading();
         gridViewlist=new ArrayList<HomePageGridViewBean>();
         initGridViewData();
