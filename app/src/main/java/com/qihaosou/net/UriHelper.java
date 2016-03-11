@@ -119,11 +119,9 @@ public class UriHelper {
         return sb.toString();
     }
     //关注列表Url
-    public  String getAttentListUrl(String uuid){
+    public  String getAttentListUrl(){
         StringBuffer sb=new StringBuffer();
         sb.append(Constants.GET_ATTENTION_LIST_URL);
-        sb.append("&uuid=");
-        sb.append(uuid);
         return sb.toString();
     }
     //取消关注

@@ -1,5 +1,7 @@
 package com.lzy.okhttputils.cookie;
 
+import com.lzy.okhttputils.L;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +16,13 @@ public final class SimpleCookieJar implements CookieJar {
 
     @Override
     public synchronized void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
+
         allCookies.addAll(cookies);
     }
 
     @Override
     public synchronized List<Cookie> loadForRequest(HttpUrl url) {
+        L.e("url:"+url);
         List<Cookie> result = new ArrayList<>();
         for (Cookie cookie : allCookies) {
             if (cookie.matches(url)) {
@@ -26,5 +30,9 @@ public final class SimpleCookieJar implements CookieJar {
             }
         }
         return result;
+    }
+
+    public List<Cookie> getAllCookies() {
+        return allCookies;
     }
 }

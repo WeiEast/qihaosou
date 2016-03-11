@@ -49,14 +49,17 @@ public class OkHttpUtils {
     private RequestParams mCommonParams;                 //全局公共请求参数
     private RequestHeaders mCommonHeader;                //全局公共请求头
     private HostnameVerifier hostnameVerifier;
-
+    private SimpleCookieJar simpleCookieJar;
     private OkHttpUtils() {
         okHttpClientBuilder = new OkHttpClient.Builder();
         //允许cookie的自动化管理
-        okHttpClientBuilder.cookieJar(new SimpleCookieJar());
+        simpleCookieJar=new SimpleCookieJar();
+        okHttpClientBuilder.cookieJar(simpleCookieJar);
         mDelivery = new Handler(Looper.getMainLooper());
     }
-
+  public void clearCookie(){
+      simpleCookieJar.getAllCookies().clear();
+  }
     public static OkHttpUtils getInstance() {
         if (mInstance == null) {
             synchronized (OkHttpUtils.class) {

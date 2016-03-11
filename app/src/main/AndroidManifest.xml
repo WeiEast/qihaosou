@@ -10,7 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity android:name=".ui.activity.MainActivity" android:theme="@style/ActivityTheme">
-
+            <meta-data
+                android:name="AA_DB_NAME"
+                android:value="qihaosou.db" />
+            <meta-data
+                android:name="AA_DB_VERSION"
+                android:value="1" />
         </activity>
         <activity android:name=".ui.activity.SplashActivity" android:theme="@style/ActivityTheme">
             <intent-filter>

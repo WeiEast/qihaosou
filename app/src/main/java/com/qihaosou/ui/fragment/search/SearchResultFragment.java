@@ -21,11 +21,13 @@ import com.lzy.okhttputils.https.TaskException;
 import com.qihaosou.R;
 import com.qihaosou.bean.IcinfoBean;
 import com.qihaosou.bean.IcinfoVagueQuery;
+import com.qihaosou.bean.SearchHistoryBean;
 import com.qihaosou.callback.IcinfoBeanCallBack;
 import com.qihaosou.callback.IcinfoVagueQueryAllCallBack;
 import com.qihaosou.net.UriHelper;
 import com.qihaosou.ui.activity.CompanySearchActivity;
 import com.qihaosou.ui.activity.EnterpriseDetailInfoActivity;
+import com.qihaosou.util.DBUtils;
 import com.qihaosou.util.ToastUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -121,6 +123,8 @@ public class SearchResultFragment extends Fragment{
 
             @Override
             public void onResponse(List<IcinfoVagueQuery> icinfoVagueQueries) {
+
+                DBUtils.saveSearch(new SearchHistoryBean(keyword));
                 resultlist.clear();
                 resultlist.addAll(icinfoVagueQueries);
                 adapter.notifyDataSetChanged();

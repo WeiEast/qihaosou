@@ -5,7 +5,7 @@ import android.app.Application;
 /**
  * Author: Created by wenjundu
  * Date:on 2016/3/3
- * Description:
+ * description:
  */
 public class GlobalContext extends Application {
     private static GlobalContext _context;

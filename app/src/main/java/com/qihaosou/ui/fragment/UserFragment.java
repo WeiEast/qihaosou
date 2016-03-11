@@ -1,6 +1,7 @@
 package com.qihaosou.ui.fragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.lzy.okhttputils.OkHttpUtils;
+import com.lzy.okhttputils.cookie.PersistentCookieStore;
 import com.qihaosou.R;
 import com.qihaosou.app.Constants;
 import com.qihaosou.bean.BaseBean;
@@ -41,6 +43,7 @@ public class UserFragment extends Fragment implements OnClickListener{
     private TextView userNameTV;
     private TextView btnOut;
     private CircleImageView userHeaderIV;
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -79,11 +82,6 @@ public class UserFragment extends Fragment implements OnClickListener{
             startActivity(intent);
     }
     private void loginOut(){
-        OkHttpUtils.post(Constants.LOGINOUT_URL).tag(this).execute(new QihaosouBeanCallBack() {
-            @Override
-            public void onResponse(QihaosouBean qihaosouBean) {
-
-            }
-        });
+        OkHttpUtils.getInstance().clearCookie();
     }
 }

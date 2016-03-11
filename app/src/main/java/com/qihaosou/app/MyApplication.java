@@ -3,6 +3,7 @@ package com.qihaosou.app;
 
 import android.app.Application;
 
+import com.activeandroid.ActiveAndroid;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.context.GlobalContext;
 import com.qihaosou.R;
@@ -31,6 +32,7 @@ public class MyApplication extends GlobalContext {
         PlatformConfig.setQQZone("1105146713", "7ZT2Qy3jwgJimRdc");
         com.umeng.socialize.utils.Log.LOG = true;
         OkHttpUtils.debug(true, "MyOkHttp");    //是否打开调试
+        ActiveAndroid.initialize(this);
         try {
             OkHttpUtils.getInstance()//
                     .setConnectTimeout(OkHttpUtils.DEFAULT_MILLISECONDS)//全局的连接超时时间
