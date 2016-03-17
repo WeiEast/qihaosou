@@ -3,6 +3,7 @@
     android:background="@color/white"
     android:id="@+id/root_layout"
     android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
+    <include layout="@layout/common_toolbar"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -56,7 +57,33 @@
             style="@style/MyHorizontalDividerLine"
             />
     </RelativeLayout>
-
+    <RelativeLayout
+        android:id="@+id/layout_check_update"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="20dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/base_text_color"
+            android:textSize="@dimen/font_size_16"
+            android:text="@string/check_update"
+            android:layout_centerVertical="true"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/usercenter_arrow_right"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            />
+        <View
+            android:layout_alignParentBottom="true"
+            style="@style/MyHorizontalDividerLine"
+            />
+    </RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"

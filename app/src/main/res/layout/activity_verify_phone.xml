@@ -61,6 +61,7 @@
                 android:paddingLeft="10.0dip"
                 android:paddingRight="10.0dip"
                 android:text="@string/get_validcode"
+                android:enabled="false"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_18" />
         </LinearLayout>
@@ -91,6 +92,7 @@
             android:layout_marginTop="20.0dip"
             android:background="@drawable/bg_gradient_login"
             android:text="@string/submit"
+            android:enabled="false"
             android:textColor="@color/white"
             android:textSize="@dimen/font_size_20" />
     </LinearLayout>

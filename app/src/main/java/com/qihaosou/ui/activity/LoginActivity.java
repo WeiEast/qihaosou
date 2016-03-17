@@ -7,12 +7,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.lzy.okhttputils.OkHttpUtils;
-import com.lzy.okhttputils.callback.BeanCallBack;
 import com.lzy.okhttputils.https.TaskException;
 import com.lzy.okhttputils.request.BaseRequest;
 import com.qihaosou.R;
-import com.qihaosou.bean.BaseBean;
-import com.qihaosou.bean.LoginBody;
 import com.qihaosou.bean.UserBean;
 import com.qihaosou.callback.UserBeanCallBack;
 import com.qihaosou.listener.MyTextWacher;
@@ -87,7 +84,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         SHARE_MEDIA platform = null;
         switch (v.getId()){
             case R.id.tv_forget_password://忘记密码
-                readyGo(VerifyPhoneActivity.class);
+                readyGo(ResetPasswordActivity.class);
                 break;
             case R.id.tv_register_acount://注册
                 readyGo(RegisterActivity.class);

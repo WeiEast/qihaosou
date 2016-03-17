@@ -7,7 +7,6 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.qihaosou.R;
-import com.qihaosou.util.L;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +37,7 @@ public class SetActivity extends BaseActivity {
                 Intent intent=null;
                 switch (position){
                     case 0:
-                        intent=new Intent(SetActivity.this,VerifyPhoneActivity.class);
+                        intent=new Intent(SetActivity.this,ResetPasswordActivity.class);
                         break;
                     case 1:
                         intent=new Intent(SetActivity.this,UserEmialActivity.class);

@@ -5,13 +5,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.qihaosou.R;
-import com.qihaosou.ui.fragment.HomeFragment;
-import com.qihaosou.ui.fragment.UserFragment;
 import com.qihaosou.ui.fragment.search.CompanyQueryBeginFragment;
 import com.qihaosou.ui.fragment.search.SearchResultFragment;
 import com.qihaosou.view.EditTextWithDelete;

@@ -31,7 +31,7 @@
             android:screenOrientation="portrait"
             ></activity>
         <activity
-            android:name=".ui.activity.VerifyPhoneActivity" android:theme="@style/ActivityTheme"
+            android:name=".ui.activity.ResetPasswordActivity" android:theme="@style/ActivityTheme"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             >
@@ -39,6 +39,7 @@
         </activity>
         <activity android:name=".ui.activity.RegisterActivity" android:theme="@style/ActivityTheme"></activity>
         <activity android:name=".ui.activity.SetActivity" android:theme="@style/ActivityTheme"></activity>
+        <activity android:name=".ui.activity.UserActivity" android:theme="@style/ActivityTheme"/>
         <activity android:name=".ui.activity.UserEmialActivity" android:theme="@style/ActivityTheme"/>
         <activity android:name=".ui.activity.CompanySearchActivity" android:theme="@style/ActivityTheme"/>
         <activity android:name=".ui.activity.EnterpriseDetailInfoActivity" android:theme="@style/ActivityTheme"/>
@@ -60,6 +61,8 @@
         <activity android:name=".ui.activity.CommentListActivity" android:theme="@style/ActivityTheme"/>
         <activity android:name=".ui.activity.DishonestyActivity" android:theme="@style/ActivityTheme"/>
         <activity android:name=".ui.activity.DishonestyDetailActivity" android:theme="@style/ActivityTheme"/>
+
+        <service android:name=".update.DownloadService" />
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

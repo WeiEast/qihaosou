@@ -8,7 +8,13 @@ import android.os.Build;
  * Description:常量信息
  */
 public class Constants {
+
     private static final String BASE_URL="http://192.168.1.40:8080/main?version=1";
+
+    public static final String APK_DOWNLOAD_URL = "downloagUrl";
+    public static final String APK_UPDATE_CONTENT = "forceUpdate";
+    public static final String APK_VERSION_CODE = "newVersion";
+
     //登录url
     public static final String LOGIN_URL=BASE_URL+"&cmd=login";
     //注册url
@@ -65,4 +71,8 @@ public class Constants {
     public static final String GET_DISHONESTYLIST_URL=BASE_URL+"&cmd=getDishonestyList";
     //失信详情
     public static final String GET_DISHONESTY_URL=BASE_URL+"&cmd=getDishonesty";
+    //版本更新
+    public static final String GET_NEW_VERSION_URL=BASE_URL+"&cmd=getNewVersion";
+    //上传图片
+    public static final String UPLOAD_AVATAR_URL=BASE_URL+ "&cmd=uploadAvatar";
 }

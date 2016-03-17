@@ -24,7 +24,7 @@ public class MyApplication extends GlobalContext {
     public void onCreate() {
         super.onCreate();
         L.isDebug=true;
-        VolleyHelper.getInstance().init(this);
+       // VolleyHelper.getInstance().init(this);
         LoadingAndRetryManager.BASE_LOADING_LAYOUT_ID = R.layout.loading;
         LoadingAndRetryManager.BASE_RETRY_LAYOUT_ID = R.layout.base_retry;
         LoadingAndRetryManager.BASE_EMPTY_LAYOUT_ID = R.layout.base_empty;
@@ -38,7 +38,7 @@ public class MyApplication extends GlobalContext {
                     .setConnectTimeout(OkHttpUtils.DEFAULT_MILLISECONDS)//全局的连接超时时间
                     .setReadTimeOut(OkHttpUtils.DEFAULT_MILLISECONDS)//全局的读取超时时间
                     .setWriteTimeOut(OkHttpUtils.DEFAULT_MILLISECONDS);//全局的写入超时时间
-                            //.setCertificates(getAssets().open("srca.cer"), getAssets().open("zhy_server.cer"))//
+                    //.setCertificates(getAssets().open("srca.cer"), getAssets().open("zhy_server.cer"))//
                    // .setCertificates(new Buffer().writeUtf8(CER_12306).inputStream());//设置自签名网站的证书
 
         } catch (Exception e) {

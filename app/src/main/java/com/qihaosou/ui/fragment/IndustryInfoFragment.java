@@ -146,7 +146,7 @@ public class IndustryInfoFragment extends BaseFragment {
 
             @Override
             public void onError(okhttp3.Request request, @Nullable okhttp3.Response response, @Nullable TaskException e) {
-                ToastUtil.TextToast(getActivity().getApplicationContext(),e.getMessage());
+                ToastUtil.TextToast(getActivity(),e.getMessage());
             }
 
             @Override

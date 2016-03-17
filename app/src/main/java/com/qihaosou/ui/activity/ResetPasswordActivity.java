@@ -28,9 +28,9 @@ import okhttp3.Response;
  * Author: wenjundu
  * Email:179451678@qq.com
  * Date:2016/1/13
- * Description:验证手机
+ * Description:忘记密码
  */
-public class VerifyPhoneActivity extends BaseActivity implements View.OnClickListener{
+public class ResetPasswordActivity extends BaseActivity implements View.OnClickListener{
     private EditText phoneET,validcodeET,passwordET;
     private Button submitBtn,validcodeBtn;
     private TimeCount timeCount;
@@ -94,7 +94,7 @@ public class VerifyPhoneActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.btn_validcode://获取验证码
                 if(phone.length()<11) {
-                    ToastUtil.TextToast(VerifyPhoneActivity.this, getString(R.string.phone_format_error));
+                    ToastUtil.TextToast(ResetPasswordActivity.this, getString(R.string.phone_format_error));
                     return;
                 }else{
                     getCode(phone);
@@ -106,7 +106,7 @@ public class VerifyPhoneActivity extends BaseActivity implements View.OnClickLis
 
     //提交修改
     private void submitChange(String phone ,String vcode,String passwrod){
-        final LoadingDialog loadingDialog=new LoadingDialog(VerifyPhoneActivity.this);
+        final LoadingDialog loadingDialog=new LoadingDialog(ResetPasswordActivity.this);
         OkHttpUtils.post(UriHelper.getInstance().rePasswordUrl(phone,vcode,passwrod)).tag(this).execute(new QihaosouBeanCallBack() {
 
             @Override
@@ -121,12 +121,12 @@ public class VerifyPhoneActivity extends BaseActivity implements View.OnClickLis
 
             @Override
             public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
-                ToastUtil.TextToast(VerifyPhoneActivity.this, e.getMessage());
+                ToastUtil.TextToast(ResetPasswordActivity.this, e.getMessage());
             }
 
             @Override
             public void onResponse(QihaosouBean qihaosouBean) {
-                ToastUtil.TextToast(VerifyPhoneActivity.this,qihaosouBean.getMessage());
+                ToastUtil.TextToast(ResetPasswordActivity.this,qihaosouBean.getMessage());
             }
         });
     }

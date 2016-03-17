@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 
+import com.lzy.okhttputils.OkHttpUtils;
 import com.qihaosou.app.BaseAppManager;
 
 
@@ -175,4 +176,9 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        OkHttpUtils.getInstance().cancelTag(this);
+    }
 }

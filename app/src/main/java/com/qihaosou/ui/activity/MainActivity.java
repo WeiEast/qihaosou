@@ -20,14 +20,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import com.qihaosou.R;
+import com.qihaosou.app.Constants;
 import com.qihaosou.bean.UMShareImageBean;
 import com.qihaosou.listener.UMShareCallBack;
 import com.qihaosou.ui.fragment.HomeFragment;
-import com.qihaosou.ui.fragment.UserFragment;
+import com.qihaosou.update.UpdateChecker;
 import com.qihaosou.view.CircleImageView;
 import com.qihaosou.view.ShareDialog;
 import com.umeng.socialize.media.UMImage;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,12 +39,11 @@ public class MainActivity extends BaseActivity{
     private ActionBarDrawerToggle mDrawerToggle;
     private CircleImageView headIcon;
     private static final int TAB_HOME = 0;
-    private static final int TAB_USER= 1;
     private FragmentManager fragmentManager;
     private String[] navName = {"企业查询","APP分享","给个好评,亲","个人中心"};
     private int[] navDrawable={R.mipmap.menu_search,R.mipmap.menu_share,R.mipmap.menu_comment,R.mipmap.menu_userinfo};
     private SimpleAdapter simpleAdapter;
-    private Fragment homeFragment,userFragment ;
+    private Fragment homeFragment;
     private static long DOUBLE_CLICK_TIME = 0L;
     private UMShareImageBean umShareImageBean;
     @Override
@@ -66,7 +65,8 @@ public class MainActivity extends BaseActivity{
         };
         mDrawerToggle.syncState();
         drawerLayout.setDrawerListener(mDrawerToggle);
-
+        //检测新版本
+        UpdateChecker.checkForDialog(MainActivity.this, Constants.GET_NEW_VERSION_URL);
     }
 
     @Override
@@ -98,7 +98,6 @@ public class MainActivity extends BaseActivity{
                 switch (position){
                     case 0:
                         selectItem(TAB_HOME);
-
                         break;
                     case 1:
                         ShareDialog shareDialog=new ShareDialog(MainActivity.this,umShareImageBean );
@@ -106,8 +105,7 @@ public class MainActivity extends BaseActivity{
                         shareDialog.show();
                         break;
                     case 3:
-                        selectItem(TAB_USER);
-
+                        readyGo(UserActivity.class);
                         break;
                 }
             }
@@ -154,18 +152,6 @@ public class MainActivity extends BaseActivity{
                     transaction.show(homeFragment);
                 }
                 break;
-            case TAB_USER:
-                setTitle(getString(R.string.user_center));
-                if(userFragment == null)
-                {
-                    userFragment = new UserFragment();
-                    transaction.add(R.id.home_container, userFragment);
-                }
-                else
-                {
-                    transaction.show(userFragment);
-                }
-                break;
         }
         transaction.addToBackStack(null);
         transaction.commit();
@@ -182,10 +168,6 @@ public class MainActivity extends BaseActivity{
         if(null != homeFragment)
         {
             transaction.hide(homeFragment);
-        }
-        if(null != userFragment)
-        {
-            transaction.hide(userFragment);
         }
     }
     @Override

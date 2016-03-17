@@ -26,6 +26,16 @@
         <item>股东信息</item>
         <item>年报</item>
     </string-array>
+
+
+    <string name="newUpdateAvailable">发现新版本</string>
+    <string name="dialogPositiveButton">立即下载</string>
+    <string name="dialogNegativeButton">以后再说</string>
+    <string name="app_no_new_update">没有发现新版本</string>
+    <string name="download_progress">正在下载:%1$d%%</string>
+    <string name="download_success">下载完成，点击安装</string>
+
+
     <!-- LoadingLayout-->
     <string name="common_loading_message">正在加载中...</string>
     <string name="login_success">登录成功</string>
@@ -81,6 +91,7 @@
     <!--fragment user-->
     <string name="exit_login">退出当前登陆</string>
     <string name="user_set">用户设置</string>
+    <string name="check_update">版本更新</string>
     <string name="home_title">企业信用查询-企好搜</string>
     <!--SetActivity-->
     <string name="set">设置</string>
@@ -208,4 +219,7 @@
     <string name="execution_final_duty">生效法律文书确定的义务</string>
     <string name="execution_desc">失信被执行人行为具体情形</string>
     <string name="execution_publish_date">发布日期</string>
+
+
+    <string name="uploading">正在上传...</string>
 </resources>

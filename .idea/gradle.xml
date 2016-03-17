@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/library_okhttpserver" />
             <option value="$PROJECT_DIR$/library_okhttputils" />
+            <option value="$PROJECT_DIR$/library_photogallery" />
           </set>
         </option>
       </GradleProjectSettings>
