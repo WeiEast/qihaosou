@@ -9,7 +9,7 @@
     <color name="transparent">#00000000</color>
     <color name="gridview_divider_line">#DCDCDC</color>
     <color name="border_bg_color">#DDDDDD</color>
-    
+    <color name="main_gray">#9A9A9A</color>
     <color name="bg_job_detail">#fff5f5f9</color>
     <color name="line_blue">#ff90c3ff</color>
     <color name="line_green">#ff7bf0e9</color>
@@ -28,6 +28,9 @@
     <color name="gplus_color_3">#427fed</color>
     <color name="gplus_color_4">#b23424</color>
 
+
+    <color name="list_item_background_normal">#ffffff</color>
+    <color name="list_item_background_pressed">#F1F1F1</color>
     <!--类别分割View颜色-->
     <color name="category_divider_color">#fff2f2f2</color>
 </resources>

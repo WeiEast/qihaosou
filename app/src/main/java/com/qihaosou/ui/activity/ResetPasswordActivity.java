@@ -5,22 +5,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.https.TaskException;
 import com.lzy.okhttputils.request.BaseRequest;
 import com.qihaosou.R;
 import com.qihaosou.bean.QihaosouBean;
-import com.qihaosou.bean.VcodeBean;
 import com.qihaosou.callback.QihaosouBeanCallBack;
-import com.qihaosou.callback.VcodeBeanCallBack;
 import com.qihaosou.listener.MyTextWacher;
 import com.qihaosou.listener.TimeCountListener;
 import com.qihaosou.net.UriHelper;
-import com.qihaosou.util.L;
+import com.qihaosou.util.MaterialDialogUtil;
 import com.qihaosou.util.TimeCount;
 import com.qihaosou.util.ToastUtil;
-import com.qihaosou.view.LoadingDialog;
-
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -106,7 +103,7 @@ public class ResetPasswordActivity extends BaseActivity implements View.OnClickL
 
     //提交修改
     private void submitChange(String phone ,String vcode,String passwrod){
-        final LoadingDialog loadingDialog=new LoadingDialog(ResetPasswordActivity.this);
+        final MaterialDialog loadingDialog=MaterialDialogUtil.getNormalProgressDialog(this,getString(R.string.requesting));
         OkHttpUtils.post(UriHelper.getInstance().rePasswordUrl(phone,vcode,passwrod)).tag(this).execute(new QihaosouBeanCallBack() {
 
             @Override
@@ -134,12 +131,8 @@ public class ResetPasswordActivity extends BaseActivity implements View.OnClickL
 
     //获取验证码
     private void getCode(String phone){
-        final LoadingDialog loadingDialog=new LoadingDialog(this);
-        OkHttpUtils.post(UriHelper.getInstance().getVcodeUrl(phone)).tag(this).execute(new VcodeBeanCallBack() {
-            @Override
-            public void onAfter(@Nullable VcodeBean vcodeBean, Request request, Response response, @Nullable TaskException e) {
-                loadingDialog.dismiss();
-            }
+        final MaterialDialog loadingDialog= MaterialDialogUtil.getNormalProgressDialog(this,getString(R.string.requesting));
+        OkHttpUtils.post(UriHelper.getInstance().getVcodeUrl(phone)).tag(this).execute(new QihaosouBeanCallBack() {
 
             @Override
             public void onBefore(BaseRequest request) {
@@ -147,19 +140,19 @@ public class ResetPasswordActivity extends BaseActivity implements View.OnClickL
             }
 
             @Override
-            public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
-                ToastUtil.TextToast(getApplicationContext(),e.getMessage());
-                validcodeBtn.setEnabled(true);
+            public void onAfter(@Nullable QihaosouBean qihaosouBean, Request request, Response response, @Nullable TaskException e) {
+                loadingDialog.dismiss();
             }
 
             @Override
-            public void onResponse(VcodeBean vcodeBean) {
-                if(vcodeBean!=null){
-                    L.e(vcodeBean.getVcode());
-                }
-                validcodeBtn.setEnabled(false);
-                validcodeET.setText(vcodeBean.getVcode());
+            public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
+                ToastUtil.TextToast(ResetPasswordActivity.this, e.getMessage());
+            }
+
+            @Override
+            public void onResponse(QihaosouBean qihaosouBean) {
                 timeCount.start();
+                ToastUtil.TextToast(ResetPasswordActivity.this, qihaosouBean.getMessage());
             }
         });
     }

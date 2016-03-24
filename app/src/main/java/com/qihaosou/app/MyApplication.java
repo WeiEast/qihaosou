@@ -4,6 +4,7 @@ package com.qihaosou.app;
 import android.app.Application;
 
 import com.activeandroid.ActiveAndroid;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.context.GlobalContext;
 import com.qihaosou.R;
@@ -31,6 +32,7 @@ public class MyApplication extends GlobalContext {
         PlatformConfig.setWeixin("wx1596167db4f5cd13", "930dcfcb2007dd9f16e2eece4708a3b6");
         PlatformConfig.setQQZone("1105146713", "7ZT2Qy3jwgJimRdc");
         com.umeng.socialize.utils.Log.LOG = true;
+        Fresco.initialize(getApplicationContext());
         OkHttpUtils.debug(true, "MyOkHttp");    //是否打开调试
         ActiveAndroid.initialize(this);
         try {

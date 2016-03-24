@@ -6,6 +6,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.https.TaskException;
 import com.lzy.okhttputils.request.BaseRequest;
@@ -15,6 +17,7 @@ import com.qihaosou.callback.UserBeanCallBack;
 import com.qihaosou.listener.MyTextWacher;
 import com.qihaosou.net.UriHelper;
 import com.qihaosou.util.L;
+import com.qihaosou.util.MaterialDialogUtil;
 import com.qihaosou.util.ToastUtil;
 import com.qihaosou.view.LoadingDialog;
 import com.umeng.socialize.UMAuthListener;
@@ -105,7 +108,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
     private void Login(String phone,String password) {
         String clientType="android";
-        final LoadingDialog loadingDialog=new LoadingDialog(LoginActivity.this);
+        final MaterialDialog loadingDialog= MaterialDialogUtil.getNormalProgressDialog(this,getString(R.string.loading));
         OkHttpUtils.post(UriHelper.getInstance().getLoginUrl(phone,password,clientType)).tag(this).execute(new UserBeanCallBack() {
 
             @Override
@@ -115,7 +118,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
             @Override
             public void onAfter(@Nullable UserBean userBean, Request request, Response response, @Nullable TaskException e) {
-                loadingDialog.dismiss();
+               loadingDialog.dismiss();
+
             }
 
             @Override
@@ -133,9 +137,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private UMAuthListener umAuthListener = new UMAuthListener() {
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
-
-            ToastUtil.TextToast(getApplicationContext(), action+"Authorize succeed");
-            L.e("........:"+data.toString());
+//            if(platform==SHARE_MEDIA.QQ){
+                ToastUtil.TextToast(getApplicationContext(), action+"Authorize succeed");
+                L.e("........:"+data.toString());
+//            }
         }
 
         @Override

@@ -9,6 +9,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ToggleButton;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.BeanCallBack;
 import com.lzy.okhttputils.https.TaskException;
@@ -24,6 +25,7 @@ import com.qihaosou.listener.TimeCountListener;
 import com.qihaosou.net.UriHelper;
 import com.qihaosou.util.DensityUtils;
 import com.qihaosou.util.L;
+import com.qihaosou.util.MaterialDialogUtil;
 import com.qihaosou.util.NetUtils;
 import com.qihaosou.util.TimeCount;
 import com.qihaosou.util.ToastUtil;
@@ -113,7 +115,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     MyTextWacher codewatcher;
     MyTextWacher regwatcher;
     private void register(String phone,String password,String nickname,String vcode){
-        final LoadingDialog loadingDialog=new LoadingDialog(this);
+        final MaterialDialog loadingDialog=MaterialDialogUtil.getNormalProgressDialog(this,getString(R.string.requesting));
         OkHttpUtils.post(UriHelper.getInstance().getRegisterUrl(phone, password, vcode,nickname)).tag(this).execute(new QihaosouBeanCallBack() {
             @Override
             public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
@@ -138,11 +140,17 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
     //获取验证码
     private void getCode(String phone){
-        final LoadingDialog loadingDialog=new LoadingDialog(this);
-        OkHttpUtils.post(UriHelper.getInstance().getVcodeUrl(phone)).tag(this).execute(new VcodeBeanCallBack() {
+        final MaterialDialog loadingDialog= MaterialDialogUtil.getNormalProgressDialog(this,getString(R.string.requesting));
+        OkHttpUtils.post(UriHelper.getInstance().getVcodeUrl(phone)).tag(this).execute(new QihaosouBeanCallBack() {
             @Override
-            public void onAfter(@Nullable VcodeBean vcodeBean, Request request, Response response, @Nullable TaskException e) {
-                loadingDialog.dismiss();
+            public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
+                ToastUtil.TextToast(getApplicationContext(), e.getMessage());
+            }
+
+            @Override
+            public void onResponse(QihaosouBean qihaosouBean) {
+                timeCount.start();
+                ToastUtil.TextToast(getApplicationContext(), qihaosouBean.getMessage());
             }
 
             @Override
@@ -151,19 +159,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             }
 
             @Override
-            public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
-                ToastUtil.TextToast(getApplicationContext(),e.getMessage());
-                btnCode.setEnabled(true);
-            }
-
-            @Override
-            public void onResponse(VcodeBean vcodeBean) {
-                if(vcodeBean!=null){
-                    L.e(vcodeBean.getVcode());
-                }
-              btnCode.setEnabled(false);
-                vcodeET.setText(vcodeBean.getVcode());
-              timeCount.start();
+            public void onAfter(@Nullable QihaosouBean qihaosouBean, Request request, Response response, @Nullable TaskException e) {
+                loadingDialog.dismiss();
             }
         });
     }

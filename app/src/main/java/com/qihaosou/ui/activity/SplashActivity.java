@@ -27,7 +27,7 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void addData() {
-        L.e("................");
+
         Animation animation =  AnimationUtils.loadAnimation(this, R.anim.splash);
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override

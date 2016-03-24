@@ -85,7 +85,7 @@ public class DownloadService extends IntentService {
 				oldProgress = progress;
 			}
 			// 下载完成
-			mBuilder.setContentText(getString(R.string.download_success)).setProgress(0, 0, false);
+			mBuilder.setContentText(getString(R.string.download_success)).setSmallIcon(android.R.drawable.stat_sys_download_done).setProgress(0, 0, false);
 
 			Intent installAPKIntent = new Intent(Intent.ACTION_VIEW);
 			//如果没有设置SDCard写权限，或者没有sdcard,apk文件保存在内存中，需要授予权限才能安装

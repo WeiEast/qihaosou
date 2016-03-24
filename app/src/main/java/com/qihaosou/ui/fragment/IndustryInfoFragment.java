@@ -40,7 +40,7 @@ import com.qihaosou.view.LoadingDialog;
  * Date:on 2016/1/22
  * Description:工商信息
  */
-public class IndustryInfoFragment extends BaseFragment {
+public class IndustryInfoFragment extends BaseLazyFragment {
     private String uuid="aad4272599094555983094089e3a27bf";
     LoadingAndRetryManager mLoadingAndRetryManager;
     ScrollView rootView;

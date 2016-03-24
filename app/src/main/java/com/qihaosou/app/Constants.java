@@ -9,7 +9,7 @@ import android.os.Build;
  */
 public class Constants {
 
-    private static final String BASE_URL="http://192.168.1.40:8080/main?version=1";
+    private static final String BASE_URL="http://service.qihaosou.com/qihaosou/main?version=1";
 
     public static final String APK_DOWNLOAD_URL = "downloagUrl";
     public static final String APK_UPDATE_CONTENT = "forceUpdate";
