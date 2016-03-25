@@ -28,7 +28,8 @@ public class TenderActivity extends BaseActivity {
     private ListView listView;
     private List<TenderBean> list;
     private TenderAdapter adapter;
-    private String uuid="b4ecbfdfb566487db1316b12b629aa02";
+    private String uuid;
+    private String econName;
     @Override
     protected void init() {
         listView= (ListView) findViewById(R.id.tender_listview);
@@ -50,18 +51,20 @@ public class TenderActivity extends BaseActivity {
     @Override
     protected void addData() {
         setTitle("招投标信息");
+        uuid=getIntent().getExtras().getString("uuid");
+        econName=getIntent().getExtras().getString("name");
         list=new ArrayList<TenderBean>();
         adapter=new TenderAdapter(this,list);
         listView.setAdapter(adapter);
-        getTenderList(uuid);
+        getTenderList(econName);
     }
 
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_tender;
     }
-    private void getTenderList(String uuid){
-        OkHttpUtils.post(UriHelper.getInstance().getTenderListUrl(uuid)).tag(this).execute(new TenderAllCallBack() {
+    private void getTenderList(String econName){
+        OkHttpUtils.post(UriHelper.getInstance().getTenderListUrl(econName)).tag(this).execute(new TenderAllCallBack() {
             @Override
             public void onResponse(List<TenderBean> tenderBeans) {
                 list.addAll(tenderBeans);

@@ -3,6 +3,7 @@ package com.qihaosou.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ import com.qihaosou.loading.OnLoadingAndRetryListener;
 import com.qihaosou.net.UriHelper;
 import com.qihaosou.util.L;
 import com.qihaosou.util.ToastUtil;
+import com.qihaosou.util.UIHelper;
 import com.qihaosou.view.LineGridView;
 
 import java.util.ArrayList;
@@ -42,8 +44,7 @@ import okhttp3.Response;
  * 企业详情
  */
 public class EnterpriseDetailInfoActivity extends BaseActivity implements View.OnClickListener{
-    private String uuid="2ee37bb8b9ab4fe5ad6a8b9fdce26401";
-   // private String uuid;
+   private String uuid;
     LoadingAndRetryManager mLoadingAndRetryManager;
     private LineGridView gridView;
     int[] resId = {R.mipmap.item_image_01,R.mipmap.item_image_02,R.mipmap.item_image_03,R.mipmap.item_image_04,
@@ -56,6 +57,7 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
     private List<IcinfoBean> list;
     private List<HomePageGridViewBean> gridViewlist;
     private HomePageGridViewAdapter gridViewAdapter;
+    private HomepageBean homepageBean;
     //浏览量
     private int readCount;
     //工商更改数量
@@ -119,35 +121,53 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(homepageBean==null){
+                    ToastUtil.TextToast(EnterpriseDetailInfoActivity.this,"暂无公司信息");
+                    return;
+                }
+                Bundle bundle=new Bundle();
+                bundle.putString("uuid",uuid);
+                bundle.putString("name",homepageBean.getEconName());
+                int num=gridViewlist.get(position).getNum();
                 switch (position){
                     case 0:
                     case 1:
                     case 2:
-                        readyGo(EnterpriseInfoDetailsActivity.class);
+
+                        UIHelper.showEnterpriseInfoDetailsActivity(EnterpriseDetailInfoActivity.this,bundle);
                         break;
                     case 3:
-                        readyGo(WebInfoActivity.class);
+                        if(isHasInfo(num))
+                            UIHelper.showWebInfoActivity(EnterpriseDetailInfoActivity.this,bundle);
                         break;
                     case 4:
-                        readyGo(MarkListActivity.class);
+                        if(isHasInfo(num))
+                            UIHelper.showMarkListActivity(EnterpriseDetailInfoActivity.this, bundle);
                         break;
                     case 5:
-                        readyGo(CompanyPatentActivity.class);
+                        if(isHasInfo(num))
+                            UIHelper.showCompanyPatentActivity(EnterpriseDetailInfoActivity.this, bundle);
                         break;
                     case 6:
-                        readyGo(CopyRightActivity.class);
+                        if(isHasInfo(num))
+                            UIHelper.showCopyRightActivity(EnterpriseDetailInfoActivity.this, bundle);
                         break;
                     case 7:
-                        readyGo(CourtListActivity.class);
+                        if(isHasInfo(num))
+                            UIHelper.showCourtListActivity(EnterpriseDetailInfoActivity.this,bundle);
                         break;
                     case 8:
-                        readyGo(DishonestyActivity.class);
+                        if(isHasInfo(num))
+                            UIHelper.showDishonestyActivity(EnterpriseDetailInfoActivity.this,bundle);
                         break;
                     case 10:
-                        readyGo(RecruitInfoActivity.class);
+                        if(isHasInfo(num))
+                            UIHelper.showRecruitInfoActivity(EnterpriseDetailInfoActivity.this,bundle);
+
                         break;
                     case 11:
-                        readyGo(TenderActivity.class);
+                        if(isHasInfo(num))
+                            UIHelper.showTenderActivity(EnterpriseDetailInfoActivity.this,bundle);
                         break;
                 }
 
@@ -158,11 +178,18 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
         btnComment.setOnClickListener(this);
     }
 
+    private boolean isHasInfo(int num){
+        if(num==0){
+            ToastUtil.TextToast(this,"暂无相关信息");
+            return false;
+        }
+        return true;
+    }
     @Override
     protected void addData() {
       //  loadData();
         setTitle("企业详情");
-        //uuid=getIntent().getExtras().getString("uuid");
+        uuid=getIntent().getExtras().getString("uuid");
         mLoadingAndRetryManager.showLoading();
         gridViewlist=new ArrayList<HomePageGridViewBean>();
         initGridViewData();
@@ -250,9 +277,9 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
             } else {
                 holder = ((Holder) convertView.getTag());
             }
-            holder.tv.setCompoundDrawablesWithIntrinsicBounds(0,list.get(i).getImgId(),0,0);
+            holder.tv.setCompoundDrawablesWithIntrinsicBounds(0, list.get(i).getImgId(), 0, 0);
             holder.tv.setText(list.get(i).getName());
-            if(list.get(i).getNum()!=0)
+            if(i!=0)
                 holder.numTV.setText(""+list.get(i).getNum());
             return convertView;
         }
@@ -290,8 +317,10 @@ public class EnterpriseDetailInfoActivity extends BaseActivity implements View.O
 
             @Override
             public void onResponse(HomepageBean homepageBean) {
-                if (homepageBean != null)
+                if (homepageBean != null){
+                    EnterpriseDetailInfoActivity.this.homepageBean=homepageBean;
                     fullinfo(homepageBean);
+                }
             }
         });
     }

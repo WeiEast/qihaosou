@@ -28,7 +28,8 @@ public class RecruitInfoActivity extends BaseActivity{
     private ListView listView;
     private List<RecruitInfoBean> list;
     private RecruitInfoAdapter adapter;
-    private String uuid="b4ecbfdfb566487db1316b12b629aa02";
+    private String uuid;
+    private String econName;
     @Override
     protected void init() {
         listView= (ListView) findViewById(R.id.recruit_listview);
@@ -51,14 +52,16 @@ public class RecruitInfoActivity extends BaseActivity{
     @Override
     protected void addData() {
         setTitle("招聘信息");
+        uuid=getIntent().getExtras().getString("uuid");
+        econName=getIntent().getExtras().getString("name");
         list=new ArrayList<RecruitInfoBean>();
         adapter=new RecruitInfoAdapter(this,list);
         listView.setAdapter(adapter);
-        getInfoList(uuid);
+        getInfoList(econName);
     }
 
-    private void getInfoList(String uuid) {
-        OkHttpUtils.post(UriHelper.getInstance().getRecruitInfoListUrl(uuid)).tag(this).execute(new RecruitInfoCallBack() {
+    private void getInfoList(String econName) {
+        OkHttpUtils.post(UriHelper.getInstance().getRecruitInfoListUrl(econName)).tag(this).execute(new RecruitInfoCallBack() {
             @Override
             public void onResponse(List<RecruitInfoBean> recruitInfoBeans) {
                 list.addAll(recruitInfoBeans);

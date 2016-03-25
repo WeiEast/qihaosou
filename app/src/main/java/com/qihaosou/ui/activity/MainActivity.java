@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import com.qihaosou.R;
 import com.qihaosou.app.Constants;
+import com.qihaosou.app.MyApplication;
 import com.qihaosou.bean.UMShareImageBean;
 import com.qihaosou.listener.UMShareCallBack;
 import com.qihaosou.ui.fragment.DrawerNavigationMenu;
@@ -147,6 +148,12 @@ public class MainActivity extends BaseActivity implements DrawerNavigationMenu.N
         currentSupportFragment = targetFragment;
         transaction.commit();
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+    }
+
     @Override
     public void onNavigationDrawerItemSelected(DrawerNavigationMenu.MenuType menuType) {
         switch (menuType){
@@ -161,7 +168,10 @@ public class MainActivity extends BaseActivity implements DrawerNavigationMenu.N
             case MENU_COM://评价
                 break;
             case MENU_USER://个人中心
-                UIHelper.showUserActivity(this);
+                if(((MyApplication)getApplication()).login)
+                    UIHelper.showUserActivity(this);
+                else
+                    UIHelper.showLoginActivity(this);
                 break;
         }
     }

@@ -33,7 +33,8 @@ public class DishonestyActivity extends BaseActivity {
     private DishonestyAdapter adapter;
     private ListView listView;
     private List<DishonestyBean> list;
-    private String uuid="b2b285a5ffd645cfb84457089f3572f1";
+    private String uuid;
+    private String econName;
     LoadingAndRetryManager mLoadingAndRetryManager;
     @Override
     protected void init() {
@@ -58,14 +59,16 @@ public class DishonestyActivity extends BaseActivity {
     @Override
     protected void addData() {
         setTitle("失信列表");
+        uuid=getIntent().getExtras().getString("uuid");
+        econName=getIntent().getExtras().getString("name");
         mLoadingAndRetryManager.showLoading();
         list=new ArrayList<DishonestyBean>();
         adapter=new DishonestyAdapter(this,list);
         listView.setAdapter(adapter);
-        getDishonestyList(uuid);
+        getDishonestyList(econName);
     }
-    private void getDishonestyList(String uuid){
-        OkHttpUtils.post(UriHelper.getInstance().getDishonestyListUrl(uuid)).tag(this).execute(new DishonestyListCallBack() {
+    private void getDishonestyList(String econName){
+        OkHttpUtils.post(UriHelper.getInstance().getDishonestyListUrl(econName)).tag(this).execute(new DishonestyListCallBack() {
 
             @Override
             public void onAfter(@Nullable List<DishonestyBean> dishonestyBeans, Request request, Response response, @Nullable TaskException e) {

@@ -8,6 +8,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.context.GlobalContext;
 import com.qihaosou.R;
+import com.qihaosou.bean.UserBean;
 import com.qihaosou.loading.LoadingAndRetryManager;
 import com.qihaosou.net.VolleyHelper;
 import com.qihaosou.util.L;
@@ -20,11 +21,13 @@ import com.umeng.socialize.PlatformConfig;
  * Description:Application
  */
 public class MyApplication extends GlobalContext {
-
+    public static boolean login;
+    public static UserBean userBean;
     @Override
     public void onCreate() {
         super.onCreate();
         L.isDebug=true;
+        SharedPreHelper.config(this);
        // VolleyHelper.getInstance().init(this);
         LoadingAndRetryManager.BASE_LOADING_LAYOUT_ID = R.layout.loading;
         LoadingAndRetryManager.BASE_RETRY_LAYOUT_ID = R.layout.base_retry;
@@ -47,7 +50,9 @@ public class MyApplication extends GlobalContext {
             e.printStackTrace();
         }
 
+
     }
+
     @Override
     public void onLowMemory() {
         android.os.Process.killProcess(android.os.Process.myPid());

@@ -3,21 +3,28 @@ package com.qihaosou.ui.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.https.TaskException;
 import com.lzy.okhttputils.request.BaseRequest;
 import com.qihaosou.R;
 import com.qihaosou.app.Constants;
+import com.qihaosou.app.MyApplication;
 import com.qihaosou.bean.QihaosouBean;
+import com.qihaosou.bean.UploadBean;
+import com.qihaosou.bean.UserBean;
 import com.qihaosou.callback.QihaosouBeanCallBack;
+import com.qihaosou.callback.UploadCallBack;
 import com.qihaosou.net.UriHelper;
 import com.qihaosou.util.BitmapUtil;
 import com.qihaosou.util.L;
@@ -39,33 +46,39 @@ import okhttp3.Response;
  * Description:个人中心
  */
 public class UserActivity extends BaseActivity implements OnClickListener{
+    public static final String UPLOAD_IMAGE_SUCCESSED_ACTION="com.qihaosou.upload_successed";
+    public static final String LOGIN_OUT_ACTION="com.qihaosou.login_out_action";
     private RelativeLayout btnUserSet ,btnCheckUpdate;
     private TextView userNameTV;
     private TextView btnOut;
-    private CircleImageView userHeaderIV;
-
+    private UserBean userBean;
+    private SimpleDraweeView userIcon;
+    private LinearLayout userlayout;
     @Override
     protected void init() {
         btnUserSet= (RelativeLayout)findViewById(R.id.layout_user_set);
         btnOut= (TextView) findViewById(R.id.btn_exit_login);
         userNameTV= (TextView)findViewById(R.id.tv_user_name);
-        userHeaderIV= (CircleImageView)findViewById(R.id.iv_user_header);
+        userIcon= (SimpleDraweeView)findViewById(R.id.iv_user_header);
         btnCheckUpdate= (RelativeLayout) findViewById(R.id.layout_check_update);
+        userlayout= (LinearLayout) findViewById(R.id.user_layout);
     }
 
     @Override
     protected void addListener() {
         btnUserSet.setOnClickListener(this);
         btnOut.setOnClickListener(this);
-        userHeaderIV.setOnClickListener(this);
+        userlayout.setOnClickListener(this);
         btnCheckUpdate.setOnClickListener(this);
     }
 
     @Override
     protected void addData() {
-
+        userBean= MyApplication.userBean;
         setTitle("个人中心");
-        userNameTV.setText("醉心客");
+        userNameTV.setText(userBean.getNickname());
+        Uri uri= Uri.parse(Constants.BASE_IMAGE_URL+userBean.getAvatar());
+        userIcon.setImageURI(uri);
     }
 
     @Override
@@ -80,7 +93,7 @@ public class UserActivity extends BaseActivity implements OnClickListener{
             case R.id.layout_user_set://用户设置
                 intent=new Intent(this, SetActivity.class);
                 break;
-            case R.id.iv_user_header:
+            case R.id.user_layout:
                 UCrop.Options options = new UCrop.Options();
                 options.setCompressionFormat(Bitmap.CompressFormat.JPEG);
                 new  PickConfig.Builder(this)
@@ -107,6 +120,12 @@ public class UserActivity extends BaseActivity implements OnClickListener{
 
     private void loginOut(){
         OkHttpUtils.getInstance().clearCookie();
+        ToastUtil.TextToast(this, "退出成功");
+        MyApplication.login=false;
+        Intent intent=new Intent();
+        intent.setAction(LOGIN_OUT_ACTION);
+        sendBroadcast(intent);
+        onBackPressed();
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -125,14 +144,26 @@ public class UserActivity extends BaseActivity implements OnClickListener{
       L.e("base64:" + base64);
         final MaterialDialog materialDialog= MaterialDialogUtil.getNormalProgressDialog(this,getString(R.string.uploading));
 
-      OkHttpUtils.post(Constants.UPLOAD_AVATAR_URL).tag(this).params("base64String",base64).params("imageType","jpg").execute(new QihaosouBeanCallBack() {
+      OkHttpUtils.post(Constants.UPLOAD_AVATAR_URL).tag(this).params("base64String",base64).params("imageType","jpg").execute(new UploadCallBack() {
           @Override
           public void onBefore(BaseRequest request) {
               materialDialog.show();
           }
 
           @Override
-          public void onAfter(@Nullable QihaosouBean qihaosouBean, Request request, Response response, @Nullable TaskException e) {
+          public void onResponse(UploadBean uploadBean) {
+              ToastUtil.TextToast(UserActivity.this, "上传成功");
+              Uri uri= Uri.parse(Constants.BASE_IMAGE_URL+uploadBean.getAvatarPath());
+              MyApplication.userBean.setAvatar(uploadBean.getAvatarPath());
+              userIcon.setImageURI(uri);
+              Intent intent =new Intent();
+              intent.setAction(UPLOAD_IMAGE_SUCCESSED_ACTION);
+              intent.putExtra("avatarPath",uploadBean.getAvatarPath());
+              sendBroadcast(intent);
+          }
+
+          @Override
+          public void onAfter(@Nullable UploadBean uploadBean, Request request, Response response, @Nullable TaskException e) {
               materialDialog.dismiss();
           }
 
@@ -140,10 +171,7 @@ public class UserActivity extends BaseActivity implements OnClickListener{
           public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
               ToastUtil.TextToast(UserActivity.this, e.getMessage());
           }
-          @Override
-          public void onResponse(QihaosouBean qihaosouBean) {
-              ToastUtil.TextToast(UserActivity.this, qihaosouBean.getMessage());
-          }
+
       });
     }
 

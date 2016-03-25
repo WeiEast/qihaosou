@@ -175,59 +175,59 @@ public class UriHelper {
         return sb.toString();
     }
     //商标列表
-    public String getMarkListUrl(String uuid){
+    public String getMarkListUrl(String econName){
         StringBuffer sb=new StringBuffer();
         sb.append(Constants.GET_COMPANY_LOGO_URL);
-        sb.append("&uuid=");
-        sb.append(uuid);
+        sb.append("&econName=");
+        sb.append(econName);
         return sb.toString();
     }
     //专利
-    public String getPatentlistUrl(String uuid){
+    public String getPatentlistUrl(String econName){
         StringBuffer sb=new StringBuffer();
         sb.append(Constants.GET_PATENT_OUTLINE_URL);
-        sb.append("&uuid=");
-        sb.append(uuid);
+        sb.append("&econName=");
+        sb.append(econName);
         return sb.toString();
     }
     //作品著作权
-    public String getWorkCopyRightUrl(String uuid){
+    public String getWorkCopyRightUrl(String econName){
         StringBuffer sb=new StringBuffer();
         sb.append(Constants.GET_WORK_COPYRIGHT_URL);
-        sb.append("&uuid=");
-        sb.append(uuid);
+        sb.append("&econName=");
+        sb.append(econName);
         return sb.toString();
     }
     //软件著作权
-    public String getSoftWareCopyRightUrl(String uuid){
+    public String getSoftWareCopyRightUrl(String econName){
         StringBuffer sb=new StringBuffer();
         sb.append(Constants.GET_COMPUTER_COPYRIGHT_URL);
-        sb.append("&uuid=");
-        sb.append(uuid);
+        sb.append("&econName=");
+        sb.append(econName);
         return sb.toString();
     }
     //招聘信息
-    public String getRecruitInfoListUrl(String uuid){
+    public String getRecruitInfoListUrl(String econName){
         StringBuffer sb=new StringBuffer();
         sb.append(Constants.GET_RECRUITINFO_URL);
-        sb.append("&uuid=");
-        sb.append(uuid);
+        sb.append("&econName=");
+        sb.append(econName);
         return sb.toString();
     }
     //招投标信息
-    public String getTenderListUrl(String uuid){
+    public String getTenderListUrl(String econName){
         StringBuffer sb=new StringBuffer();
         sb.append(Constants.GET_TENDERS_URL);
-        sb.append("&uuid=");
-        sb.append(uuid);
+        sb.append("&econName=");
+        sb.append(econName);
         return sb.toString();
     }
     //诉讼URL
-    public String getCourtListUrl(String uuid){
+    public String getCourtListUrl(String econName){
         StringBuffer sb=new StringBuffer();
         sb.append(Constants.GET_COURTLIST_URL);
-        sb.append("&uuid=");
-        sb.append(uuid);
+        sb.append("&econName=");
+        sb.append(econName);
         return sb.toString();
     }
     //法律文书
@@ -257,11 +257,11 @@ public class UriHelper {
         return sb.toString();
     }
     //失信列表
-    public String getDishonestyListUrl(String uuid){
+    public String getDishonestyListUrl(String econName){
         StringBuffer sb=new StringBuffer();
         sb.append(Constants.GET_DISHONESTYLIST_URL);
-        sb.append("&uuid=");
-        sb.append(uuid);
+        sb.append("&econName=");
+        sb.append(econName);
         return sb.toString();
     }
     //失信详情

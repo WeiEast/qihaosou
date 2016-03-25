@@ -9,9 +9,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.qihaosou.R;
+import com.qihaosou.bean.HotCompanyBean;
 import com.qihaosou.ui.activity.CompanySearchActivity;
 import com.qihaosou.view.SlidingTabLayout;
 import com.qihaosou.view.StickHeaderViewPager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Author:wenjundu
@@ -43,12 +47,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         btnSearch= (TextView) view.findViewById(R.id.btn_search);
         btnSearch.setOnClickListener(this);
         setData();
-//        listview= (ListView) view.findViewById(R.id.home_listview);
-//        View headerView=LayoutInflater.from(getContext()).inflate(R.layout.home_header_layout,(ViewGroup)null);
-//        listview.addHeaderView(headerView,null,false);
-//        String[] ss={"haha","hehe","huhu","gege"};
-//        ArrayAdapter<String> adapter=new ArrayAdapter<String>(getContext(),android.R.layout.simple_expandable_list_item_1,ss);
-//        listview.setAdapter(adapter);
     }
 
     private void setData() {
@@ -61,10 +59,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 return getResources().getColor(R.color.title_color);
             }
         });
+
         StickHeaderViewPager.StickHeaderViewPagerBuilder.stickTo(shvp_content).
                 setFragmentManager(getChildFragmentManager()).addScrollFragments(
-                HomeListViewFragment.newInstance("热门企业"),
-                HomeListViewFragment.newInstance("最近浏览"))
+                HotCompanyFragment.newInstance("热门企业"),
+                HotCompanyFragment.newInstance("最近浏览"))
                 .notifyData();
         stl_stick.setViewPager(shvp_content.getViewPager());
     }

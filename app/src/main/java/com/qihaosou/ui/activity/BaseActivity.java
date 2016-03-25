@@ -1,5 +1,6 @@
 package com.qihaosou.ui.activity;
 
+import android.content.pm.ActivityInfo;
 import android.support.v7.widget.Toolbar;
 
 import com.qihaosou.R;
@@ -16,6 +17,12 @@ public abstract class BaseActivity  extends BaseAppCompatActivity {
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
+        /**
+         * 竖屏
+         */
+        if (getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
         mToolbar = (Toolbar) findViewById(R.id.common_toolbar);
         if (null != mToolbar) {
             setSupportActionBar(mToolbar);

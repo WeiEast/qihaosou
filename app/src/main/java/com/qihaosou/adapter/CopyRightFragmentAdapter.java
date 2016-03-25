@@ -8,6 +8,8 @@ import com.qihaosou.R;
 import com.qihaosou.ui.fragment.copyright.SoftwareCopyRightFragment;
 import com.qihaosou.ui.fragment.copyright.WorkCopyRightFragment;
 
+import java.util.List;
+
 /**
  * Author: Created by wenjundu
  * Date:on 2016/3/7
@@ -15,27 +17,23 @@ import com.qihaosou.ui.fragment.copyright.WorkCopyRightFragment;
  */
 public class CopyRightFragmentAdapter extends FragmentPagerAdapter {
     private String[] titles;
+    private List<Fragment> list;
     public CopyRightFragmentAdapter(FragmentManager fm) {
         super(fm);
     }
-    public CopyRightFragmentAdapter(Context context,FragmentManager fm){
+    public CopyRightFragmentAdapter(Context context,FragmentManager fm,List<Fragment> list){
         super(fm);
         titles=context.getResources().getStringArray(R.array.copy_right);
+        this.list=list;
     }
     @Override
     public Fragment getItem(int position) {
-        switch (position){
-            case 0:
-                return new WorkCopyRightFragment();
-            case 1:
-                return new SoftwareCopyRightFragment();
-        }
-        return null;
+       return list.get(position);
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return list.size();
     }
 
     @Override

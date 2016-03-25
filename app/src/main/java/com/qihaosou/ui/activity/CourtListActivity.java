@@ -27,7 +27,8 @@ public class CourtListActivity extends BaseActivity{
     private ListView listView;
     private List<CourtBean> list;
     private CourtAdapter adapter;
-    private String uuid="efbc0d4d76cc4d59981363f0cc385924";
+    private String uuid;
+    private String econName;
     @Override
     protected void init() {
         listView= (ListView) findViewById(R.id.court_listview);
@@ -50,18 +51,20 @@ public class CourtListActivity extends BaseActivity{
     @Override
     protected void addData() {
         setTitle("法院诉讼列表");
+        uuid=getIntent().getExtras().getString("uuid");
+        econName=getIntent().getExtras().getString("name");
         list=new ArrayList<CourtBean>();
         adapter=new CourtAdapter(this,list);
         listView.setAdapter(adapter);
-        getCourtList(uuid);
+        getCourtList(econName);
     }
 
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_courtlist;
     }
-    private void getCourtList(String uuid){
-        OkHttpUtils.post(UriHelper.getInstance().getCourtListUrl(uuid)).tag(this).execute(new CourtAllCallBack() {
+    private void getCourtList(String econName){
+        OkHttpUtils.post(UriHelper.getInstance().getCourtListUrl(econName)).tag(this).execute(new CourtAllCallBack() {
             @Override
             public void onResponse(List<CourtBean> courtBeans) {
                 list.addAll(courtBeans);

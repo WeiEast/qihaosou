@@ -37,7 +37,7 @@ public class YearReportFragment extends Fragment{
     private ListView listView;
     private YearReportAdapter adapter;
     private List<AnnualBean> list;
-    private String uuid="2ee37bb8b9ab4fe5ad6a8b9fdce26401";
+    private String uuid;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,6 +47,7 @@ public class YearReportFragment extends Fragment{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        uuid=getArguments().getString("uuid");
         init(getView());
         addData();
     }

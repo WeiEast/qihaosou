@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:id="@+id/root_layout"
-    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <include layout="@layout/common_toolbar"/>
     <LinearLayout
+        android:id="@+id/user_layout"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:orientation="horizontal"
@@ -13,13 +17,20 @@
         android:paddingRight="20dp"
         android:gravity="center_vertical"
         >
-        <com.qihaosou.view.CircleImageView
-            android:id="@+id/iv_user_header"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@mipmap/default_userface"
 
-            />
+        <com.facebook.drawee.view.SimpleDraweeView
+            fresco:placeholderImage="@mipmap/ic_default_avatar"
+            fresco:roundAsCircle="true"
+            android:id="@+id/iv_user_header"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:paddingLeft="7dp"
+            android:paddingRight="6dp"
+            android:paddingTop="7dp"
+            android:paddingBottom="6dp"
+            android:background="@mipmap/menu_avatar_bg" />
         <TextView
             android:id="@+id/tv_user_name"
             android:layout_width="wrap_content"

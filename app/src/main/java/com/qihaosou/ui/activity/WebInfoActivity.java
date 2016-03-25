@@ -27,7 +27,7 @@ public class WebInfoActivity extends BaseActivity{
     private ListView listView;
     private WebInfoAdapter adapter;
     private List<RecordBean> recordBeans;
-    private String uuid="415419221aab4c60b7e217a37d46e685";
+    private String uuid;
     @Override
     protected void init() {
         listView= (ListView) findViewById(R.id.web_info_listview);
@@ -42,6 +42,7 @@ public class WebInfoActivity extends BaseActivity{
     @Override
     protected void addData() {
         setTitle("域名信息");
+        uuid=getIntent().getExtras().getString("uuid");
         recordBeans=new ArrayList<RecordBean>();
         adapter=new WebInfoAdapter(this,recordBeans);
         listView.setAdapter(adapter);

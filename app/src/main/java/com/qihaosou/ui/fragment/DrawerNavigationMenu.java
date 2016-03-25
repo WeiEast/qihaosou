@@ -1,11 +1,23 @@
 package com.qihaosou.ui.fragment;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.qihaosou.R;
+import com.qihaosou.app.Constants;
+import com.qihaosou.bean.UserBean;
+import com.qihaosou.ui.activity.LoginActivity;
+import com.qihaosou.ui.activity.UserActivity;
 import com.qihaosou.util.UIHelper;
 
 import butterknife.InjectView;
@@ -21,6 +33,10 @@ public class DrawerNavigationMenu extends BaseFragment {
     View mMenu_rl_header;
     @InjectView(R.id.menu_item_search)
     View mMenu_rl_search;
+    @InjectView(R.id.iv_avatar)
+    SimpleDraweeView headerIcon;
+    @InjectView(R.id.tv_name)
+    TextView userName;
     @InjectView(R.id.menu_item_share)
     View mMenu_rl_share;
     @InjectView(R.id.menu_item_com)
@@ -40,6 +56,17 @@ public class DrawerNavigationMenu extends BaseFragment {
                     "Activity must implement NavigationDrawerCallbacks.");
         }
     }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction(LoginActivity.LOGIN_SUCCESSED_ACTION);
+        intentFilter.addAction(UserActivity.UPLOAD_IMAGE_SUCCESSED_ACTION);
+        intentFilter.addAction(UserActivity.LOGIN_OUT_ACTION);
+        getContext().registerReceiver(receiver,intentFilter);
+    }
+
     @Override
     public void onDetach() {
         super.onDetach();
@@ -69,7 +96,8 @@ public class DrawerNavigationMenu extends BaseFragment {
     public void OnViewClick(View view){
         switch (view.getId()){
             case R.id.rl_header:
-                UIHelper.showLoginActivity(getContext());
+                if(!getApplication().login)
+                    UIHelper.showLoginActivity(getContext());
                 break;
             case R.id.menu_item_search:
                 if(mCallbacks!=null){
@@ -93,10 +121,40 @@ public class DrawerNavigationMenu extends BaseFragment {
                 break;
         }
     }
+
+    private BroadcastReceiver receiver=new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            if(LoginActivity.LOGIN_SUCCESSED_ACTION.equals(intent.getAction())){
+                getApplication().login=true;
+                UserBean userBean=(UserBean)intent.getExtras().get("userinfo");
+                Uri imageUri = Uri.parse(Constants.BASE_IMAGE_URL+userBean.getAvatar());
+                headerIcon.setImageURI(imageUri);
+                userName.setText(userBean.getNickname());
+            }
+            if(UserActivity.UPLOAD_IMAGE_SUCCESSED_ACTION.equals(intent.getAction())){
+                String avatarPath=intent.getExtras().getString("avatarPath");
+                Uri imageUri = Uri.parse(Constants.BASE_IMAGE_URL + avatarPath);
+                headerIcon.setImageURI(imageUri);
+            }
+            if(UserActivity.LOGIN_OUT_ACTION.equals(intent.getAction())){
+                headerIcon.setImageURI(null);
+                userName.setText("未登录");
+            }
+        }
+    };
+
     public enum MenuType{
         MENU_SEARCH,MENU_SHARE,MENU_COM,MENU_USER
 }
     public interface NavigationDrawerCallbacks {
         void onNavigationDrawerItemSelected(MenuType menuType);
+    }
+
+    @Override
+    public void onDestroy() {
+        getContext().unregisterReceiver(receiver);
+        super.onDestroy();
     }
 }

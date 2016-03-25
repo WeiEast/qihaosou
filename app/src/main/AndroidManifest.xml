@@ -17,7 +17,7 @@
                 android:name="AA_DB_VERSION"
                 android:value="1" />
         </activity>
-        <activity android:name=".ui.activity.SplashActivity" android:theme="@style/ActivityTheme">
+        <activity android:name=".ui.activity.SplashActivity"  android:theme="@style/ActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

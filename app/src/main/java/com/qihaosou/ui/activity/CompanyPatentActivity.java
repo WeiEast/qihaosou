@@ -32,7 +32,8 @@ public class CompanyPatentActivity extends BaseActivity implements View.OnClickL
     private ListView patentlistView;
     private List<PatentOutlineBean> list;
     private PatentAapter patentAapter;
-    private String uuid="2ee37bb8b9ab4fe5ad6a8b9fdce26401";
+    private String uuid;
+    private String econName;
     @Override
     protected void init() {
         setTitle("");
@@ -57,9 +58,11 @@ public class CompanyPatentActivity extends BaseActivity implements View.OnClickL
     @Override
     protected void addData() {
         list=new ArrayList<PatentOutlineBean>();
+        uuid=getIntent().getExtras().getString("uuid");
+        econName=getIntent().getExtras().getString("name");
         patentAapter=new PatentAapter(this,list);
         patentlistView.setAdapter(patentAapter);
-        getPatentOutline(uuid);
+        getPatentOutline(econName);
 
         patentCategoryPopup=new SelectPatentCategoryPopup(this);
         patentCategoryPopup.setSelectPatentCategoryListener(new SelectPatentCategoryPopup.SelectPatentCategoryListener() {
@@ -89,8 +92,8 @@ public class CompanyPatentActivity extends BaseActivity implements View.OnClickL
         }
     }
 
-    private void getPatentOutline(String uuid){
-        OkHttpUtils.post(UriHelper.getInstance().getPatentlistUrl(uuid)).tag(this).execute(new PatentOutlineAllCallBack() {
+    private void getPatentOutline(String econName){
+        OkHttpUtils.post(UriHelper.getInstance().getPatentlistUrl(econName)).tag(this).execute(new PatentOutlineAllCallBack() {
             @Override
             public void onResponse(List<PatentOutlineBean> patentOutlineBeans) {
                 list.addAll(patentOutlineBeans);

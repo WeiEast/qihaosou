@@ -1,12 +1,14 @@
 package com.qihaosou.bean;
 
+import java.io.Serializable;
+
 /**
  * Author: Created by wenjundu
  * Date:on 2016/1/27
  * Description:
  */
-public class UserBean{
-    private String avatar;
+public class UserBean implements Serializable{
+    public String avatar;
     private String clientType;
     private String mobile;
     private String nickname;

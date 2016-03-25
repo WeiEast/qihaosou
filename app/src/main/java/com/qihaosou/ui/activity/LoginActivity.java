@@ -1,5 +1,6 @@
 package com.qihaosou.ui.activity;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,8 @@ import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.https.TaskException;
 import com.lzy.okhttputils.request.BaseRequest;
 import com.qihaosou.R;
+import com.qihaosou.app.MyApplication;
+import com.qihaosou.app.SharedPreHelper;
 import com.qihaosou.bean.UserBean;
 import com.qihaosou.callback.UserBeanCallBack;
 import com.qihaosou.listener.MyTextWacher;
@@ -36,6 +39,7 @@ import okhttp3.Response;
  * Description:
  */
 public class LoginActivity extends BaseActivity implements View.OnClickListener{
+    public static final String LOGIN_SUCCESSED_ACTION="com.qihaosou.login.successed";
     private TextView forgetPasswordTV,registerTV;
     private EditText phoneET,passwordET;
     private Button loginBtn;
@@ -106,7 +110,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
             mShareAPI.doOauthVerify(LoginActivity.this, platform, umAuthListener);
     }
 
-    private void Login(String phone,String password) {
+    private void Login(String phone, final String password) {
         String clientType="android";
         final MaterialDialog loadingDialog= MaterialDialogUtil.getNormalProgressDialog(this,getString(R.string.loading));
         OkHttpUtils.post(UriHelper.getInstance().getLoginUrl(phone,password,clientType)).tag(this).execute(new UserBeanCallBack() {
@@ -130,6 +134,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
             @Override
             public void onResponse(UserBean userBean) {
                 ToastUtil.TextToast(getApplicationContext(),getString(R.string.login_success));
+                try {
+                    SharedPreHelper.putUserInfo(userBean);
+                    MyApplication.userBean=userBean;
+                    MyApplication.userBean.setAvatar(userBean.getAvatar()+".jpg");
+                    setLogined(true);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                Intent intent=new Intent();
+                intent.setAction(LOGIN_SUCCESSED_ACTION);
+                intent.putExtra("userinfo",userBean);
+                sendBroadcast(intent);
                 finish();
             }
         });
@@ -153,4 +169,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
             ToastUtil.TextToast(getApplicationContext(), "Authorize cancel");
         }
     };
+    private void setLogined(boolean islogin){
+        SharedPreHelper.putBooleanShareData("islogin",islogin);
+
+    }
 }

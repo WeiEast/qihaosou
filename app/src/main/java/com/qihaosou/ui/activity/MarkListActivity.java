@@ -28,7 +28,8 @@ public class MarkListActivity extends BaseActivity{
     private MarkAdapter adapter;
     private ListView listView;
     private List<CompanyLogoBean> companyLogoBeans;
-    private String uuid="e3860ee7b83b43619e6cfdc1b896c8b7";
+    private String uuid;
+    private String econName;
     @Override
     protected void init() {
         listView= (ListView) findViewById(R.id.mark_listview);
@@ -47,10 +48,12 @@ public class MarkListActivity extends BaseActivity{
     @Override
     protected void addData() {
         setTitle("商标信息");
+        uuid=getIntent().getExtras().getString("uuid");
+        econName=getIntent().getExtras().getString("name");
         companyLogoBeans=new ArrayList<CompanyLogoBean>();
         adapter=new MarkAdapter(this,companyLogoBeans);
         listView.setAdapter(adapter);
-        getMarkList(uuid);
+        getMarkList(econName);
     }
 
     @Override
@@ -58,8 +61,8 @@ public class MarkListActivity extends BaseActivity{
         return R.layout.activity_mark_list;
     }
 
-    private void getMarkList(String uuid){
-        OkHttpUtils.post(UriHelper.getInstance().getMarkListUrl(uuid)).tag(this).execute(new CompanyLogoAllCallBack() {
+    private void getMarkList(String econName){
+        OkHttpUtils.post(UriHelper.getInstance().getMarkListUrl(econName)).tag(this).execute(new CompanyLogoAllCallBack() {
             @Override
             public void onResponse(List<CompanyLogoBean> companyLogoBeans) {
                MarkListActivity.this.companyLogoBeans.clear();

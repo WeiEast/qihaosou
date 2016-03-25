@@ -62,7 +62,7 @@ public class UpdateChecker extends Fragment {
         args.putString(APP_UPDATE_SERVER_URL,url);
 		//args.putInt(SUCCESSFUL_CHECKS_REQUIRED_KEY, 5);
 		updateChecker.setArguments(args);
-		content.add(updateChecker, null).commit();
+		content.add(updateChecker, null).commitAllowingStateLoss();
 	}
 
 	

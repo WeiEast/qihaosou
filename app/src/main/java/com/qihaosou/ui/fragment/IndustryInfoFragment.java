@@ -41,7 +41,7 @@ import com.qihaosou.view.LoadingDialog;
  * Description:工商信息
  */
 public class IndustryInfoFragment extends BaseLazyFragment {
-    private String uuid="aad4272599094555983094089e3a27bf";
+    private String uuid;
     LoadingAndRetryManager mLoadingAndRetryManager;
     ScrollView rootView;
     private TextView operNameTV,operateStatusTV,registerDateTV,checkDateTV,startDateTV,endDateTV,registCapiTV,econNoTV,compZipTV,econKindTV,compTelTV,econNameTV,belongOrgTV,unifiedNoTV,compAddressTV,addressTV;
@@ -65,6 +65,7 @@ public class IndustryInfoFragment extends BaseLazyFragment {
 
     @Override
     protected void init(View view) {
+        uuid=getArguments().getString("uuid");
         //法定代表
         operNameTV= (TextView) view.findViewById(R.id.tv_opername);
         //经营状态

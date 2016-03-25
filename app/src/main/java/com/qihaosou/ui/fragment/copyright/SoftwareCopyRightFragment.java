@@ -29,7 +29,8 @@ public class SoftwareCopyRightFragment extends Fragment {
     private ListView listView;
     private SoftWareCopyRightAdapter adapter;
     private List<ComputerCopyrightBean> list;
-    private String uuid="0a43123cd81a4bd69f9068d205a4f771";
+    private String uuid;
+    private String econName;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_copy_right,null);
@@ -38,6 +39,8 @@ public class SoftwareCopyRightFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        uuid=getArguments().getString("uuid");
+        econName=getArguments().getString("name");
         init(getView());
         addDate();
     }
@@ -46,14 +49,14 @@ public class SoftwareCopyRightFragment extends Fragment {
         list=new ArrayList<ComputerCopyrightBean>();
         adapter=new SoftWareCopyRightAdapter(getContext(),list);
         listView.setAdapter(adapter);
-        getSoftwareInfo(uuid);
+        getSoftwareInfo(econName);
     }
 
     private void init(View view) {
         listView= (ListView) view.findViewById(R.id.copy_right_listview);
     }
-    private void getSoftwareInfo(String uuid){
-        OkHttpUtils.post(UriHelper.getInstance().getSoftWareCopyRightUrl(uuid)).tag(this).execute(new ComputerCopyrightListCallBack() {
+    private void getSoftwareInfo(String econName){
+        OkHttpUtils.post(UriHelper.getInstance().getSoftWareCopyRightUrl(econName)).tag(this).execute(new ComputerCopyrightListCallBack() {
             @Override
             public void onResponse(List<ComputerCopyrightBean> computerCopyrightBeans) {
                 list.addAll(computerCopyrightBeans);

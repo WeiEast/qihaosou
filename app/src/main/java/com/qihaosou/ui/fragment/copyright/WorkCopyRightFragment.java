@@ -29,7 +29,8 @@ public class WorkCopyRightFragment extends Fragment {
     private ListView listView;
     private List<WorkCopyrightBean> list;
     private WorkCopyRightAdapter adapter;
-    private String uuid="8097795298f843418022d16c4f674d9a";
+    private String uuid;
+    private String econName;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_copy_right,null);
@@ -43,14 +44,16 @@ public class WorkCopyRightFragment extends Fragment {
     }
 
     private void addDate() {
+        uuid=getArguments().getString("uuid");
+        econName=getArguments().getString("name");
         list=new ArrayList<WorkCopyrightBean>();
         adapter=new WorkCopyRightAdapter(getContext(),list);
         listView.setAdapter(adapter);
-        getworkInfo(uuid);
+        getworkInfo(econName);
     }
 
-    private void getworkInfo(String uuid) {
-        OkHttpUtils.post(UriHelper.getInstance().getWorkCopyRightUrl(uuid)).tag(this).execute(new WorkCopyrightListCallBack() {
+    private void getworkInfo(String econName) {
+        OkHttpUtils.post(UriHelper.getInstance().getWorkCopyRightUrl(econName)).tag(this).execute(new WorkCopyrightListCallBack() {
             @Override
             public void onResponse(List<WorkCopyrightBean> workCopyrightBeans) {
                 list.addAll(workCopyrightBeans);

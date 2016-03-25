@@ -33,7 +33,7 @@ import okhttp3.Response;
  */
 public class StockHolderInfoFragment extends Fragment {
 
-    private String uuid="2ee37bb8b9ab4fe5ad6a8b9fdce26401";
+    private String uuid;
     private ListView listView;
     LoadingAndRetryManager mLoadingAndRetryManager;
     private List<PartnerBean> list;
@@ -48,6 +48,7 @@ public class StockHolderInfoFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        uuid=getArguments().getString("uuid");
         init(getView());
         addDate();
     }

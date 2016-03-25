@@ -51,6 +51,7 @@ public class KeyPersonFragment extends Fragment{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        uuid=getArguments().getString("uuid");
         init(getView());
 
     }
@@ -114,7 +115,7 @@ public class KeyPersonFragment extends Fragment{
 
            @Override
            public void onError(okhttp3.Request request, @Nullable okhttp3.Response response, @Nullable TaskException e) {
-               ToastUtil.TextToast(getActivity(), e.toString());
+               ToastUtil.TextToast(getActivity(), e.getMessage());
            }
 
 

@@ -15,6 +15,10 @@ public class Constants {
     public static final String APK_UPDATE_CONTENT = "forceUpdate";
     public static final String APK_VERSION_CODE = "newVersion";
 
+
+
+    //图片URL
+    public static final String BASE_IMAGE_URL="http://img.qihaosou.com/avatar/";
     //登录url
     public static final String LOGIN_URL=BASE_URL+"&cmd=login";
     //注册url
@@ -23,6 +27,8 @@ public class Constants {
     public static final String LOGINOUT_URL=BASE_URL+"&cmd=loginOut";
     //重设密码
     public static final String REPASSWORD_URL=BASE_URL+"&cmd=rePassword";
+    //热门企业
+    public static final String GET_HOT_COMPANY_URL=BASE_URL+"&cmd=getHotCompany";
     //工商信息主页接口
     public static final String GET_ICINFO=BASE_URL+"&cmd=getIcinfo";
     //主要人员接口
