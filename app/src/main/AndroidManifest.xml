@@ -61,7 +61,7 @@
         <activity android:name=".ui.activity.CommentListActivity" android:theme="@style/ActivityTheme"/>
         <activity android:name=".ui.activity.DishonestyActivity" android:theme="@style/ActivityTheme"/>
         <activity android:name=".ui.activity.DishonestyDetailActivity" android:theme="@style/ActivityTheme"/>
-
+        <activity android:name=".ui.activity.UniteLoginActivity" android:theme="@style/ActivityTheme"/>
         <service android:name=".update.DownloadService" />
         <activity
             android:name=".wxapi.WXEntryActivity"

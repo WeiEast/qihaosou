@@ -64,6 +64,7 @@
     <string name="menu_user">个人中心</string>
     <string name="menu_setting">设置</string>
     <string name="menu_theme">夜间</string>
+    <string name="main_menu_search">搜索</string>
 
     <!-- 验证手机号 -->
     <string name="verify_phone">验证手机号</string>

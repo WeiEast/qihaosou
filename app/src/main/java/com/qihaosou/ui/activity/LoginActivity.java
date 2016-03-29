@@ -1,6 +1,7 @@
 package com.qihaosou.ui.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import com.lzy.okhttputils.request.BaseRequest;
 import com.qihaosou.R;
 import com.qihaosou.app.MyApplication;
 import com.qihaosou.app.SharedPreHelper;
+import com.qihaosou.bean.OpenIdCatalog;
 import com.qihaosou.bean.UserBean;
 import com.qihaosou.callback.UserBeanCallBack;
 import com.qihaosou.listener.MyTextWacher;
@@ -22,6 +24,7 @@ import com.qihaosou.net.UriHelper;
 import com.qihaosou.util.L;
 import com.qihaosou.util.MaterialDialogUtil;
 import com.qihaosou.util.ToastUtil;
+import com.qihaosou.util.UIHelper;
 import com.qihaosou.view.LoadingDialog;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
@@ -153,10 +156,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private UMAuthListener umAuthListener = new UMAuthListener() {
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
-//            if(platform==SHARE_MEDIA.QQ){
-                ToastUtil.TextToast(getApplicationContext(), action+"Authorize succeed");
-                L.e("........:"+data.toString());
-//            }
+
+               mShareAPI.getPlatformInfo(LoginActivity.this, platform, umUserInfoListener);
+
         }
 
         @Override
@@ -169,8 +171,79 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
             ToastUtil.TextToast(getApplicationContext(), "Authorize cancel");
         }
     };
+
+    private UMAuthListener umUserInfoListener=new UMAuthListener() {
+        @Override
+        public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+            L.e( map.toString());
+            L.e(map.get("profile_image_url") + "...." + map.get("screen_name"));
+            isBind(map.get("openid"),share_media,map);
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA share_media, int i) {
+
+        }
+    };
+
     private void setLogined(boolean islogin){
         SharedPreHelper.putBooleanShareData("islogin",islogin);
+
+    }
+
+    //检测是否绑定
+    private void isBind(String uid, final SHARE_MEDIA platform, final Map<String, String> openinfo){
+        OkHttpUtils.post(UriHelper.getInstance().checkUidUrl(uid)).tag(this).execute(new UserBeanCallBack() {
+
+            @Override
+            public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
+                if("102".equals(e.getCode())){//未绑定，跳到绑定页面
+                    Bundle bundle=new Bundle();
+                    if(platform==SHARE_MEDIA.QQ){
+                        bundle.putString("platform", OpenIdCatalog.QQ);
+                        bundle.putString("header_url",openinfo.get("profile_image_url"));
+                        bundle.putString("username",openinfo.get("screen_name"));
+                    }
+                    if(platform==SHARE_MEDIA.WEIXIN){
+                        bundle.putString("platform",OpenIdCatalog.WECHAT);
+                        bundle.putString("header_url",openinfo.get("headimgurl"));
+                        bundle.putString("username",openinfo.get("nickname"));
+                    }
+                    UIHelper.showUniteLoginActivity(LoginActivity.this,bundle);
+                }else
+                ToastUtil.TextToast(LoginActivity.this,e.getMessage());
+            }
+
+            @Override
+            public void onResponse(UserBean userBean) {
+                ToastUtil.TextToast(getApplicationContext(),getString(R.string.login_success));
+                try {
+                    SharedPreHelper.putUserInfo(userBean);
+                    MyApplication.userBean=userBean;
+                    MyApplication.userBean.setAvatar(userBean.getAvatar()+".jpg");
+                    setLogined(true);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                Intent intent=new Intent();
+                intent.setAction(LOGIN_SUCCESSED_ACTION);
+                intent.putExtra("userinfo",userBean);
+                sendBroadcast(intent);
+                finish();
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        L.e("auth", "on activity re 2");
+        mShareAPI.onActivityResult(requestCode, resultCode, data);
 
     }
 }

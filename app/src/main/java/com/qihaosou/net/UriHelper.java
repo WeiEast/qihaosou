@@ -47,6 +47,15 @@ public class UriHelper {
         sb.append(clientType);
         return sb.toString();
     }
+    //检测uid
+    public String checkUidUrl(String uid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.CHECK_UID_URL);
+        sb.append("&uid=");
+        sb.append(uid);
+        return sb.toString();
+    }
+
     public String getVcodeUrl(String phone){
         StringBuffer sb=new StringBuffer();
         sb.append(Constants.GET_V_CODE_URL);

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.qihaosou.ui.activity.CompanyPatentActivity;
+import com.qihaosou.ui.activity.CompanySearchActivity;
 import com.qihaosou.ui.activity.CopyRightActivity;
 import com.qihaosou.ui.activity.CourtListActivity;
 import com.qihaosou.ui.activity.DemoActivity;
@@ -15,6 +16,7 @@ import com.qihaosou.ui.activity.LoginActivity;
 import com.qihaosou.ui.activity.MarkListActivity;
 import com.qihaosou.ui.activity.RecruitInfoActivity;
 import com.qihaosou.ui.activity.TenderActivity;
+import com.qihaosou.ui.activity.UniteLoginActivity;
 import com.qihaosou.ui.activity.UserActivity;
 import com.qihaosou.ui.activity.WebInfoActivity;
 
@@ -48,6 +50,14 @@ public class UIHelper {
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
     }
+    /**
+     * 显示搜索界面
+     */
+    public static void showSearchActivity(Context context){
+        Intent intent=new Intent(context, CompanySearchActivity.class);
+        context.startActivity(intent);
+    }
+
     /**
      * 显示个人中心页面
      */
@@ -134,6 +144,14 @@ public class UIHelper {
      */
     public static void showTenderActivity(Context context,Bundle bundle){
         Intent intent=new Intent(context, TenderActivity.class);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
+    /**
+     * 显示联合登录界面
+     */
+    public static void showUniteLoginActivity(Context context,Bundle bundle){
+        Intent intent=new Intent(context, UniteLoginActivity.class);
         intent.putExtras(bundle);
         context.startActivity(intent);
     }

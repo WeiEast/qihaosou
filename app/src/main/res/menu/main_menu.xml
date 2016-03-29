@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osc="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/main_menu_search"
+        android:icon="@mipmap/actionbar_search_icon"
+        android:title="@string/main_menu_search"
+        android:visible="true"
+        osc:showAsAction="always"/>
+
+    <item
+        android:id="@+id/main_menu_profile"
+        android:title="个人中心"
+        android:visible="false"
+        osc:showAsAction="never"/>
+
+    <item
+        android:id="@+id/main_menu_open_software"
+        android:title="开源软件"
+        android:visible="false"
+        osc:showAsAction="never"/>
+    <item
+        android:id="@+id/main_menu_event"
+        android:title="开源活动"
+        android:visible="false"
+        osc:showAsAction="never"/>
+    <item
+        android:id="@+id/main_menu_settings"
+        android:title="应用设置"
+        osc:showAsAction="never"/>
+    <item
+        android:id="@+id/main_menu_feedback"
+        android:title="用戶反馈"
+        osc:showAsAction="never"/>
+    <item
+        android:id="@+id/main_menu_quit"
+        android:title="退出应用"
+        osc:showAsAction="never"/>
+</menu>
