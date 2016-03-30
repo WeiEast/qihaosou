@@ -55,7 +55,14 @@ public class UriHelper {
         sb.append(uid);
         return sb.toString();
     }
-
+    //绑定uid
+    public String bindUidUrl(String uid){
+        StringBuffer sb=new StringBuffer();
+        sb.append(Constants.BIND_UID_URL);
+        sb.append("&uid=");
+        sb.append(uid);
+        return sb.toString();
+    }
     public String getVcodeUrl(String phone){
         StringBuffer sb=new StringBuffer();
         sb.append(Constants.GET_V_CODE_URL);

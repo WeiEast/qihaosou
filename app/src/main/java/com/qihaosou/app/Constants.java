@@ -23,6 +23,8 @@ public class Constants {
     public static final String LOGIN_URL=BASE_URL+"&cmd=login";
     //检测绑定
     public static final String CHECK_UID_URL=BASE_URL+"&cmd=checkUid";
+    //绑定
+    public static final String BIND_UID_URL=BASE_URL+"&cmd=bindingUid";
     //注册url
     public static final String REGISTER_URL=BASE_URL+"&cmd=register";
     //注销url

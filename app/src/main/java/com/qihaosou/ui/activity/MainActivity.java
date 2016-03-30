@@ -75,6 +75,7 @@ public class MainActivity extends BaseActivity implements DrawerNavigationMenu.N
 
     @Override
     protected void addData() {
+        setTitle("企业大数据查询-企好搜");
         umShareImageBean=new UMShareImageBean();
         umShareImageBean.setShareText("hahahahah");
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.search_bg_02);

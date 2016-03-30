@@ -119,6 +119,7 @@
                 android:layout_marginLeft="30.0dip"
                 android:layout_marginRight="30.0dip"
                 android:layout_marginTop="20.0dip"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/bg_radius_border_white"
                 android:drawableLeft="@mipmap/register_nickname"
                 android:drawablePadding="10.0dip"
@@ -128,20 +129,52 @@
                 android:textColor="#ff333333"
                 android:textColorHint="#ffabb5b9"
              />
-
+            <TextView
+                android:id="@+id/tv_register_bind_tip"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/register_tip"
+                android:textSize="@dimen/font_size_12"
+                android:textColor="@color/base_text_color"
+                android:visibility="gone"
+                />
             <Button
                 android:id="@+id/btn_register"
                 android:layout_width="fill_parent"
                 android:layout_height="44.0dip"
                 android:layout_marginLeft="30.0dip"
                 android:layout_marginRight="30.0dip"
-                android:layout_marginTop="20.0dip"
+                android:layout_marginTop="10.0dip"
                 android:background="@drawable/bg_gradient_login"
                 android:text="@string/register_submit"
                 android:enabled="false"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_20" />
-
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/base_text_color"
+                    android:textSize="@dimen/font_size_14"
+                    android:text="@string/agreement_tip"
+                    />
+                <TextView
+                    android:id="@+id/tv_agreement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/title_color"
+                    android:textSize="@dimen/font_size_14"
+                    android:text="@string/agreement_tv"
+                    />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

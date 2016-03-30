@@ -1,5 +1,6 @@
 package com.qihaosou.ui.activity;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -15,10 +17,16 @@ import com.lzy.okhttputils.callback.BeanCallBack;
 import com.lzy.okhttputils.https.TaskException;
 import com.lzy.okhttputils.request.BaseRequest;
 import com.qihaosou.R;
+import com.qihaosou.app.MyAction;
+import com.qihaosou.app.MyApplication;
+import com.qihaosou.app.SharedPreHelper;
 import com.qihaosou.bean.BaseBean;
+import com.qihaosou.bean.OpenIdCatalog;
 import com.qihaosou.bean.QihaosouBean;
+import com.qihaosou.bean.UserBean;
 import com.qihaosou.bean.VcodeBean;
 import com.qihaosou.callback.QihaosouBeanCallBack;
+import com.qihaosou.callback.UserBeanCallBack;
 import com.qihaosou.callback.VcodeBeanCallBack;
 import com.qihaosou.listener.MyTextWacher;
 import com.qihaosou.listener.TimeCountListener;
@@ -29,6 +37,7 @@ import com.qihaosou.util.MaterialDialogUtil;
 import com.qihaosou.util.NetUtils;
 import com.qihaosou.util.TimeCount;
 import com.qihaosou.util.ToastUtil;
+import com.qihaosou.util.UIHelper;
 import com.qihaosou.view.LoadingDialog;
 
 import okhttp3.Request;
@@ -45,6 +54,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private Button btnCode,btnRegister;
     private ToggleButton btnChange;
     private TimeCount timeCount;
+
+    private TextView bindTipTV;
+    private TextView btnAgreement;
+    private boolean isBind;//是否需要绑定
+    private String platform,uid;
+    private UserBean  MyUserBean;
     @Override
     protected void init() {
         phoneET= (EditText) findViewById(R.id.edt_register_number);
@@ -54,6 +69,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         btnCode= (Button) findViewById(R.id.btn_register_getvalid);
         btnRegister= (Button) findViewById(R.id.btn_register);
         btnChange= (ToggleButton) findViewById(R.id.tb_change_version);
+        bindTipTV= (TextView) findViewById(R.id.tv_register_bind_tip);
+        btnAgreement= (TextView) findViewById(R.id.tv_agreement);
 
         codewatcher=new MyTextWacher(btnCode,phoneET);
         regwatcher=new MyTextWacher(btnRegister,phoneET,vcodeET,passwordET,nicknameET);
@@ -71,6 +88,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         passwordET.addTextChangedListener(regwatcher);
         nicknameET.addTextChangedListener(regwatcher);
         btnChange.setOnCheckedChangeListener(this);
+        btnAgreement.setOnClickListener(this);
         timeCount.setOnTimeCountListener(new TimeCountListener() {
             @Override
             public void onFinish() {
@@ -88,7 +106,24 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void addData() {
-        setTitle(getString(R.string.title_register));
+        Intent intent=getIntent();
+        if(MyAction.LOGINACTIVITY_LAUNCH_ACTION.equals(intent.getAction())) {//从登录页启动的
+            setTitle(getString(R.string.title_register));
+            bindTipTV.setVisibility(View.GONE);
+            isBind=false;
+        }else if(MyAction.UNITEACTIVITY_LAUNCH_ACTION.equals(intent.getAction())){//从联合登录页启动的
+
+            setTitle(getString(R.string.title_bind_register));
+            platform=intent.getExtras().getString("platform");
+            uid=intent.getExtras().getString("uid");
+            bindTipTV.setVisibility(View.VISIBLE);
+            if(OpenIdCatalog.QQ.equals(platform))
+                bindTipTV.setText(String.format(getString(R.string.register_tip),"QQ"));
+            else if(OpenIdCatalog.WECHAT.equals(platform))
+                bindTipTV.setText(String.format(getString(R.string.register_tip),"微信"));
+            isBind=true;
+        }
+
     }
 
     @Override
@@ -110,13 +145,16 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             case R.id.btn_register_getvalid://获取验证
                 getCode(phone);
                 break;
+            case R.id.tv_agreement://服务协议
+                UIHelper.showAgreementActivity(RegisterActivity.this);
+                break;
         }
     }
     MyTextWacher codewatcher;
     MyTextWacher regwatcher;
-    private void register(String phone,String password,String nickname,String vcode){
+    private void register(final String phone, final String password,String nickname,String vcode){
         final MaterialDialog loadingDialog=MaterialDialogUtil.getNormalProgressDialog(this,getString(R.string.requesting));
-        OkHttpUtils.post(UriHelper.getInstance().getRegisterUrl(phone, password, vcode,nickname)).tag(this).execute(new QihaosouBeanCallBack() {
+        OkHttpUtils.post(UriHelper.getInstance().getRegisterUrl(phone, password, vcode, nickname)).tag(this).execute(new QihaosouBeanCallBack() {
             @Override
             public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
                 ToastUtil.TextToast(getApplicationContext(),e.getMessage());
@@ -124,7 +162,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void onResponse(QihaosouBean qihaosouBean) {
-                ToastUtil.TextToast(getApplicationContext(),qihaosouBean.getMessage());
+                Login(phone, password);
             }
 
             @Override
@@ -172,7 +210,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         L.e("手机IMEI:" + NetUtils.getPhoneIMEI(this)) ;
         L.e("运营商:"+NetUtils.getProviders(this));
         L.e("手机型号:"+NetUtils.getRelase());
-        L.e("手机分辨率:"+ DensityUtils.getDisplayWidth(this)+"*"+DensityUtils.getDisplayHeight(this));
+        L.e("手机分辨率:" + DensityUtils.getDisplayWidth(this) + "*" + DensityUtils.getDisplayHeight(this));
     }
 
     /**
@@ -191,5 +229,80 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             passwordET.setTransformationMethod(
                     PasswordTransformationMethod.getInstance());
         }
+    }
+    private void Login(String phone, final String password) {
+        String clientType="android";
+        final MaterialDialog loadingDialog= MaterialDialogUtil.getNormalProgressDialog(this, getString(R.string.loading));
+        OkHttpUtils.post(UriHelper.getInstance().getLoginUrl(phone, password, clientType)).tag(this).execute(new UserBeanCallBack() {
+
+            @Override
+            public void onBefore(BaseRequest request) {
+                loadingDialog.show();
+            }
+
+            @Override
+            public void onAfter(@Nullable UserBean userBean, Request request, Response response, @Nullable TaskException e) {
+                loadingDialog.dismiss();
+
+            }
+
+            @Override
+            public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
+                ToastUtil.TextToast(RegisterActivity.this, e.getMessage());
+            }
+
+            @Override
+            public void onResponse(UserBean userBean) {
+                MyUserBean=userBean;
+                if(isBind)
+                    bind(uid);
+                else{
+                    ToastUtil.TextToast(getApplicationContext(),getString(R.string.login_success));
+                    try {
+                        SharedPreHelper.putUserInfo(MyUserBean);
+                        MyApplication.userBean=MyUserBean;
+                        MyApplication.userBean.setAvatar(MyUserBean.getAvatar()+".jpg");
+                        setLogined(true);
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                    Intent intent=new Intent();
+                    intent.setAction(MyAction.LOGIN_SUCCESSED_ACTION);
+                    intent.putExtra("userinfo",MyUserBean);
+                    sendBroadcast(intent);
+                    UIHelper.showMainActivity(RegisterActivity.this);
+                }
+            }
+        });
+    }
+    private void bind(String uid){
+        OkHttpUtils.post(UriHelper.getInstance().bindUidUrl(uid)).tag(this).execute(new QihaosouBeanCallBack() {
+            @Override
+            public void onError(Request request, @Nullable Response response, @Nullable TaskException e) {
+                ToastUtil.TextToast(RegisterActivity.this,e.getMessage());
+            }
+
+            @Override
+            public void onResponse(QihaosouBean qihaosouBean) {
+                ToastUtil.TextToast(getApplicationContext(),getString(R.string.login_success));
+                try {
+                    SharedPreHelper.putUserInfo(MyUserBean);
+                    MyApplication.userBean=MyUserBean;
+                    MyApplication.userBean.setAvatar(MyUserBean.getAvatar()+".jpg");
+                    setLogined(true);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                Intent intent=new Intent();
+                intent.setAction(MyAction.LOGIN_SUCCESSED_ACTION);
+                intent.putExtra("userinfo",MyUserBean);
+                sendBroadcast(intent);
+                UIHelper.showMainActivity(RegisterActivity.this);
+            }
+        });
+    }
+    private void setLogined(boolean islogin){
+        SharedPreHelper.putBooleanShareData("islogin", islogin);
+
     }
 }

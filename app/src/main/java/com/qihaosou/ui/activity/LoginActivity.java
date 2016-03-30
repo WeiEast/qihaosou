@@ -8,12 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.https.TaskException;
 import com.lzy.okhttputils.request.BaseRequest;
 import com.qihaosou.R;
+import com.qihaosou.app.MyAction;
 import com.qihaosou.app.MyApplication;
 import com.qihaosou.app.SharedPreHelper;
 import com.qihaosou.bean.OpenIdCatalog;
@@ -42,7 +42,7 @@ import okhttp3.Response;
  * Description:
  */
 public class LoginActivity extends BaseActivity implements View.OnClickListener{
-    public static final String LOGIN_SUCCESSED_ACTION="com.qihaosou.login.successed";
+
     private TextView forgetPasswordTV,registerTV;
     private EditText phoneET,passwordET;
     private Button loginBtn;
@@ -97,7 +97,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                 readyGo(ResetPasswordActivity.class);
                 break;
             case R.id.tv_register_acount://注册
-                readyGo(RegisterActivity.class);
+                UIHelper.showRegisterActivity(LoginActivity.this,MyAction.LOGINACTIVITY_LAUNCH_ACTION);
                 break;
             case R.id.btn_login_newpage://登录
                 Login(phone,password);
@@ -146,7 +146,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                     e.printStackTrace();
                 }
                 Intent intent=new Intent();
-                intent.setAction(LOGIN_SUCCESSED_ACTION);
+                intent.setAction(MyAction.LOGIN_SUCCESSED_ACTION);
                 intent.putExtra("userinfo",userBean);
                 sendBroadcast(intent);
                 finish();
@@ -197,7 +197,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     }
 
     //检测是否绑定
-    private void isBind(String uid, final SHARE_MEDIA platform, final Map<String, String> openinfo){
+    private void isBind(final String uid, final SHARE_MEDIA platform, final Map<String, String> openinfo){
         OkHttpUtils.post(UriHelper.getInstance().checkUidUrl(uid)).tag(this).execute(new UserBeanCallBack() {
 
             @Override
@@ -214,6 +214,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                         bundle.putString("header_url",openinfo.get("headimgurl"));
                         bundle.putString("username",openinfo.get("nickname"));
                     }
+                    bundle.putString("uid",uid);
                     UIHelper.showUniteLoginActivity(LoginActivity.this,bundle);
                 }else
                 ToastUtil.TextToast(LoginActivity.this,e.getMessage());
@@ -231,7 +232,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                     e.printStackTrace();
                 }
                 Intent intent=new Intent();
-                intent.setAction(LOGIN_SUCCESSED_ACTION);
+                intent.setAction(MyAction.LOGIN_SUCCESSED_ACTION);
                 intent.putExtra("userinfo",userBean);
                 sendBroadcast(intent);
                 finish();

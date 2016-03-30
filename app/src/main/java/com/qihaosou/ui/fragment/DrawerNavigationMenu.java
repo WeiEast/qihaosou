@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.qihaosou.R;
 import com.qihaosou.app.Constants;
+import com.qihaosou.app.MyAction;
+import com.qihaosou.app.MyApplication;
 import com.qihaosou.bean.UserBean;
 import com.qihaosou.ui.activity.LoginActivity;
 import com.qihaosou.ui.activity.UserActivity;
@@ -61,7 +63,7 @@ public class DrawerNavigationMenu extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         IntentFilter intentFilter=new IntentFilter();
-        intentFilter.addAction(LoginActivity.LOGIN_SUCCESSED_ACTION);
+        intentFilter.addAction(MyAction.LOGIN_SUCCESSED_ACTION);
         intentFilter.addAction(UserActivity.UPLOAD_IMAGE_SUCCESSED_ACTION);
         intentFilter.addAction(UserActivity.LOGIN_OUT_ACTION);
         getContext().registerReceiver(receiver,intentFilter);
@@ -126,7 +128,7 @@ public class DrawerNavigationMenu extends BaseFragment {
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            if(LoginActivity.LOGIN_SUCCESSED_ACTION.equals(intent.getAction())){
+            if(MyAction.LOGIN_SUCCESSED_ACTION.equals(intent.getAction())){
                 getApplication().login=true;
                 UserBean userBean=(UserBean)intent.getExtras().get("userinfo");
                 Uri imageUri = Uri.parse(Constants.BASE_IMAGE_URL+userBean.getAvatar());

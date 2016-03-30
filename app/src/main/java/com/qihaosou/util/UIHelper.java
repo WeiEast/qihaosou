@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.qihaosou.ui.activity.AgreementActivity;
 import com.qihaosou.ui.activity.CompanyPatentActivity;
 import com.qihaosou.ui.activity.CompanySearchActivity;
 import com.qihaosou.ui.activity.CopyRightActivity;
@@ -13,8 +14,12 @@ import com.qihaosou.ui.activity.DishonestyActivity;
 import com.qihaosou.ui.activity.EnterpriseDetailInfoActivity;
 import com.qihaosou.ui.activity.EnterpriseInfoDetailsActivity;
 import com.qihaosou.ui.activity.LoginActivity;
+import com.qihaosou.ui.activity.LoginBindActivity;
+import com.qihaosou.ui.activity.MainActivity;
 import com.qihaosou.ui.activity.MarkListActivity;
 import com.qihaosou.ui.activity.RecruitInfoActivity;
+import com.qihaosou.ui.activity.RegisterActivity;
+import com.qihaosou.ui.activity.ResetPasswordActivity;
 import com.qihaosou.ui.activity.TenderActivity;
 import com.qihaosou.ui.activity.UniteLoginActivity;
 import com.qihaosou.ui.activity.UserActivity;
@@ -39,15 +44,25 @@ public class UIHelper {
     /**
      * 显示注册界面
      */
-    public static void showRegisterActivity(Context context){
-        Intent intent = new Intent(context, LoginActivity.class);
+    public static void showRegisterActivity(Context context,String action){
+        Intent intent = new Intent(context, RegisterActivity.class);
+        intent.setAction(action);
+        context.startActivity(intent);
+    }
+    /**
+     * 显示注册绑定界面
+     */
+    public static void showBindRegisterActivity(Context context,String action,Bundle bundle){
+        Intent intent = new Intent(context, RegisterActivity.class);
+        intent.setAction(action);
+        intent.putExtras(bundle);
         context.startActivity(intent);
     }
     /**
      * 显示忘记密码界面
      */
     public static void showResetPasswordActivity(Context context){
-        Intent intent = new Intent(context, LoginActivity.class);
+        Intent intent = new Intent(context, ResetPasswordActivity.class);
         context.startActivity(intent);
     }
     /**
@@ -57,7 +72,13 @@ public class UIHelper {
         Intent intent=new Intent(context, CompanySearchActivity.class);
         context.startActivity(intent);
     }
-
+    /**
+     * 显示服务协议界面
+     */
+    public static void showAgreementActivity(Context context){
+        Intent intent=new Intent(context, AgreementActivity.class);
+        context.startActivity(intent);
+    }
     /**
      * 显示个人中心页面
      */
@@ -153,6 +174,21 @@ public class UIHelper {
     public static void showUniteLoginActivity(Context context,Bundle bundle){
         Intent intent=new Intent(context, UniteLoginActivity.class);
         intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
+    /**
+     * 显示登录绑定界面
+     */
+    public static void showLoginBindActivity(Context context,Bundle bundle){
+        Intent intent=new Intent(context, LoginBindActivity.class);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
+    /**
+     * 显示首页
+     */
+    public static void showMainActivity(Context context){
+        Intent intent=new Intent(context, MainActivity.class);
         context.startActivity(intent);
     }
 }

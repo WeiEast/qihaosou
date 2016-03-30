@@ -56,7 +56,11 @@
     <string name="login_weixin_account">微信登录</string>
     <string name="email">邮箱</string>
     <string name="reset_password">重置密码</string>
-
+    <string name="u_forgot_password"><u>找回密码</u></string>
+    <string name="rele_tip">关联后,您的%s帐号和企好搜帐号都可以登录</string>
+    <string name="register_tip">注册后，您的%s和企好搜帐号都可以登录</string>
+    <string name="agreement_tip">点击\"注册\"即表示您同意</string>
+    <string name="agreement_tv">《服务协议》</string>
 
     <string name="menu_qiye_search">企业查询</string>
     <string name="menu_share">APP分享</string>
@@ -84,6 +88,7 @@
     <!--title-->
     <string name="title_login">登陆</string>
     <string name="title_register">注册</string>
+    <string name="title_bind_register">注册绑定</string>
     <string name="title_verfiy_phone">验证手机</string>
 
     <!--share-->
@@ -123,7 +128,7 @@
     <string name="company_detial_redar">企业变更提示</string>
     <string name="information_commap_info">企业图谱</string>
     <string name="company_detial_contact">联络信息</string>
-    <string name="company_detial_opername">法定代表</string>
+    <string name="company_detial_opername">法人代表</string>
     <string name="company_detial_end_null">一</string>
     <string name="company_detial_registcapi">注册资本</string>
     <string name="company_detial_termstart">成立日期</string>
